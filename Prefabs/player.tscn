@@ -66,10 +66,13 @@ animations = [{
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=769169184]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=57519571]
+visible = false
 position = Vector2(0, 38.905)
 shape = SubResource("CapsuleShape2D_mc20k")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=725024059]
+visible = false
+texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_1bjei")
 animation = &"Iddle"
 autoplay = "Iddle"

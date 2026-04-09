@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://drpmguk88ausi"]
+
+[ext_resource type="Script" uid="uid://cn5t1156jtyp5" path="res://Prefabs/dog.gd" id="1_7j1c1"]
+[ext_resource type="Texture2D" uid="uid://4d1gsv2w7pme" path="res://Sprites/FrontDog.png" id="1_euiuq"]
+[ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="2_7j1c1"]
+[ext_resource type="Texture2D" uid="uid://b0ie0bguyrjsw" path="res://Sprites/BackDog.png" id="3_s8jhl"]
+
+[node name="Dog" type="Node2D" unique_id=380888768]
+script = ExtResource("1_7j1c1")
+
+[node name="Front" type="Sprite2D" parent="." unique_id=1120338587]
+texture_filter = 1
+texture = ExtResource("1_euiuq")
+offset = Vector2(-0.78, 0)
+
+[node name="Middle" type="Sprite2D" parent="." unique_id=55796717]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-12, 19)
+scale = Vector2(1.037, 1.074)
+texture = ExtResource("2_7j1c1")
+centered = false
+region_enabled = true
+region_rect = Rect2(60.012238, 83.09561, 15.986519, 14.882965)
+
+[node name="Back" type="Sprite2D" parent="." unique_id=454432495]
+texture_filter = 1
+texture = ExtResource("3_s8jhl")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=282526992]
+visible = false
+offset_left = -72.0
+offset_top = -64.0
+offset_right = 72.0
+offset_bottom = 64.0
+texture = ExtResource("2_7j1c1")
+stretch_mode = 1

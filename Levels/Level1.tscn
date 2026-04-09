@@ -2,11 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://clwq3k4knykhf" path="res://Prefabs/player.tscn" id="1_w77jt"]
 [ext_resource type="Script" uid="uid://c3ubxpp10k6x6" path="res://Scripts/player.gd" id="2_3anf8"]
+[ext_resource type="PackedScene" uid="uid://drpmguk88ausi" path="res://Prefabs/dog.tscn" id="3_fhqol"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3anf8"]
 size = Vector2(158, 29)
 
 [node name="Node2D" type="Node2D" unique_id=160075761]
+position = Vector2(2, 0)
 
 [node name="Player" parent="." unique_id=769169184 instance=ExtResource("1_w77jt")]
 position = Vector2(43, 31)
@@ -26,3 +28,5 @@ offset_top = 115.0
 offset_right = 164.0
 offset_bottom = 143.0
 color = Color(0.9349131, 0.6729012, 0.4678023, 1)
+
+[node name="Dog" parent="." unique_id=380888768 instance=ExtResource("3_fhqol")]
