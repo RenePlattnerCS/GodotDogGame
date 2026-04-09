@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bija28ely3dax"]
+
+[ext_resource type="PackedScene" uid="uid://clwq3k4knykhf" path="res://Prefabs/player.tscn" id="1_w77jt"]
+[ext_resource type="Script" uid="uid://c3ubxpp10k6x6" path="res://Scripts/player.gd" id="2_3anf8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3anf8"]
+size = Vector2(158, 29)
+
+[node name="Node2D" type="Node2D" unique_id=160075761]
+
+[node name="Player" parent="." unique_id=769169184 instance=ExtResource("1_w77jt")]
+position = Vector2(43, 31)
+script = ExtResource("2_3anf8")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=927835041]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=843334306]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1471057174]
+position = Vector2(85, 129.5)
+shape = SubResource("RectangleShape2D_3anf8")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=1448919302]
+offset_left = 7.0
+offset_top = 115.0
+offset_right = 164.0
+offset_bottom = 143.0
+color = Color(0.9349131, 0.6729012, 0.4678023, 1)

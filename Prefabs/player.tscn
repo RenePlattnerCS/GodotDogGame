@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://clwq3k4knykhf"]
+
+[ext_resource type="Texture2D" uid="uid://vd1ckait7qmh" path="res://Sprites/IddleGirl.png" id="1_y6xdh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mc20k"]
+radius = 13.0
+height = 52.190002
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cove1"]
+atlas = ExtResource("1_y6xdh")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwyiq"]
+atlas = ExtResource("1_y6xdh")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn5ey"]
+atlas = ExtResource("1_y6xdh")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmyl5"]
+atlas = ExtResource("1_y6xdh")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlbie"]
+atlas = ExtResource("1_y6xdh")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3sxq"]
+atlas = ExtResource("1_y6xdh")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5py54"]
+atlas = ExtResource("1_y6xdh")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1bjei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cove1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwyiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dn5ey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmyl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlbie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3sxq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5py54")
+}],
+"loop": true,
+"name": &"Iddle",
+"speed": 12.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=769169184]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=57519571]
+position = Vector2(0, 38.905)
+shape = SubResource("CapsuleShape2D_mc20k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=725024059]
+sprite_frames = SubResource("SpriteFrames_1bjei")
+animation = &"Iddle"
+autoplay = "Iddle"
+frame = 3
+frame_progress = 0.40487498
+offset = Vector2(-0.875, 0)
