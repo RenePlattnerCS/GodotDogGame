@@ -11,10 +11,13 @@ extends CharacterBody2D
 @export_group("Jump")
 @export var fall_multiplier : float = 1.5
 @export var low_jump_multiplier: float = 5.0  # when button released early
-@export var max_jump_time: float = 1.3  # max time you can hold jump
+@export var max_jump_time: float = 0.4  # max time you can hold jump
+@export var lock_jump_after_time: float = 0.2  # max time you can hold jump
 
 var jump_timer: float = 0.0
 var is_jumping: bool = false
+var lock_jump: bool = false
+
 var player_has_horizontal_speed : bool = false
 
 var is_knocked_back: bool = false
@@ -28,8 +31,13 @@ func _ready():
 	$Sprites/HandAnimation.play("idle")
 	$Sprites/BodyAnimation.play("idle")
 	$Sprites/DogBounceAnimationPlayer.play("idle")
+	
+	$NormalHurtbox.disabled = false
+	$JumpingHurtbox.disabled = true
 
 func _process(delta: float) -> void:
+	
+	
 	player_has_horizontal_speed = abs(velocity.x) > EPSILON
 	if(player_has_horizontal_speed and not is_knocked_back):
 		$Sprites/HandAnimation.play("walking")
@@ -46,14 +54,25 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		if Input.is_action_just_released(get_input_action("jump")):
+		
+	
+		if Input.is_action_just_released(get_input_action("jump")) and not lock_jump:
 			is_jumping = false
 		
 		if is_jumping:
+			 
+			
 			jump_timer += delta
 			# force descend if held too long
 			if jump_timer >= max_jump_time:
+				print(" jump timer")
 				is_jumping = false
+				
+			if jump_timer >= lock_jump_after_time:
+				print("lock jump")
+				lock_jump = true
+				$NormalHurtbox.disabled = true
+				$JumpingHurtbox.disabled = false
 				
 		if velocity.y > 0:  # descending
 			velocity += get_gravity() * delta * fall_multiplier
@@ -66,8 +85,13 @@ func _physics_process(delta: float) -> void:
 			# slow air resistance instead of instant stop
 			velocity.x *= air_resistance
 	else:		
+		#print("unlock jump")
 		is_jumping = false
+		lock_jump = false
 		jump_timer = 0.0
+		$NormalHurtbox.disabled = false
+		$JumpingHurtbox.disabled = true
+		
 		
 	if is_knocked_back:
 	 	# slide on ground instead of stopping
@@ -76,7 +100,7 @@ func _physics_process(delta: float) -> void:
 		if abs(velocity.x) < knockback_threshold:
 			is_knocked_back = false
 			
-	elif not is_jumping:
+	elif not is_jumping and not lock_jump:
 		# normal movement
 		var direction = Input.get_axis(get_input_action(("left")), get_input_action(("right")))
 		if direction:

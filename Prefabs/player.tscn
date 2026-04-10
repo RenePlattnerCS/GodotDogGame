@@ -8,8 +8,11 @@
 [ext_resource type="Texture2D" uid="uid://dsxodcrisgf64" path="res://Sprites/WalkArms.png" id="6_juxdh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mc20k"]
-radius = 13.0
-height = 52.190002
+height = 50.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hck1p"]
+radius = 16.0
+height = 58.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3vpsw"]
 atlas = ExtResource("2_y5hcb")
@@ -364,9 +367,14 @@ _data = {
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=769169184 groups=["player"]]
 script = ExtResource("1_2nftw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=57519571 groups=["player"]]
-position = Vector2(-0.125, 38.905)
+[node name="NormalHurtbox" type="CollisionShape2D" parent="." unique_id=57519571 groups=["player"]]
+position = Vector2(-1, 39)
 shape = SubResource("CapsuleShape2D_mc20k")
+
+[node name="JumpingHurtbox" type="CollisionShape2D" parent="." unique_id=1824086948]
+position = Vector2(-1, 39)
+shape = SubResource("CapsuleShape2D_hck1p")
+debug_color = Color(0.8625561, 0.3104777, 0.4780476, 0.41960785)
 
 [node name="Sprites" type="Node2D" parent="." unique_id=1069677877]
 

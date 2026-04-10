@@ -78,6 +78,7 @@ func update_dog():
 
 
 func process_dog_state(delta):
+
 	# buffer the input with a timer
 	if Input.is_action_just_pressed(get_input_action("shoot")):
 		input_buffer = true
@@ -161,7 +162,7 @@ func apply_impact(body : CharacterBody2D):
 	if(hit_enemy):
 		return
 	# direction away from dog front
-	if (hit_count < MAX_HIT_COUNT):
+	if (hit_count <= MAX_HIT_COUNT):
 		hit_enemy = true
 		hit_count += 1
 		var distance = abs(body.global_position.x - global_position.x)
@@ -173,7 +174,9 @@ func apply_impact(body : CharacterBody2D):
 		
 		
 		var bonus = 0
-		if(charge_percent > CHARCE_PERCENT_BONUS_THREASHHOLD and distance > BONUS_DISTANCE):
+		if(charge_percent > CHARCE_PERCENT_BONUS_THREASHHOLD and distance > BONUS_DISTANCE or hit_count == MAX_HIT_COUNT):
+			if( hit_count == MAX_HIT_COUNT):
+				print("bonus hit!")
 			bonus = HIGH_CHARGE_KNOCKBACK_BOSUS
 		var force = lerp(KNOCKBACK_MIN_STRENGTH , knockback_stength + bonus , charge_percent)
 		var force_up = lerp(KNOCKBACK_UP_MIN_STRENGTH, knockback_up, charge_percent)
