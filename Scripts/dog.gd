@@ -4,13 +4,16 @@ extends Node2D
 @export var max_charge_time: float = 1.0
 @export var max_keep_charging_time: float = 3.0
 @export var max_length: float = 150.0
-@export var extend_speed: float = 400.0
-@export var retract_speed: float = 200.0
+@export var extend_speed: float = 600.0
+@export var retract_speed: float = 300.0
+@export var retract_ease_speed: float = 5.0
 @export var min_extend_length: float = 30.0
 @export var charging_retraction_length: float = 15.0
-@export var buffer_time: float = 0.2  
+@export var buffer_time: float = 0.4  
 
-
+const RETRACT_LENGTH_OFFSET = 1.0
+const EXTEND_LENGTH_OFFSET = 20.0
+const EASE_IN_LENGTH = 20.0
 
 var player_index: int = -1
 var charge_time: float = 0.0
@@ -71,7 +74,8 @@ func process_dog_state(delta):
 		
 		DogState.CHARGING:
 			
-			current_length = move_toward(current_length, target_length, retract_speed * delta)
+			#current_length = move_toward(current_length, target_length, retract_speed * delta)
+			current_length = lerp(current_length, target_length, 1.0 - exp(-retract_ease_speed * delta))
 			
 			var extend_dog : bool = false
 			#charge_time = min(charge_time + delta, max_charge_time)
@@ -90,12 +94,24 @@ func process_dog_state(delta):
 		
 		DogState.EXTENDING:
 			current_length = move_toward(current_length, target_length, extend_speed * delta)
-			if current_length >= target_length:
+			
+			
+			if current_length > target_length - EXTEND_LENGTH_OFFSET:
+				print("reached END")
 				state = DogState.RETRACTING  # auto retract when reached!
 		
 		DogState.RETRACTING:
-			current_length = move_toward(current_length, 0.0, retract_speed * delta)
-			if current_length <= 0.0:
+			print("length; " , current_length)
+			if(current_length > EASE_IN_LENGTH):
+				current_length = move_toward(current_length, 0.0, retract_speed * delta)
+			else:
+				current_length = lerp(current_length, 0.0, 1.0 - exp(-retract_ease_speed * delta))
+				if input_buffer:
+					input_buffer = false
+					target_length = current_length - charging_retraction_length
+					state = DogState.CHARGING
+				
+			if current_length <= 0.0 + RETRACT_LENGTH_OFFSET:
 				current_length = 0.0
 				state = DogState.IDLE 
 				
