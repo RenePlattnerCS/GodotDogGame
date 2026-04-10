@@ -3,17 +3,22 @@ extends Node2D
 
 @export var max_charge_time: float = 1.0
 @export var max_keep_charging_time: float = 3.0
-@export var max_length: float = 150.0
-@export var extend_speed: float = 600.0
+@export var max_length: float = 170.0
+@export var extend_speed: float = 700.0
 @export var retract_speed: float = 300.0
-@export var retract_ease_speed: float = 5.0
+@export var retract_ease_speed: float = 5.0 
 @export var min_extend_length: float = 30.0
 @export var charging_retraction_length: float = 15.0
 @export var buffer_time: float = 0.4  
 
+@export var knockback_up: float = 200
+@export var knockback_stength: float = 1800 
+
 const RETRACT_LENGTH_OFFSET = 1.0
 const EXTEND_LENGTH_OFFSET = 20.0
 const EASE_IN_LENGTH = 20.0
+const KNOCKBACK_MIN_STRENGTH = 300.0
+const KNOCKBACK_UP_MIN_STRENGTH = 50.0
 
 var player_index: int = -1
 var charge_time: float = 0.0
@@ -94,14 +99,12 @@ func process_dog_state(delta):
 		
 		DogState.EXTENDING:
 			current_length = move_toward(current_length, target_length, extend_speed * delta)
-			
+			check_existing_overlaps()
 			
 			if current_length > target_length - EXTEND_LENGTH_OFFSET:
-				print("reached END")
 				state = DogState.RETRACTING  # auto retract when reached!
 		
 		DogState.RETRACTING:
-			print("length; " , current_length)
 			if(current_length > EASE_IN_LENGTH):
 				current_length = move_toward(current_length, 0.0, retract_speed * delta)
 			else:
@@ -118,3 +121,34 @@ func process_dog_state(delta):
 	
 func get_input_action(action: String) -> String:
 	return "p" + str(player_index) + "_" + action
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	# only apply force when actually extending!
+	if state != DogState.EXTENDING:
+		print("returned")
+		return
+	
+	if body.is_in_group("player"):
+		apply_impact(body)
+		
+		
+		
+func apply_impact(body):
+	# direction away from dog front
+	var knock_direction = sign(body.global_position.x - $Front.global_position.x)
+	
+	# scale knockback with how charged the shot was
+	var charge_percent = target_length / max_length  # 0.0 to 1.0
+	var force = lerp(KNOCKBACK_MIN_STRENGTH, knockback_stength, charge_percent)
+	var force_up = lerp(KNOCKBACK_UP_MIN_STRENGTH, knockback_up, charge_percent)
+	
+	body.velocity.x = knock_direction * force
+	body.velocity.y = -force_up  # launch upward!
+	body.is_knocked_back = true
+	
+func check_existing_overlaps():
+	for body in $Front/Hitbox.get_overlapping_bodies():
+		if body.is_in_group("player"):
+			body.is_knocked_back = true
+			apply_impact(body)

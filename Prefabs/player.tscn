@@ -361,10 +361,10 @@ _data = {
 &"walking": SubResource("Animation_juxdh")
 }
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=769169184]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=769169184 groups=["player"]]
 script = ExtResource("1_2nftw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=57519571]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=57519571 groups=["player"]]
 position = Vector2(-0.125, 38.905)
 shape = SubResource("CapsuleShape2D_mc20k")
 

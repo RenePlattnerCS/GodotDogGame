@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bija28ely3dax"]
 
 [ext_resource type="PackedScene" uid="uid://clwq3k4knykhf" path="res://Prefabs/player.tscn" id="1_w77jt"]
+[ext_resource type="Script" uid="uid://blkrhr1r5b17l" path="res://Scripts/camera_follow.gd" id="2_3anf8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3anf8"]
 size = Vector2(158, 29)
@@ -8,14 +9,19 @@ size = Vector2(158, 29)
 [node name="Level1" type="Node2D" unique_id=160075761]
 
 [node name="Player1" parent="." unique_id=365629459 instance=ExtResource("1_w77jt")]
-position = Vector2(34, 72)
+position = Vector2(-289, 72)
 
 [node name="Player2" parent="." unique_id=769169184 instance=ExtResource("1_w77jt")]
-position = Vector2(137, 74)
+position = Vector2(250, 73)
 player_index = 2
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=663416642 node_paths=PackedStringArray("player1", "player2")]
+script = ExtResource("2_3anf8")
+player1 = NodePath("../Player1")
+player2 = NodePath("../Player2")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=843334306]
-position = Vector2(-168, 3.0000002)
+position = Vector2(-396, 5)
 scale = Vector2(4.63, 1.265)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1471057174]
@@ -23,6 +29,21 @@ position = Vector2(85, 129.5)
 shape = SubResource("RectangleShape2D_3anf8")
 
 [node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=1448919302]
+offset_left = 7.0
+offset_top = 115.0
+offset_right = 164.0
+offset_bottom = 143.0
+color = Color(0.9349131, 0.6729012, 0.4678023, 1)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1542371631]
+position = Vector2(-1341, 145)
+scale = Vector2(21.436901, 1.600225)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1437003271]
+position = Vector2(85, 129.5)
+shape = SubResource("RectangleShape2D_3anf8")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2" unique_id=1888254486]
 offset_left = 7.0
 offset_top = 115.0
 offset_right = 164.0
