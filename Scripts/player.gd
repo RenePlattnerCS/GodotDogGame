@@ -53,7 +53,6 @@ func _physics_process(delta: float) -> void:
 			jump_timer += delta
 			# force descend if held too long
 			if jump_timer >= max_jump_time:
-				print("timer!")
 				is_jumping = false
 				
 		if velocity.y > 0:  # descending
@@ -75,7 +74,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x *= ground_slide_friction
 		# exit knockback when slow enough
 		if abs(velocity.x) < knockback_threshold:
-			print("thrwshold reached!:" , velocity.x)
 			is_knocked_back = false
 			
 	elif not is_jumping:

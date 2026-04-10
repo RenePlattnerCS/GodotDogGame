@@ -10,8 +10,10 @@ extends Node2D
 @export var min_extend_length: float = 30.0
 @export var charging_retraction_length: float = 15.0
 @export var buffer_time: float = 0.4  
-@export var knockback_up: float = 400
-@export var knockback_stength: float = 2000 
+@export var knockback_up: float = 600
+@export var knockback_stength: float = 4000  #4000 -> hit 3 times if charge and close
+@export var min_hit_lag_time: float = 0.05 
+@export var max_hit_lag_time: float = 0.3 
 
 @export_group("Blinking")
 @export var max_blink_speed: float = 10.0  # blinks per second at full charge
@@ -23,12 +25,24 @@ const EXTEND_LENGTH_OFFSET = 20.0
 const EASE_IN_LENGTH = 20.0
 const KNOCKBACK_MIN_STRENGTH = 300.0
 const KNOCKBACK_UP_MIN_STRENGTH = 50.0
+const HIGH_CHARGE_KNOCKBACK_BOSUS = 3000
+const CHARCE_PERCENT_BONUS_THREASHHOLD = 0.8
+const BONUS_DISTANCE = 100
+const HITLAG_THREASHOLD = 0.50
+const FLASH_COUNT = 3
+const MAX_HIT_COUNT = 3
+const CAN_HIT_AGAIN_TIME = 0.03
 
+
+var hit_count = 0
 var player_index: int = -1
 var charge_time: float = 0.0
+var prev_charge_time: float = 0.0
 var is_charging: bool = false
 var is_extending: bool = false
 var blink_timer: float = 0.0
+var hit_again_timer: float = 0.0
+var hit_enemy : bool = false
 
 var current_length: float = 0.0
 var target_length: float = 0.0
@@ -52,6 +66,7 @@ func _process(delta):
 	process_dog_state(delta)
 	update_dog()
 	update_charge_visuals(delta)
+	update_hit_timer(delta)
 
 
 func update_dog():
@@ -100,6 +115,7 @@ func process_dog_state(delta):
 			if extend_dog:
 				charge_time = min(charge_time + delta, max_charge_time)
 				target_length = max((charge_time / max_charge_time) * max_length, min_extend_length)
+				prev_charge_time = charge_time
 				charge_time = 0.0
 				state = DogState.EXTENDING
 		
@@ -111,6 +127,8 @@ func process_dog_state(delta):
 				state = DogState.RETRACTING  # auto retract when reached!
 		
 		DogState.RETRACTING:
+			hit_count = 0
+			
 			if(current_length > EASE_IN_LENGTH):
 				current_length = move_toward(current_length, 0.0, retract_speed * delta)
 			else:
@@ -132,7 +150,6 @@ func get_input_action(action: String) -> String:
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	# only apply force when actually extending!
 	if state != DogState.EXTENDING:
-		print("returned")
 		return
 	
 	if body.is_in_group("player"):
@@ -140,19 +157,32 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		
 		
 		
-func apply_impact(body):
+func apply_impact(body : CharacterBody2D):
+	if(hit_enemy):
+		return
 	# direction away from dog front
-	#if(body.is_knocked_back == false):
+	if (hit_count < MAX_HIT_COUNT):
+		hit_enemy = true
+		hit_count += 1
+		var distance = abs(body.global_position.x - global_position.x)
+			
 		var knock_direction = sign(body.global_position.x - $Front.global_position.x)
 		
 		# scale knockback with how charged the shot was
 		var charge_percent = target_length / max_length  # 0.0 to 1.0
-		var force = lerp(KNOCKBACK_MIN_STRENGTH, knockback_stength, charge_percent)
+		
+		
+		var bonus = 0
+		if(charge_percent > CHARCE_PERCENT_BONUS_THREASHHOLD and distance > BONUS_DISTANCE):
+			bonus = HIGH_CHARGE_KNOCKBACK_BOSUS
+		var force = lerp(KNOCKBACK_MIN_STRENGTH , knockback_stength + bonus , charge_percent)
 		var force_up = lerp(KNOCKBACK_UP_MIN_STRENGTH, knockback_up, charge_percent)
 		
 		body.velocity.x = knock_direction * force
 		body.velocity.y = -force_up  # launch upward!
 		body.is_knocked_back = true
+		
+		hitlag(body)
 	
 func check_existing_overlaps():
 	for body in $Front/Hitbox.get_overlapping_bodies():
@@ -177,3 +207,26 @@ func update_charge_visuals(delta):
 		# reset to normal
 		blink_timer = 0.0
 		modulate = Color.WHITE
+		
+func hitlag(body):
+	var charge_percent = clamp(prev_charge_time / max_charge_time, 0.0, 1.0)
+	
+	if charge_percent > HITLAG_THREASHOLD:
+		#body.modulate = Color.RED
+		var hitlag_duration = lerp(0.05, 0.15, charge_percent)
+		var flash_time = hitlag_duration / (FLASH_COUNT * 2)
+		Engine.time_scale = 0.0
+		for i in FLASH_COUNT:
+			body.modulate = Color.RED
+			await get_tree().create_timer(flash_time, true, false, true).timeout
+			body.modulate = Color.WHITE
+			await get_tree().create_timer(flash_time, true, false, true).timeout
+		Engine.time_scale = 1.0
+		body.modulate = Color.WHITE
+		
+func update_hit_timer(delta):
+	if(hit_enemy):
+		hit_again_timer += delta
+		if(hit_again_timer > CAN_HIT_AGAIN_TIME):
+			hit_again_timer = 0
+			hit_enemy = false
