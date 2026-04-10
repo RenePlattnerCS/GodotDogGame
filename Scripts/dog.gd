@@ -1,6 +1,6 @@
 extends Node2D
 
-
+@export_group("Attacking")
 @export var max_charge_time: float = 1.0
 @export var max_keep_charging_time: float = 3.0
 @export var max_length: float = 170.0
@@ -10,9 +10,13 @@ extends Node2D
 @export var min_extend_length: float = 30.0
 @export var charging_retraction_length: float = 15.0
 @export var buffer_time: float = 0.4  
+@export var knockback_up: float = 400
+@export var knockback_stength: float = 2000 
 
-@export var knockback_up: float = 200
-@export var knockback_stength: float = 1800 
+@export_group("Blinking")
+@export var max_blink_speed: float = 10.0  # blinks per second at full charge
+@export var min_blink_speed: float = 0.5   # blinks per second at min charge
+
 
 const RETRACT_LENGTH_OFFSET = 1.0
 const EXTEND_LENGTH_OFFSET = 20.0
@@ -24,6 +28,7 @@ var player_index: int = -1
 var charge_time: float = 0.0
 var is_charging: bool = false
 var is_extending: bool = false
+var blink_timer: float = 0.0
 
 var current_length: float = 0.0
 var target_length: float = 0.0
@@ -46,6 +51,7 @@ func _ready():
 func _process(delta):
 	process_dog_state(delta)
 	update_dog()
+	update_charge_visuals(delta)
 
 
 func update_dog():
@@ -136,19 +142,38 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		
 func apply_impact(body):
 	# direction away from dog front
-	var knock_direction = sign(body.global_position.x - $Front.global_position.x)
-	
-	# scale knockback with how charged the shot was
-	var charge_percent = target_length / max_length  # 0.0 to 1.0
-	var force = lerp(KNOCKBACK_MIN_STRENGTH, knockback_stength, charge_percent)
-	var force_up = lerp(KNOCKBACK_UP_MIN_STRENGTH, knockback_up, charge_percent)
-	
-	body.velocity.x = knock_direction * force
-	body.velocity.y = -force_up  # launch upward!
-	body.is_knocked_back = true
+	#if(body.is_knocked_back == false):
+		var knock_direction = sign(body.global_position.x - $Front.global_position.x)
+		
+		# scale knockback with how charged the shot was
+		var charge_percent = target_length / max_length  # 0.0 to 1.0
+		var force = lerp(KNOCKBACK_MIN_STRENGTH, knockback_stength, charge_percent)
+		var force_up = lerp(KNOCKBACK_UP_MIN_STRENGTH, knockback_up, charge_percent)
+		
+		body.velocity.x = knock_direction * force
+		body.velocity.y = -force_up  # launch upward!
+		body.is_knocked_back = true
 	
 func check_existing_overlaps():
 	for body in $Front/Hitbox.get_overlapping_bodies():
 		if body.is_in_group("player"):
-			body.is_knocked_back = true
 			apply_impact(body)
+			
+func update_charge_visuals(delta):
+	if state == DogState.CHARGING:
+		var charge_percent = clamp(charge_time / max_charge_time, 0.0, 1.0)
+		
+		# blink speed increases with charge
+		var blink_speed = lerp(min_blink_speed, max_blink_speed, charge_percent )
+		blink_timer += delta * blink_speed
+		
+		# sin wave between 0 and 1
+		var blink = (sin(blink_timer * TAU) + 1.0) / 2.0
+		
+		# lerp between normal and white/yellow tint
+		var tint = Color.LIGHT_YELLOW  # or Color.WHITE
+		modulate = lerp(Color.ORANGE_RED, tint, blink)
+	else:
+		# reset to normal
+		blink_timer = 0.0
+		modulate = Color.WHITE
