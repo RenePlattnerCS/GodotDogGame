@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://d3usyoj20yxov"]
+
+[ext_resource type="Script" uid="uid://dvyt5m3cpr45a" path="res://Scripts/death_zone_respawn.gd" id="1_30gwi"]
+[ext_resource type="PackedScene" uid="uid://np88urr1nmrf" path="res://Prefabs/loser_screen.tscn" id="2_103s5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_104vp"]
+size = Vector2(4004, 140)
+
+[node name="DeathZone" type="Area2D" unique_id=1575452244 node_paths=PackedStringArray("spawn_point_p1", "spawn_point_p2", "button1", "button2")]
+collision_mask = 2
+script = ExtResource("1_30gwi")
+spawn_point_p1 = NodePath("p1_spawn")
+spawn_point_p2 = NodePath("p2_spawn2")
+button1 = NodePath("Loser screen/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button")
+button2 = NodePath("Loser screen/MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=474644388]
+position = Vector2(86, 326)
+shape = SubResource("RectangleShape2D_104vp")
+
+[node name="p2_spawn2" type="Node2D" parent="." unique_id=517062826]
+position = Vector2(142, -37)
+
+[node name="p1_spawn" type="Node2D" parent="." unique_id=1398750736]
+position = Vector2(-105, -48)
+
+[node name="Loser screen" parent="." unique_id=264522770 instance=ExtResource("2_103s5")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+
+[editable path="Loser screen"]

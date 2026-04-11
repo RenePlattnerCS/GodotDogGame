@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://clwq3k4knykhf" path="res://Prefabs/player.tscn" id="1_w77jt"]
 [ext_resource type="Script" uid="uid://blkrhr1r5b17l" path="res://Scripts/camera_follow.gd" id="2_3anf8"]
 [ext_resource type="Texture2D" uid="uid://g0kjipxwsgj8" path="res://Sprites/BG/1 Tiles/Tileset.png" id="3_fhqol"]
+[ext_resource type="PackedScene" uid="uid://d3usyoj20yxov" path="res://Prefabs/death_zone.tscn" id="3_p2sgf"]
 [ext_resource type="Texture2D" uid="uid://cqf1m55ph0q84" path="res://Sprites/BG/3 Objects/1 Cargos/6.png" id="3_xcayt"]
 [ext_resource type="Texture2D" uid="uid://bmwq170u4r44h" path="res://Sprites/BG/3 Objects/1 Cargos/2.png" id="4_5g41i"]
-[ext_resource type="PackedScene" uid="uid://np88urr1nmrf" path="res://Prefabs/loser_screen.tscn" id="4_ufevr"]
 [ext_resource type="Texture2D" uid="uid://dl6nsj0a7kota" path="res://Sprites/BG/3 Objects/1 Cargos/20.png" id="5_7fl83"]
 [ext_resource type="Texture2D" uid="uid://c0m525lis3k4h" path="res://Sprites/BG/3 Objects/2 Fencing/1.png" id="6_p5226"]
 [ext_resource type="Texture2D" uid="uid://dbyn2bapgfvf7" path="res://Sprites/BG/3 Objects/2 Fencing/2.png" id="7_tuji2"]
@@ -13,14 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://by4gtq0ykst75" path="res://Sprites/BG/falling_plattform.png" id="9_7fl83"]
 [ext_resource type="Script" path="res://Levels/platforms.gd" id="10_p5226"]
 [ext_resource type="PackedScene" uid="uid://cmsxm67oe7sj6" path="res://Prefabs/craneBase.tscn" id="11_p5226"]
-[ext_resource type="Script" uid="uid://dvyt5m3cpr45a" path="res://Scripts/death_zone_respawn.gd" id="13_f5cpa"]
 [ext_resource type="Texture2D" uid="uid://b85a85i4qtq4d" path="res://Sprites/BG/3 Background/Day/5.png" id="14_p2sgf"]
 [ext_resource type="Texture2D" uid="uid://b1cmv27ky8u7y" path="res://Sprites/BG/3 Background/Day/3.png" id="14_sbm5j"]
 [ext_resource type="Texture2D" uid="uid://biierk3fove7a" path="res://Sprites/BG/3 Background/Day/2.png" id="15_p2sgf"]
 [ext_resource type="Texture2D" uid="uid://cxf5gsapmx83u" path="res://Sprites/BG/3 Background/Day/1.png" id="16_ufevr"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_104vp"]
-size = Vector2(4004, 140)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iotdp"]
 texture = ExtResource("3_fhqol")
@@ -154,23 +150,7 @@ player1 = NodePath("../Player1")
 player2 = NodePath("../Player2")
 camera_speed = 7.0
 
-[node name="DeathZone" type="Area2D" parent="." unique_id=877671771 node_paths=PackedStringArray("spawn_point_p1", "spawn_point_p2")]
-collision_mask = 2
-script = ExtResource("13_f5cpa")
-spawn_point_p1 = NodePath("p1_spawn")
-spawn_point_p2 = NodePath("p2_spawn2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone" unique_id=1946386793]
-position = Vector2(86, 326)
-shape = SubResource("RectangleShape2D_104vp")
-
-[node name="p2_spawn2" type="Node2D" parent="DeathZone" unique_id=1457644583]
-position = Vector2(142, -37)
-
-[node name="p1_spawn" type="Node2D" parent="DeathZone" unique_id=772080567]
-position = Vector2(-105, -48)
-
-[node name="Loser screen" parent="DeathZone" unique_id=264522770 instance=ExtResource("4_ufevr")]
+[node name="DeathZone" parent="." unique_id=1575452244 instance=ExtResource("3_p2sgf")]
 
 [node name="Stage" type="Node2D" parent="." unique_id=1898055944]
 
@@ -283,5 +263,3 @@ texture_filter = 1
 position = Vector2(16, -66)
 scale = Vector2(3, 3)
 texture = ExtResource("16_ufevr")
-
-[connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_body_entered"]
