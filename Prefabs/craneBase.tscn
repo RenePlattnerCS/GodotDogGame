@@ -1,0 +1,512 @@
+[gd_scene format=3 uid="uid://cmsxm67oe7sj6"]
+
+[ext_resource type="Texture2D" uid="uid://btrjmr2fge5kc" path="res://Sprites/BG/3 Objects/4 Overhead crane/1 Base/Tile3.png" id="1_pluw8"]
+[ext_resource type="Texture2D" uid="uid://blii67jrxnhr8" path="res://Sprites/BG/3 Objects/4 Overhead crane/1 Base/Tile4.png" id="2_onnh8"]
+[ext_resource type="Texture2D" uid="uid://b1plmo8oiujc8" path="res://Sprites/BG/3 Objects/4 Overhead crane/1 Base/Tile2.png" id="3_r1k4j"]
+[ext_resource type="Texture2D" uid="uid://d4n4l3h5w8e7w" path="res://Sprites/BG/3 Objects/4 Overhead crane/1 Base/Tile1.png" id="4_vj1bw"]
+[ext_resource type="Texture2D" uid="uid://8ytoij2mb0n8" path="res://Sprites/BG/3 Objects/4 Overhead crane/1 Base/Tile9.png" id="5_3kbmx"]
+[ext_resource type="Texture2D" uid="uid://d20xflbfcj53w" path="res://Sprites/BG/3 Objects/4 Overhead crane/1 Base/Tile8.png" id="6_r1k4j"]
+[ext_resource type="Texture2D" uid="uid://bm4mbgbt5up5b" path="res://Sprites/BG/3 Objects/4 Overhead crane/1 Base/Tile6.png" id="7_vj1bw"]
+[ext_resource type="Texture2D" uid="uid://h8uif1d2k2se" path="res://Sprites/BG/3 Objects/3 Box/3.png" id="8_3kbmx"]
+[ext_resource type="Texture2D" uid="uid://bmsyujjros8hk" path="res://Sprites/BG/3 Objects/1 Cargos/9.png" id="9_0lpxl"]
+
+[node name="Node2D" type="Node2D" unique_id=866214868]
+z_index = -3
+
+[node name="Crane1" type="Node2D" parent="." unique_id=641580203]
+z_index = -3
+position = Vector2(123, -39)
+
+[node name="Tile3" type="Sprite2D" parent="Crane1" unique_id=1352882608]
+texture_filter = 1
+position = Vector2(60, -143)
+texture = ExtResource("1_pluw8")
+
+[node name="Tile6" type="Sprite2D" parent="Crane1" unique_id=480004579]
+texture_filter = 1
+position = Vector2(156, -143)
+texture = ExtResource("2_onnh8")
+
+[node name="Tile5" type="Sprite2D" parent="Crane1/Tile6" unique_id=479926637]
+position = Vector2(32, 0)
+texture = ExtResource("2_onnh8")
+
+[node name="Tile5" type="Sprite2D" parent="Crane1/Tile6/Tile5" unique_id=1144133983]
+texture_filter = 1
+position = Vector2(32, 0)
+texture = ExtResource("2_onnh8")
+
+[node name="Tile6" type="Sprite2D" parent="Crane1/Tile6" unique_id=790890060]
+texture_filter = 1
+position = Vector2(32, 0)
+texture = ExtResource("2_onnh8")
+
+[node name="Tile5" type="Sprite2D" parent="Crane1/Tile6/Tile6" unique_id=1039539742]
+texture_filter = 1
+position = Vector2(64, 0)
+texture = ExtResource("2_onnh8")
+
+[node name="Tile5" type="Sprite2D" parent="Crane1/Tile6/Tile6/Tile5" unique_id=732198187]
+texture_filter = 1
+position = Vector2(32, 0)
+texture = ExtResource("2_onnh8")
+
+[node name="Tile7" type="Sprite2D" parent="Crane1/Tile6" unique_id=1035202095]
+texture_filter = 1
+position = Vector2(160, 0)
+texture = ExtResource("2_onnh8")
+
+[node name="Tile5" type="Sprite2D" parent="Crane1/Tile6/Tile7" unique_id=131395195]
+position = Vector2(32, 0)
+texture = ExtResource("2_onnh8")
+
+[node name="Tile5" type="Sprite2D" parent="Crane1/Tile6/Tile7/Tile5" unique_id=989502837]
+texture_filter = 1
+position = Vector2(32, 0)
+texture = ExtResource("2_onnh8")
+
+[node name="Tile6" type="Sprite2D" parent="Crane1/Tile6/Tile7" unique_id=1207403159]
+texture_filter = 1
+position = Vector2(32, 0)
+texture = ExtResource("2_onnh8")
+
+[node name="Tile5" type="Sprite2D" parent="Crane1" unique_id=1814012948]
+texture_filter = 1
+position = Vector2(124, -143)
+texture = ExtResource("2_onnh8")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1" unique_id=1585843808]
+texture_filter = 1
+position = Vector2(27, -48)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane1/Tile4" unique_id=677104822]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane1/Tile4" unique_id=1463274818]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4" unique_id=1611315009]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile4" unique_id=105905699]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile4/Tile4" unique_id=1292564483]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile5" type="Sprite2D" parent="Crane1/Tile4" unique_id=273895987]
+texture_filter = 1
+position = Vector2(385, 0)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane1/Tile4/Tile5" unique_id=1167244973]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane1/Tile4/Tile5" unique_id=1411904777]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5" unique_id=447161323]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile4" unique_id=1061194374]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile4/Tile4" unique_id=1180002216]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile5" type="Sprite2D" parent="Crane1/Tile4/Tile5" unique_id=293348227]
+texture_filter = 1
+position = Vector2(0, 191)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5" unique_id=1860665555]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5" unique_id=1193139016]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5" unique_id=1241766095]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile4" unique_id=861910313]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile4/Tile4" unique_id=1746492107]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile5" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5" unique_id=1360999385]
+texture_filter = 1
+position = Vector2(0, 191)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile5" unique_id=1269575304]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile5" unique_id=523013718]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile5" unique_id=165606142]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile5/Tile4" unique_id=1961763972]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile5/Tile4/Tile4" unique_id=652738555]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile5" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile5" unique_id=655326740]
+texture_filter = 1
+position = Vector2(0, 191)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile5/Tile5" unique_id=1516421883]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile5/Tile5" unique_id=1709987869]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile5/Tile5" unique_id=347379320]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile5/Tile5/Tile4" unique_id=1141595919]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile4/Tile5/Tile5/Tile5/Tile5/Tile4/Tile4" unique_id=1677193072]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile9" type="Sprite2D" parent="Crane1" unique_id=271558885]
+texture_filter = 1
+position = Vector2(412, -143)
+texture = ExtResource("5_3kbmx")
+
+[node name="Tile7" type="Sprite2D" parent="Crane1" unique_id=949293767]
+texture_filter = 1
+position = Vector2(27, 143)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane1/Tile7" unique_id=1645155704]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane1/Tile7" unique_id=1980703168]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile7" unique_id=1607688148]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile7/Tile4" unique_id=138133965]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane1/Tile7/Tile4/Tile4" unique_id=468918935]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Crane2" type="Node2D" parent="." unique_id=441937415]
+z_index = -3
+position = Vector2(-760, -39)
+
+[node name="Tile3" type="Sprite2D" parent="Crane2" unique_id=909856772]
+texture_filter = 1
+position = Vector2(290, -143)
+texture = ExtResource("1_pluw8")
+
+[node name="Tile5" type="Sprite2D" parent="Crane2" unique_id=1941687547]
+texture_filter = 1
+position = Vector2(635, -48)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane2/Tile5" unique_id=1610331520]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane2/Tile5" unique_id=2091824271]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile5" unique_id=297657657]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile5/Tile4" unique_id=1017286792]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile5/Tile4/Tile4" unique_id=2081457495]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile5" type="Sprite2D" parent="Crane2/Tile5" unique_id=2140445598]
+texture_filter = 1
+position = Vector2(0, 191)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane2/Tile5/Tile5" unique_id=390030211]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane2/Tile5/Tile5" unique_id=772900679]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile5/Tile5" unique_id=398477641]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile5/Tile5/Tile4" unique_id=89823548]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile5/Tile5/Tile4/Tile4" unique_id=720948683]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2" unique_id=1946504714]
+texture_filter = 1
+position = Vector2(258, -48)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane2/Tile4" unique_id=1137300669]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane2/Tile4" unique_id=1106738534]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile4" unique_id=1581970649]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile4/Tile4" unique_id=1655328809]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile4/Tile4/Tile4" unique_id=696949648]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile9" type="Sprite2D" parent="Crane2" unique_id=1435670082]
+texture_filter = 1
+position = Vector2(635, -143)
+texture = ExtResource("5_3kbmx")
+
+[node name="Tile7" type="Sprite2D" parent="Crane2" unique_id=168788458]
+texture_filter = 1
+position = Vector2(258, 143)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane2/Tile7" unique_id=38980894]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane2/Tile7" unique_id=397632398]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile7" unique_id=879049963]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile7/Tile4" unique_id=2053227924]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile7/Tile4/Tile4" unique_id=1968535797]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile7" type="Sprite2D" parent="Crane2/Tile7" unique_id=1563186090]
+texture_filter = 1
+position = Vector2(0, 191)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane2/Tile7/Tile7" unique_id=1930675038]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane2/Tile7/Tile7" unique_id=1241389602]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile7/Tile7" unique_id=147225427]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile7/Tile7/Tile4" unique_id=594608645]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile7/Tile7/Tile4/Tile4" unique_id=2091958268]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile7" type="Sprite2D" parent="Crane2/Tile7/Tile7" unique_id=2106106533]
+texture_filter = 1
+position = Vector2(0, 191)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile1" type="Sprite2D" parent="Crane2/Tile7/Tile7/Tile7" unique_id=1848346799]
+texture_filter = 1
+position = Vector2(0, -32)
+texture = ExtResource("4_vj1bw")
+
+[node name="Tile2" type="Sprite2D" parent="Crane2/Tile7/Tile7/Tile7" unique_id=2132682009]
+texture_filter = 1
+position = Vector2(0, -63)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile7/Tile7/Tile7" unique_id=1670538351]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile7/Tile7/Tile7/Tile4" unique_id=1241594553]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile4" type="Sprite2D" parent="Crane2/Tile7/Tile7/Tile7/Tile4/Tile4" unique_id=65932177]
+texture_filter = 1
+position = Vector2(0, 32)
+texture = ExtResource("3_r1k4j")
+
+[node name="Tile8" type="Sprite2D" parent="Crane2" unique_id=2042955785]
+texture_filter = 1
+position = Vector2(578, -143)
+texture = ExtResource("6_r1k4j")
+
+[node name="Tile8" type="Sprite2D" parent="Crane2/Tile8" unique_id=190937846]
+texture_filter = 1
+position = Vector2(-32, 0)
+texture = ExtResource("6_r1k4j")
+
+[node name="Tile8" type="Sprite2D" parent="Crane2/Tile8/Tile8" unique_id=523240745]
+texture_filter = 1
+position = Vector2(-32, 0)
+texture = ExtResource("6_r1k4j")
+
+[node name="Tile8" type="Sprite2D" parent="Crane2/Tile8/Tile8/Tile8" unique_id=1175584814]
+texture_filter = 1
+position = Vector2(-32, 0)
+texture = ExtResource("6_r1k4j")
+
+[node name="Tile8" type="Sprite2D" parent="Crane2/Tile8/Tile8/Tile8/Tile8" unique_id=2027200180]
+texture_filter = 1
+position = Vector2(-32, 0)
+texture = ExtResource("6_r1k4j")
+
+[node name="Tile8" type="Sprite2D" parent="Crane2/Tile8/Tile8/Tile8/Tile8/Tile8" unique_id=1817343624]
+texture_filter = 1
+position = Vector2(-32, 0)
+texture = ExtResource("6_r1k4j")
+
+[node name="Tile8" type="Sprite2D" parent="Crane2/Tile8/Tile8/Tile8/Tile8/Tile8/Tile8" unique_id=619394250]
+texture_filter = 1
+position = Vector2(-32, 0)
+texture = ExtResource("6_r1k4j")
+
+[node name="Tile6" type="Sprite2D" parent="Crane2/Tile8/Tile8/Tile8/Tile8/Tile8/Tile8" unique_id=884414174]
+texture_filter = 1
+position = Vector2(-64, 0)
+texture = ExtResource("7_vj1bw")
+
+[node name="Tile10" type="Sprite2D" parent="Crane2" unique_id=1019300239]
+texture_filter = 1
+position = Vector2(609, -143)
+texture = ExtResource("7_vj1bw")
+
+[node name="3" type="Sprite2D" parent="Crane2" unique_id=1231306065]
+z_index = -1
+texture_filter = 1
+position = Vector2(1201.5, -213)
+texture = ExtResource("8_3kbmx")
+
+[node name="9" type="Sprite2D" parent="Crane2" unique_id=1021088590]
+z_index = -2
+texture_filter = 1
+position = Vector2(1197.5, -181)
+texture = ExtResource("9_0lpxl")

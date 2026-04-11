@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://dxv4vweycwwkp"]
+
+[ext_resource type="Script" uid="uid://bsc7lejf61f4u" path="res://Scripts/crumblin_plattform.gd" id="1_uknno"]
+[ext_resource type="Texture2D" uid="uid://by4gtq0ykst75" path="res://Sprites/BG/falling_plattform.png" id="2_mh6bt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gscm8"]
+size = Vector2(16, 16)
+
+[node name="RigidBody2D" type="RigidBody2D" unique_id=1609051506]
+collision_mask = 3
+script = ExtResource("1_uknno")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=497813779]
+shape = SubResource("RectangleShape2D_gscm8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1463302691]
+texture_filter = 1
+texture = ExtResource("2_mh6bt")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)

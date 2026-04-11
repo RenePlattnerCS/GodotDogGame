@@ -365,6 +365,8 @@ _data = {
 }
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=769169184 groups=["player"]]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_2nftw")
 
 [node name="NormalHurtbox" type="CollisionShape2D" parent="." unique_id=57519571 groups=["player"]]
@@ -372,6 +374,7 @@ position = Vector2(-1, 39)
 shape = SubResource("CapsuleShape2D_mc20k")
 
 [node name="JumpingHurtbox" type="CollisionShape2D" parent="." unique_id=1824086948]
+z_index = 2
 position = Vector2(-1, 39)
 shape = SubResource("CapsuleShape2D_hck1p")
 debug_color = Color(0.8625561, 0.3104777, 0.4780476, 0.41960785)
@@ -401,3 +404,7 @@ offset = Vector2(-0.875, 0)
 [node name="DogBounceAnimationPlayer" type="AnimationPlayer" parent="Sprites" unique_id=1118664844]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_juxdh")
+
+[node name="DownRayCast2D" type="RayCast2D" parent="." unique_id=1482340320]
+position = Vector2(-1, 64)
+target_position = Vector2(0, 16)

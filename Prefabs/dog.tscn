@@ -16,6 +16,8 @@ texture = ExtResource("1_euiuq")
 offset = Vector2(-2.265, 0)
 
 [node name="Hitbox" type="Area2D" parent="Front" unique_id=502847565]
+collision_layer = 8
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Front/Hitbox" unique_id=650149174]
 position = Vector2(26, 23)

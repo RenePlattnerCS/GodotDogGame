@@ -11,7 +11,7 @@ extends Node2D
 @export var charging_retraction_length: float = 15.0
 @export var buffer_time: float = 0.4  
 @export var knockback_up: float = 600
-@export var knockback_stength: float = 4000  #4000 -> hit 3 times if charge and close
+@export var knockback_stength: float = 2000  #4000 -> hit 3 times if charge and close
 @export var min_hit_lag_time: float = 0.05 
 @export var max_hit_lag_time: float = 0.3 
 
@@ -31,7 +31,7 @@ const BONUS_DISTANCE = 100
 const HITLAG_THREASHOLD = 0.50
 const FLASH_COUNT = 3
 const MAX_HIT_COUNT = 3
-const CAN_HIT_AGAIN_TIME = 0.03
+const CAN_HIT_AGAIN_TIME = 0.05 # 0.03 was nice with 400
 
 
 var hit_count = 0

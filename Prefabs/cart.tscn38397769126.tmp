@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://bi364gsiiww7b"]
+
+[ext_resource type="Texture2D" uid="uid://h210kty6oqrm" path="res://Sprites/BG/3 Objects/4 Overhead crane/2 Cart/Move.png" id="1_o8d5y"]
+[ext_resource type="Script" uid="uid://dtk3qnjegvy0j" path="res://Prefabs/cart_grapple.gd" id="2_6ohuo"]
+[ext_resource type="Texture2D" uid="uid://j04db4sygssj" path="res://Sprites/BG/3 Objects/4 Overhead crane/3 Grab/Rope2.png" id="4_24e42"]
+[ext_resource type="Texture2D" uid="uid://bh1dnqpa57sj2" path="res://Sprites/BG/3 Objects/4 Overhead crane/3 Grab/GrapFrontt.png" id="4_ikec7"]
+[ext_resource type="Script" uid="uid://cacglvo173ega" path="res://Prefabs/grappler.gd" id="4_u2am6"]
+[ext_resource type="Texture2D" uid="uid://cm6mg3dwym6by" path="res://Sprites/BG/3 Objects/1 Cargos/15.png" id="5_u2am6"]
+[ext_resource type="Texture2D" uid="uid://1qabjb8lo60x" path="res://Sprites/BG/3 Objects/4 Overhead crane/3 Grab/GrapBackt.png" id="6_8dvh4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhx2p"]
+atlas = ExtResource("1_o8d5y")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdwky"]
+atlas = ExtResource("1_o8d5y")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ohuo"]
+atlas = ExtResource("1_o8d5y")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24e42"]
+atlas = ExtResource("1_o8d5y")
+region = Rect2(288, 0, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ikec7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhx2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kdwky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ohuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24e42")
+}],
+"loop": true,
+"name": &"iddle",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2x0ey"]
+atlas = ExtResource("4_ikec7")
+region = Rect2(288, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0prat"]
+atlas = ExtResource("4_ikec7")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yq8s"]
+atlas = ExtResource("4_ikec7")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5h70y"]
+atlas = ExtResource("4_ikec7")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5h70y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2x0ey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0prat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yq8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5h70y")
+}],
+"loop": false,
+"name": &"release",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmf7s"]
+atlas = ExtResource("6_8dvh4")
+region = Rect2(288, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chqli"]
+atlas = ExtResource("6_8dvh4")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msys5"]
+atlas = ExtResource("6_8dvh4")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqwls"]
+atlas = ExtResource("6_8dvh4")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o7duk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmf7s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chqli")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msys5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqwls")
+}],
+"loop": false,
+"name": &"release",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" unique_id=2108662638]
+texture_filter = 1
+texture_repeat = 2
+sprite_frames = SubResource("SpriteFrames_ikec7")
+animation = &"iddle"
+frame_progress = 0.9973761
+script = ExtResource("2_6ohuo")
+
+[node name="Rope2" type="Sprite2D" parent="." unique_id=211995453]
+z_index = -1
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-16, 31)
+texture = ExtResource("4_24e42")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Grappler" type="Node2D" parent="." unique_id=68228059]
+position = Vector2(0, -1)
+script = ExtResource("4_u2am6")
+
+[node name="CargoDropBox" type="Sprite2D" parent="Grappler" unique_id=1860309812]
+visible = false
+z_index = -1
+position = Vector2(2, 128)
+scale = Vector2(1.32, 1.265)
+texture = ExtResource("5_u2am6")
+
+[node name="GrapplerFront" type="AnimatedSprite2D" parent="Grappler" unique_id=1793406921]
+position = Vector2(0, 96)
+sprite_frames = SubResource("SpriteFrames_5h70y")
+animation = &"release"
+
+[node name="GrappleBack" type="AnimatedSprite2D" parent="Grappler" unique_id=1656885427]
+z_index = -2
+position = Vector2(0, 96)
+sprite_frames = SubResource("SpriteFrames_o7duk")
+animation = &"release"

@@ -25,6 +25,7 @@ window/stretch/mode="viewport"
 [global_group]
 
 player="the player character"
+crumble_tile=""
 
 [input]
 
@@ -74,6 +75,13 @@ p1_shoot={
 "events": [Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="ground"
+2d_physics/layer_2="player"
+2d_physics/layer_3="box"
+2d_physics/layer_4="dog"
 
 [physics]
 

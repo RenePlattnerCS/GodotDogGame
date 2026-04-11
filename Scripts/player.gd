@@ -84,7 +84,12 @@ func _physics_process(delta: float) -> void:
 		if is_knocked_back:
 			# slow air resistance instead of instant stop
 			velocity.x *= air_resistance
-	else:		
+	else:	
+		if $DownRayCast2D.is_colliding():
+			var body = $DownRayCast2D.get_collider()
+			if body:  # always null check first!
+				if body.is_in_group("crumble_tile"):
+					body.crumble()
 		#print("unlock jump")
 		is_jumping = false
 		lock_jump = false
