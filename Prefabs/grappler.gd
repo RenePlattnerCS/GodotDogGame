@@ -12,7 +12,6 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	timer += delta
-	print(timer)
 	if timer > 20 and not one_shot:
 		release_grapple()
 		one_shot = true

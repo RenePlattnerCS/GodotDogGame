@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://np88urr1nmrf"]
+
+[ext_resource type="Texture2D" uid="uid://cqf1m55ph0q84" path="res://Sprites/BG/3 Objects/1 Cargos/6.png" id="1_ebsy2"]
+[ext_resource type="Texture2D" uid="uid://cwmp6bg8mnyp" path="res://Sprites/BG/3 Objects/1 Cargos/14.png" id="2_413dk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ebsy2"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tkfg3"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yni04"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Loser screen" type="CanvasLayer" unique_id=264522770]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1491022539]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 11
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=639121385]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer" unique_id=1802180047]
+layout_mode = 2
+
+[node name="Loser" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=1401013706]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 46
+theme_override_styles/focus = SubResource("StyleBoxFlat_ebsy2")
+text = "Loser"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=2102995779]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer" unique_id=1255863207]
+texture_filter = 1
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_tkfg3")
+icon = ExtResource("1_ebsy2")
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button" unique_id=1804197191]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 14.0
+offset_right = 90.0
+offset_bottom = 40.0
+focus_neighbor_right = NodePath("../../Button2")
+theme_override_colors/font_color = Color(0.78643984, 0.80752504, 0.49111098, 1)
+theme_override_colors/font_outline_color = Color(0.71090275, 0.21512273, 0.22328469, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
+text = "Speed"
+
+[node name="Button2" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer" unique_id=82167876]
+texture_filter = 1
+layout_mode = 2
+focus_neighbor_left = NodePath("../Button")
+theme_override_styles/normal = SubResource("StyleBoxFlat_yni04")
+icon = ExtResource("2_413dk")
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button2" unique_id=534598156]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 14.0
+offset_right = 91.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0.8312985, 0.92195415, 0.9369481, 1)
+theme_override_colors/font_outline_color = Color(0.28336954, 0.45540756, 0.7606312, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18
+text = "Power"
+
+[node name="Choose" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=1736498829]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 46
+theme_override_styles/focus = SubResource("StyleBoxFlat_ebsy2")
+text = "Choose"
+horizontal_alignment = 1

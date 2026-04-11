@@ -11,7 +11,7 @@ extends Node2D
 @export var charging_retraction_length: float = 15.0
 @export var buffer_time: float = 0.4  
 @export var knockback_up: float = 600
-@export var knockback_stength: float = 2000  #4000 -> hit 3 times if charge and close
+@export var knockback_stength: float = 4000  #4000 -> hit 3 times if charge and close
 @export var min_hit_lag_time: float = 0.05 
 @export var max_hit_lag_time: float = 0.3 
 
@@ -92,7 +92,6 @@ func process_dog_state(delta):
 			
 	match state:
 		DogState.IDLE:
-			#print("dog iddle")
 			# only accept input when fully retracted
 			if input_buffer:
 				input_buffer = false
@@ -176,8 +175,7 @@ func apply_impact(body : CharacterBody2D):
 		var bonus = 0
 		if(charge_percent > CHARCE_PERCENT_BONUS_THREASHHOLD and distance > BONUS_DISTANCE or hit_count == MAX_HIT_COUNT):
 			if( hit_count == MAX_HIT_COUNT):
-				print("bonus hit!")
-			bonus = HIGH_CHARGE_KNOCKBACK_BOSUS
+				bonus = HIGH_CHARGE_KNOCKBACK_BOSUS
 		var force = lerp(KNOCKBACK_MIN_STRENGTH , knockback_stength + bonus , charge_percent)
 		var force_up = lerp(KNOCKBACK_UP_MIN_STRENGTH, knockback_up, charge_percent)
 		
