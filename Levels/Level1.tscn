@@ -148,10 +148,10 @@ camera_speed = 7.0
 [node name="Stage" type="Node2D" parent="." unique_id=1898055944]
 
 [node name="CargoCart2" parent="Stage" unique_id=1175306088 instance=ExtResource("8_3momc")]
-position = Vector2(252, -228)
+position = Vector2(252, -229)
 
 [node name="CargoCart" parent="Stage" unique_id=2108662638 instance=ExtResource("8_3momc")]
-position = Vector2(-230, -229)
+position = Vector2(-226.675, -229)
 
 [node name="Cargo" type="Node2D" parent="Stage" unique_id=766573068]
 z_index = -1

@@ -124,7 +124,8 @@ texture_filter = 1
 texture_repeat = 2
 sprite_frames = SubResource("SpriteFrames_ikec7")
 animation = &"iddle"
-frame_progress = 0.2589207
+autoplay = "iddle"
+frame_progress = 0.59015316
 script = ExtResource("2_6ohuo")
 
 [node name="Rope2" type="Sprite2D" parent="." unique_id=211995453]
