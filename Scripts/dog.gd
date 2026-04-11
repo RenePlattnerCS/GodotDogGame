@@ -213,12 +213,10 @@ func update_charge_visuals(delta):
 		
 func hitlag(body):
 	var charge_percent = clamp(prev_charge_time / max_charge_time, 0.0, 1.0)
-	
 	if charge_percent > HITLAG_THREASHOLD:
-		#body.modulate = Color.RED
 		var hitlag_duration = lerp(0.05, 0.15, charge_percent)
 		var flash_time = hitlag_duration / (FLASH_COUNT * 2)
-		Engine.time_scale = 0.0
+		Engine.time_scale = 0.05  # slow motion instead of full freeze
 		for i in FLASH_COUNT:
 			body.modulate = Color.RED
 			await get_tree().create_timer(flash_time, true, false, true).timeout

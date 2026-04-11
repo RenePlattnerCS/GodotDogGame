@@ -389,6 +389,7 @@ animation = &"walking"
 offset = Vector2(-0.875, 0)
 
 [node name="Dog" parent="Sprites" unique_id=380888768 instance=ExtResource("2_2nftw")]
+physics_interpolation_mode = 2
 position = Vector2(19, 2)
 max_charge_time = 0.7
 max_length = 200.0
