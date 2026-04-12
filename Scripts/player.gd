@@ -38,6 +38,7 @@ func _ready():
 	$NormalHurtbox.disabled = false
 	$JumpingHurtbox.disabled = true
 
+
 func _process(delta: float) -> void:
 	
 	
@@ -141,15 +142,19 @@ func disable_player():
 	
 	
 func increase_dog_knockback(added_strength : int):
-	$Sprites/Dog.knockback_stength += added_strength
+	$Sprites/Dog.stats.knockback_strength += added_strength
+	$Sprites/Dog.apply_stats()
 	
 func decrease_dog_chargetime():
-	$Sprites/Dog.charge_speed_multiplier *= 2
+	$Sprites/Dog.stats.charge_speed_multiplier *= 2
+	$Sprites/Dog.apply_stats()
 	
 func increase_dog_length(length : int, extend_speed : int,  retract_speed : int):
-	$Sprites/Dog.max_length += length
-	$Sprites/Dog.extend_speed += extend_speed
-	$Sprites/Dog.retract_speed += retract_speed
+	$Sprites/Dog.stats.max_length += length
+	$Sprites/Dog.stats.extend_speed +=extend_speed
+	$Sprites/Dog.stats.retract_speed += retract_speed
+	$Sprites/Dog.apply_stats()
+
 
 func respawn():
 	if(not spawn_point):
