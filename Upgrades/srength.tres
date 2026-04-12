@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradePunch" format=3 uid="uid://klk52emkkn5l"]
+
+[ext_resource type="Texture2D" uid="uid://cr5kkxdm7iedr" path="res://Sprites/BG/3 Objects/1 Cargos/Buttons/Button_strength.png" id="1_8cfwa"]
+[ext_resource type="Script" uid="uid://0xmvtt3ate8g" path="res://Scripts/UpgradeRessources/upgrade_dog.gd" id="1_clmay"]
+
+[resource]
+script = ExtResource("1_clmay")
+name = "Strength↑"
+icon = ExtResource("1_8cfwa")
+button_text_color = Color(1, 0.59257066, 0.4643036, 1)
+button_text_border_color = Color(0.44313726, 0.17254902, 0.047058824, 1)
+metadata/_custom_type_script = "uid://0xmvtt3ate8g"

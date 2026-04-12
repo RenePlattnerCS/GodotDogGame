@@ -14,19 +14,21 @@ script = ExtResource("1_30gwi")
 position = Vector2(86, 326)
 shape = SubResource("RectangleShape2D_104vp")
 
+[node name="p2_spawn2" type="Node2D" parent="." unique_id=517062826]
+position = Vector2(142, -37)
+
+[node name="p1_spawn" type="Node2D" parent="." unique_id=1398750736]
+position = Vector2(-105, -48)
+
 [node name="choose_screen2" parent="." unique_id=264522770 instance=ExtResource("2_103s5")]
 
 [node name="MarginContainer" parent="choose_screen2" index="0" unique_id=1491022539]
-offset_left = 491.0
-offset_top = -36.0
-offset_right = 698.0
-offset_bottom = 167.0
+offset_left = 251.0
+offset_top = -1.0
+offset_right = 458.0
+offset_bottom = 202.0
 
 [node name="choose_screen" parent="." unique_id=1194221161 instance=ExtResource("2_103s5")]
-
-[node name="MarginContainer" parent="choose_screen" index="0" unique_id=1491022539]
-offset_right = 207.0
-offset_bottom = 135.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 

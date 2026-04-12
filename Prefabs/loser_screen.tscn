@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://np88urr1nmrf"]
 
+[ext_resource type="Script" uid="uid://uh76s671f75j" path="res://Scripts/loser_screen.gd" id="1_413dk"]
 [ext_resource type="Texture2D" uid="uid://cqf1m55ph0q84" path="res://Sprites/BG/3 Objects/1 Cargos/6.png" id="1_ebsy2"]
 [ext_resource type="Texture2D" uid="uid://cwmp6bg8mnyp" path="res://Sprites/BG/3 Objects/1 Cargos/14.png" id="2_413dk"]
 
@@ -56,6 +57,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [node name="Loser screen" type="CanvasLayer" unique_id=264522770]
+script = ExtResource("1_413dk")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1491022539]
 offset_right = 40.0
@@ -76,7 +78,7 @@ theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 46
 theme_override_styles/focus = SubResource("StyleBoxFlat_ebsy2")
-text = "Loser"
+text = "Choose"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=2102995779]
@@ -91,16 +93,16 @@ icon = ExtResource("1_ebsy2")
 
 [node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button" unique_id=1804197191]
 layout_mode = 0
-offset_left = 36.0
+offset_left = 13.0
 offset_top = 14.0
-offset_right = 90.0
+offset_right = 75.0
 offset_bottom = 40.0
 focus_neighbor_right = NodePath("../../Button2")
 theme_override_colors/font_color = Color(0.78643984, 0.80752504, 0.49111098, 1)
 theme_override_colors/font_outline_color = Color(0.71090275, 0.21512273, 0.22328469, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 18
-text = "Speed"
+text = "test"
 
 [node name="Button2" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer" unique_id=82167876]
 texture_filter = 1
@@ -111,22 +113,12 @@ icon = ExtResource("2_413dk")
 
 [node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button2" unique_id=534598156]
 layout_mode = 0
-offset_left = 36.0
-offset_top = 14.0
-offset_right = 91.0
-offset_bottom = 40.0
+offset_left = 16.0
+offset_top = 13.0
+offset_right = 71.0
+offset_bottom = 39.0
 theme_override_colors/font_color = Color(0.8312985, 0.92195415, 0.9369481, 1)
 theme_override_colors/font_outline_color = Color(0.28336954, 0.45540756, 0.7606312, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 18
-text = "Power"
-
-[node name="Choose" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer" unique_id=1736498829]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 46
-theme_override_styles/focus = SubResource("StyleBoxFlat_ebsy2")
-text = "Choose"
-horizontal_alignment = 1
+text = "test"

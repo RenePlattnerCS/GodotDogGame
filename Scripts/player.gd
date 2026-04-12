@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 
 @export var player_index: int = 1
+@export var spawn_point: Node2D 
 
 @export_group("Movement")
 @export var air_resistance: float = 0.95  # closer to 1.0 = more slippery
@@ -11,19 +12,21 @@ extends CharacterBody2D
 @export_group("Jump")
 @export var fall_multiplier : float = 1.5
 @export var low_jump_multiplier: float = 5.0  # when button released early
-@export var max_jump_time: float = 0.4  # max time you can hold jump
+@export var max_jump_time: float = 0.8  # max time you can hold jump
 @export var lock_jump_after_time: float = 0.2  # max time you can hold jump
 
 var jump_timer: float = 0.0
 var is_jumping: bool = false
 var lock_jump: bool = false
+var jump_upgraded: bool = false
+
 
 var player_has_horizontal_speed : bool = false
 
 var is_knocked_back: bool = false
 
-const SPEED = 150.0
-const JUMP_VELOCITY = -400.0
+var SPEED = 150.0
+var  JUMP_VELOCITY = -400.0
 const EPSILON = 1.0
 
 
@@ -65,12 +68,13 @@ func _physics_process(delta: float) -> void:
 			jump_timer += delta
 			# force descend if held too long
 			if jump_timer >= max_jump_time:
-				print(" jump timer")
 				is_jumping = false
 				
+			
 			if jump_timer >= lock_jump_after_time:
-				print("lock jump")
-				lock_jump = true
+				if not jump_upgraded :
+					print("lock jump")
+					lock_jump = true
 				$NormalHurtbox.disabled = true
 				$JumpingHurtbox.disabled = false
 				
@@ -105,7 +109,7 @@ func _physics_process(delta: float) -> void:
 		if abs(velocity.x) < knockback_threshold:
 			is_knocked_back = false
 			
-	elif not is_jumping and not lock_jump:
+	elif (not is_jumping and not lock_jump) or jump_upgraded:
 		# normal movement
 		var direction = Input.get_axis(get_input_action(("left")), get_input_action(("right")))
 		if direction:
@@ -128,3 +132,33 @@ func _physics_process(delta: float) -> void:
 func get_input_action(action: String) -> String:
 	return "p" + str(player_index) + "_" + action
 	
+	
+	
+func disable_player():
+	visible = false
+	set_process(false)        # disables _process
+	set_physics_process(false) # disables _physics_process
+	
+	
+func increase_dog_knockback(added_strength : int):
+	$Sprites/Dog.knockback_stength += added_strength
+	
+func decrease_dog_chargetime():
+	$Sprites/Dog.charge_speed_multiplier *= 2
+	
+func increase_dog_length(length : int, extend_speed : int,  retract_speed : int):
+	$Sprites/Dog.max_length += length
+	$Sprites/Dog.extend_speed += extend_speed
+	$Sprites/Dog.retract_speed += retract_speed
+
+func respawn():
+	if(not spawn_point):
+		print("no sawn point assigned")
+		return
+	global_position = spawn_point.position
+	
+	visible = true
+	set_process(true)
+	set_physics_process(true)
+	velocity = Vector2.ZERO
+	is_knocked_back = false

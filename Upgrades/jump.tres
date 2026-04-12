@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="UpgradeJump" format=3 uid="uid://bkbrdusfh27cv"]
+
+[ext_resource type="Texture2D" uid="uid://d240amq7v5gwi" path="res://Sprites/BG/3 Objects/1 Cargos/Buttons/Button_jump.png" id="1_h7k5v"]
+[ext_resource type="Script" uid="uid://br6vos1jb85vf" path="res://Scripts/UpgradeRessources/upgrade_jump.gd" id="1_x2epv"]
+
+[resource]
+script = ExtResource("1_x2epv")
+name = "Jump↑"
+description = "increase jump hight"
+icon = ExtResource("1_h7k5v")
+button_text_color = Color(0.7855932, 0.96888655, 0.6877686, 1)
+button_text_border_color = Color(0.1906907, 0.34446174, 0.08561287, 1)
+metadata/_custom_type_script = "uid://br6vos1jb85vf"

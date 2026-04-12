@@ -11,12 +11,13 @@
 [ext_resource type="Texture2D" uid="uid://dbyn2bapgfvf7" path="res://Sprites/BG/3 Objects/2 Fencing/2.png" id="7_tuji2"]
 [ext_resource type="PackedScene" uid="uid://bi364gsiiww7b" path="res://Prefabs/cart.tscn" id="8_3momc"]
 [ext_resource type="Texture2D" uid="uid://by4gtq0ykst75" path="res://Sprites/BG/falling_plattform.png" id="9_7fl83"]
-[ext_resource type="Script" path="res://Levels/platforms.gd" id="10_p5226"]
+[ext_resource type="Script" uid="uid://dy620fnjdan1o" path="res://Levels/platforms.gd" id="10_p5226"]
 [ext_resource type="PackedScene" uid="uid://cmsxm67oe7sj6" path="res://Prefabs/craneBase.tscn" id="11_p5226"]
 [ext_resource type="Texture2D" uid="uid://b85a85i4qtq4d" path="res://Sprites/BG/3 Background/Day/5.png" id="14_p2sgf"]
 [ext_resource type="Texture2D" uid="uid://b1cmv27ky8u7y" path="res://Sprites/BG/3 Background/Day/3.png" id="14_sbm5j"]
 [ext_resource type="Texture2D" uid="uid://biierk3fove7a" path="res://Sprites/BG/3 Background/Day/2.png" id="15_p2sgf"]
 [ext_resource type="Texture2D" uid="uid://cxf5gsapmx83u" path="res://Sprites/BG/3 Background/Day/1.png" id="16_ufevr"]
+[ext_resource type="Script" uid="uid://8wt1q6ite14s" path="res://Levels/upgrade_manager.gd" id="18_ufevr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iotdp"]
 texture = ExtResource("3_fhqol")
@@ -135,12 +136,20 @@ sources/0 = SubResource("TileSetAtlasSource_tuji2")
 [node name="Level1" type="Node2D" unique_id=160075761 groups=["crumble_tile"]]
 position = Vector2(-16, 0)
 
-[node name="Player1" parent="." unique_id=365629459 instance=ExtResource("1_w77jt")]
+[node name="Player1" parent="." unique_id=365629459 node_paths=PackedStringArray("spawn_point") instance=ExtResource("1_w77jt")]
 position = Vector2(-86, -74)
+spawn_point = NodePath("../P1_spawn")
 
-[node name="Player2" parent="." unique_id=769169184 instance=ExtResource("1_w77jt")]
+[node name="Player2" parent="." unique_id=769169184 node_paths=PackedStringArray("spawn_point") instance=ExtResource("1_w77jt")]
 position = Vector2(99, -81)
 player_index = 2
+spawn_point = NodePath("../P2_spawn")
+
+[node name="P2_spawn" type="Node2D" parent="." unique_id=1283321819]
+position = Vector2(126, -70)
+
+[node name="P1_spawn" type="Node2D" parent="." unique_id=1855197464]
+position = Vector2(-104, -62)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=663416642 node_paths=PackedStringArray("player1", "player2")]
 offset = Vector2(0, -31.35)
@@ -152,6 +161,18 @@ camera_speed = 7.0
 
 [node name="DeathZone" parent="." unique_id=1575452244 instance=ExtResource("3_p2sgf")]
 
+[node name="choose_screen2" parent="DeathZone" index="1" unique_id=264522770 node_paths=PackedStringArray("button1", "button2", "controlled_player", "UpgradeManager")]
+button1 = NodePath("MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button")
+button2 = NodePath("MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button2")
+controlled_player = NodePath("../../Player2")
+UpgradeManager = NodePath("../../upgrade_manager")
+
+[node name="choose_screen" parent="DeathZone" index="2" unique_id=1194221161 node_paths=PackedStringArray("button1", "button2", "controlled_player", "UpgradeManager")]
+button1 = NodePath("MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button")
+button2 = NodePath("MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button2")
+controlled_player = NodePath("../../Player1")
+UpgradeManager = NodePath("../../upgrade_manager")
+
 [node name="Stage" type="Node2D" parent="." unique_id=1898055944]
 
 [node name="CargoCart2" parent="Stage" unique_id=1175306088 instance=ExtResource("8_3momc")]
@@ -161,6 +182,7 @@ position = Vector2(252, -229)
 position = Vector2(-226.675, -229)
 
 [node name="Cargo" type="Node2D" parent="Stage" unique_id=766573068]
+modulate = Color(0.5985247, 0.59852463, 0.59852463, 1)
 z_index = -1
 position = Vector2(0, 1)
 
@@ -202,17 +224,17 @@ position = Vector2(156, -5)
 texture = ExtResource("7_tuji2")
 
 [node name="Cranes" parent="Stage" unique_id=866214868 instance=ExtResource("11_p5226")]
+modulate = Color(0.8346143, 0.8346143, 0.8346143, 1)
 
 [node name="Platforms" type="TileMapLayer" parent="Stage" unique_id=356187448]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAAWAAAAAAABAAAAAAAXAAAAAAACAAAAAAAYAAAAAAADAAAAAAAZAAAAAAAEAAAAAAAaAAAAAAAAAAAAAAAbAAAAAAABAAAAAAAcAAAAAAACAAAAAAAdAAAAAAADAAAAAAAeAAAAAAAEAAAAAAAfAAAAAAAAAAAAAAAgAAAAAAABAAAAAAAhAAAAAAACAAAAAAAiAAAAAAADAAAAAAAjAAAAAAAEAAAAAADo/wAAAAAAAAAAAADp/wAAAAABAAAAAADq/wAAAAACAAAAAADr/wAAAAADAAAAAADs/wAAAAAEAAAAAADj/wAAAAAAAAAAAADk/wAAAAABAAAAAADl/wAAAAACAAAAAADm/wAAAAADAAAAAADn/wAAAAAEAAAAAADe/wAAAAAAAAAAAADf/wAAAAABAAAAAADg/wAAAAACAAAAAADh/wAAAAADAAAAAADi/wAAAAAEAAAAAADb/wAAAAAFAAAAAADc/wAAAAAGAAAAAADd/wAAAAAHAAAAAAAkAAAAAAAFAAAAAAAlAAAAAAAGAAAAAAAmAAAAAAAHAAAAAADt/wAAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_f5cpa")
 script = ExtResource("10_p5226")
 
 [node name="Background" type="Node2D" parent="." unique_id=1336164069]
 
 [node name="4" type="Parallax2D" parent="Background" unique_id=991644249]
-scroll_scale = Vector2(0.8, 0.8)
+scroll_scale = Vector2(0.6, 0.6)
 repeat_size = Vector2(570, 0)
 repeat_times = 3
 
@@ -256,10 +278,20 @@ region_rect = Rect2(0, 25.5, 574, 293)
 
 [node name="1" type="Parallax2D" parent="Background" unique_id=1349417110]
 scroll_scale = Vector2(0, 0)
+repeat_size = Vector2(570, 0)
+repeat_times = 4
 
 [node name="BG1" type="Sprite2D" parent="Background/1" unique_id=1645562215]
 z_index = -10
 texture_filter = 1
-position = Vector2(16, -66)
-scale = Vector2(3, 3)
+position = Vector2(14, -41)
 texture = ExtResource("16_ufevr")
+region_enabled = true
+region_rect = Rect2(-0.666687, -0.33332825, 570.6667, 316.6667)
+
+[node name="upgrade_manager" type="Node2D" parent="." unique_id=48248330]
+script = ExtResource("18_ufevr")
+
+[editable path="DeathZone"]
+[editable path="DeathZone/choose_screen2"]
+[editable path="DeathZone/choose_screen"]

@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://d20xflbfcj53w" path="res://Sprites/BG/3 Objects/4 Overhead crane/1 Base/Tile8.png" id="6_r1k4j"]
 [ext_resource type="Texture2D" uid="uid://bm4mbgbt5up5b" path="res://Sprites/BG/3 Objects/4 Overhead crane/1 Base/Tile6.png" id="7_vj1bw"]
 [ext_resource type="Texture2D" uid="uid://h8uif1d2k2se" path="res://Sprites/BG/3 Objects/3 Box/3.png" id="8_3kbmx"]
-[ext_resource type="Texture2D" uid="uid://bmsyujjros8hk" path="res://Sprites/BG/3 Objects/1 Cargos/9.png" id="9_0lpxl"]
 
 [node name="Node2D" type="Node2D" unique_id=866214868]
 z_index = -3
@@ -71,6 +70,7 @@ position = Vector2(32, 0)
 texture = ExtResource("2_onnh8")
 
 [node name="Tile5" type="Sprite2D" parent="Crane1" unique_id=1814012948]
+z_index = 7
 texture_filter = 1
 position = Vector2(124, -143)
 texture = ExtResource("2_onnh8")
@@ -465,6 +465,7 @@ position = Vector2(-32, 0)
 texture = ExtResource("6_r1k4j")
 
 [node name="Tile8" type="Sprite2D" parent="Crane2/Tile8/Tile8" unique_id=523240745]
+z_index = 6
 texture_filter = 1
 position = Vector2(-32, 0)
 texture = ExtResource("6_r1k4j")
@@ -502,11 +503,5 @@ texture = ExtResource("7_vj1bw")
 [node name="3" type="Sprite2D" parent="Crane2" unique_id=1231306065]
 z_index = -1
 texture_filter = 1
-position = Vector2(1201.5, -213)
+position = Vector2(1290, -167)
 texture = ExtResource("8_3kbmx")
-
-[node name="9" type="Sprite2D" parent="Crane2" unique_id=1021088590]
-z_index = -2
-texture_filter = 1
-position = Vector2(1197.5, -181)
-texture = ExtResource("9_0lpxl")

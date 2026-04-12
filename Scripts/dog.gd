@@ -1,7 +1,7 @@
 extends Node2D
 
 @export_group("Attacking")
-@export var max_charge_time: float = 1.0
+@export var max_charge_time: float = 2.0
 @export var max_keep_charging_time: float = 3.0
 @export var max_length: float = 170.0
 @export var extend_speed: float = 700.0
@@ -13,7 +13,8 @@ extends Node2D
 @export var knockback_up: float = 600
 @export var knockback_stength: float = 4000  #4000 -> hit 3 times if charge and close
 @export var min_hit_lag_time: float = 0.05 
-@export var max_hit_lag_time: float = 0.3 
+@export var max_hit_lag_time: float = 0.1 
+@export var charge_speed_multiplier: float = 1.0
 
 @export_group("Blinking")
 @export var max_blink_speed: float = 10.0  # blinks per second at full charge
@@ -37,6 +38,7 @@ const CAN_HIT_AGAIN_TIME = 0.05 # 0.03 was nice with 400
 var hit_count = 0
 var player_index: int = -1
 var charge_time: float = 0.0
+var over_charge_time: float = 0.0
 var prev_charge_time: float = 0.0
 var is_charging: bool = false
 var is_extending: bool = false
@@ -105,8 +107,9 @@ func process_dog_state(delta):
 			
 			var extend_dog : bool = false
 			#charge_time = min(charge_time + delta, max_charge_time)
-			charge_time = charge_time + delta
-			if(charge_time >  max_charge_time + max_keep_charging_time):
+			charge_time = charge_time + delta * charge_speed_multiplier
+			over_charge_time = over_charge_time + delta
+			if(over_charge_time >  max_keep_charging_time):
 				extend_dog = true
 			
 			if Input.is_action_just_released(get_input_action("shoot")):
@@ -117,6 +120,7 @@ func process_dog_state(delta):
 				target_length = max((charge_time / max_charge_time) * max_length, min_extend_length)
 				prev_charge_time = charge_time
 				charge_time = 0.0
+				over_charge_time = 0.0
 				state = DogState.EXTENDING
 		
 		DogState.EXTENDING:
