@@ -41,7 +41,7 @@ var state: DogState = DogState.IDLE
 
 
 func _ready():
-	player_index = get_parent().get_parent().player_index
+	player_index = get_parent().get_parent().get_parent().player_index
 	if player_index == -1:
 		print("couldn't find player index")
 	apply_stats()
@@ -129,6 +129,7 @@ func apply_knockback(body: CharacterBody2D, knock_direction: float, charge_perce
 	if hit_enemy:
 		return
 	hit_enemy = true
+	print("applying force")
 	var force = lerp(300.0, knockback_strength, charge_percent)
 	var force_up = lerp(50.0, knockback_up, charge_percent)
 	body.velocity.x = knock_direction * force
@@ -176,6 +177,7 @@ func update_charge_visuals(delta):
 
 
 func apply_stats():
+	print("applying stats")
 	# override in each dog to read from stats
 	max_length = stats.max_length
 	extend_speed = stats.extend_speed

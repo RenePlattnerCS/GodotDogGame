@@ -4,6 +4,6 @@ class_name UpgradeCharge
 
 @export var charge_reduction: float = 0.2
 
-func apply(player: CharacterBody2D):
-	player.decrease_dog_chargetime()
+func apply(player: Node2D):
+	player.get_node("Sprites/Dog").decrease_charge_time()
 	#.max_charge_time -= charge_reduction

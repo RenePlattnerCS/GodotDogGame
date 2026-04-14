@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dbyn2bapgfvf7" path="res://Sprites/BG/3 Objects/2 Fencing/2.png" id="7_tuji2"]
 [ext_resource type="PackedScene" uid="uid://bi364gsiiww7b" path="res://Prefabs/cart.tscn" id="8_3momc"]
 [ext_resource type="Texture2D" uid="uid://by4gtq0ykst75" path="res://Sprites/BG/falling_plattform.png" id="9_7fl83"]
-[ext_resource type="Script" uid="uid://dy620fnjdan1o" path="res://Levels/platforms.gd" id="10_p5226"]
+[ext_resource type="Script" path="res://Levels/platforms.gd" id="10_p5226"]
 [ext_resource type="PackedScene" uid="uid://cmsxm67oe7sj6" path="res://Prefabs/craneBase.tscn" id="11_p5226"]
 [ext_resource type="Texture2D" uid="uid://b85a85i4qtq4d" path="res://Sprites/BG/3 Background/Day/5.png" id="14_p2sgf"]
 [ext_resource type="Texture2D" uid="uid://b1cmv27ky8u7y" path="res://Sprites/BG/3 Background/Day/3.png" id="14_sbm5j"]

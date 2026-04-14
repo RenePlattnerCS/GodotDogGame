@@ -1,20 +1,18 @@
 [gd_scene format=3 uid="uid://drpmguk88ausi"]
 
-[ext_resource type="Texture2D" uid="uid://4d1gsv2w7pme" path="res://Sprites/FrontDog.png" id="1_euiuq"]
-[ext_resource type="Script" uid="uid://chly7ehqwckde" path="res://Scripts/dogs/Boxer.gd" id="1_s8jhl"]
-[ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="2_7j1c1"]
-[ext_resource type="Resource" uid="uid://boht2f5uoule" path="res://Dog_stats/dog_stats.tres" id="2_wkplo"]
-[ext_resource type="Texture2D" uid="uid://b0ie0bguyrjsw" path="res://Sprites/BackDog.png" id="3_s8jhl"]
+[ext_resource type="Script" uid="uid://4l00bpiehtcf" path="res://Scripts/dachshund.gd" id="1_3s77s"]
+[ext_resource type="Texture2D" uid="uid://4d1gsv2w7pme" path="res://Sprites/FrontDog.png" id="3_knabg"]
+[ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="4_nx2tc"]
+[ext_resource type="Texture2D" uid="uid://b0ie0bguyrjsw" path="res://Sprites/BackDog.png" id="5_cj07x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7j1c1"]
 
-[node name="Dog" type="Node2D" unique_id=380888768]
-script = ExtResource("1_s8jhl")
-stats = ExtResource("2_wkplo")
+[node name="Dachshund" type="Node2D" unique_id=380888768]
+script = ExtResource("1_3s77s")
 
 [node name="Front" type="Sprite2D" parent="." unique_id=1120338587]
 texture_filter = 1
-texture = ExtResource("1_euiuq")
+texture = ExtResource("3_knabg")
 offset = Vector2(-2.265, 0)
 
 [node name="Hitbox" type="Area2D" parent="Front" unique_id=502847565]
@@ -30,14 +28,14 @@ texture_filter = 1
 texture_repeat = 2
 position = Vector2(-12, 19)
 scale = Vector2(1.037, 1.074)
-texture = ExtResource("2_7j1c1")
+texture = ExtResource("4_nx2tc")
 centered = false
 region_enabled = true
 region_rect = Rect2(60.012238, 83.09561, 15.986519, 14.882965)
 
 [node name="Back" type="Sprite2D" parent="." unique_id=454432495]
 texture_filter = 1
-texture = ExtResource("3_s8jhl")
+texture = ExtResource("5_cj07x")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=282526992]
 visible = false
@@ -45,7 +43,7 @@ offset_left = -72.0
 offset_top = -64.0
 offset_right = 72.0
 offset_bottom = 64.0
-texture = ExtResource("2_7j1c1")
+texture = ExtResource("4_nx2tc")
 stretch_mode = 1
 
-[connection signal="body_entered" from="Front/Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="Front/Hitbox" to="." method="on_hit"]

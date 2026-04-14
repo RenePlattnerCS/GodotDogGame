@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://c3ubxpp10k6x6" path="res://Scripts/player.gd" id="1_2nftw"]
 [ext_resource type="Texture2D" uid="uid://jvy0f21h6wpa" path="res://Sprites/ArmGirl.png" id="1_5wxv7"]
-[ext_resource type="PackedScene" uid="uid://drpmguk88ausi" path="res://Prefabs/dog.tscn" id="2_2nftw"]
 [ext_resource type="Texture2D" uid="uid://gec11fjvcnsg" path="res://Sprites/Girl.png" id="2_y5hcb"]
 [ext_resource type="Texture2D" uid="uid://5ups8sd3fwsl" path="res://Sprites/WalkBody.png" id="3_hck1p"]
+[ext_resource type="Script" uid="uid://cuo0tfm5xpd1o" path="res://Prefabs/dog_manager.gd" id="4_4qbli"]
+[ext_resource type="PackedScene" uid="uid://cpyypyg05jsny" path="res://Prefabs/boxer.tscn" id="4_juxdh"]
 [ext_resource type="Texture2D" uid="uid://dsxodcrisgf64" path="res://Sprites/WalkArms.png" id="6_juxdh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mc20k"]
@@ -388,11 +389,11 @@ sprite_frames = SubResource("SpriteFrames_and0b")
 animation = &"walking"
 offset = Vector2(-0.875, 0)
 
-[node name="Dog" parent="Sprites" unique_id=380888768 instance=ExtResource("2_2nftw")]
-physics_interpolation_mode = 2
+[node name="Dog" type="Node2D" parent="Sprites" unique_id=1637275449]
 position = Vector2(19, 2)
-max_charge_time = 0.7
-max_length = 200.0
+script = ExtResource("4_4qbli")
+
+[node name="Boxer" parent="Sprites/Dog" unique_id=1059360503 instance=ExtResource("4_juxdh")]
 
 [node name="HandAnimation" type="AnimatedSprite2D" parent="Sprites" unique_id=1653877274]
 texture_filter = 1
@@ -405,6 +406,8 @@ offset = Vector2(-0.875, 0)
 [node name="DogBounceAnimationPlayer" type="AnimationPlayer" parent="Sprites" unique_id=1118664844]
 root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_juxdh")
+
+[node name="Node" type="Node" parent="Sprites" unique_id=1863457981]
 
 [node name="DownRayCast2D" type="RayCast2D" parent="." unique_id=1482340320]
 position = Vector2(-1, 64)

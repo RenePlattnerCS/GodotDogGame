@@ -4,6 +4,6 @@ class_name UpgradePunch
 
 @export var knockback_bonus: float = 2000.0
 
-func apply(player: CharacterBody2D):
+func apply(player: Node2D):
 	print("strenght upgraded")
-	player.increase_dog_knockback(knockback_bonus)  
+	player.get_node("Sprites/Dog").increase_knockback(knockback_bonus)  

@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var air_resistance: float = 0.95  # closer to 1.0 = more slippery
 @export var ground_slide_friction: float = 0.95  # closer to 1.0 = more slide
 @export var knockback_threshold: float = 70.0  # when to exit knockback state
+@export var dash_slide_timer: float = 0.3
 
 @export_group("Jump")
 @export var fall_multiplier : float = 1.5
@@ -19,11 +20,12 @@ var jump_timer: float = 0.0
 var is_jumping: bool = false
 var lock_jump: bool = false
 var jump_upgraded: bool = false
-
+var dash_timer: float = 0.0
 
 var player_has_horizontal_speed : bool = false
 
 var is_knocked_back: bool = false
+var is_dashing: bool = false
 
 var SPEED = 150.0
 var  JUMP_VELOCITY = -400.0
@@ -64,8 +66,7 @@ func _physics_process(delta: float) -> void:
 			is_jumping = false
 		
 		if is_jumping:
-			 
-			
+
 			jump_timer += delta
 			# force descend if held too long
 			if jump_timer >= max_jump_time:
@@ -74,7 +75,6 @@ func _physics_process(delta: float) -> void:
 			
 			if jump_timer >= lock_jump_after_time:
 				if not jump_upgraded :
-					print("lock jump")
 					lock_jump = true
 				$NormalHurtbox.disabled = true
 				$JumpingHurtbox.disabled = false
@@ -103,12 +103,20 @@ func _physics_process(delta: float) -> void:
 		$JumpingHurtbox.disabled = true
 		
 		
-	if is_knocked_back:
+	if is_knocked_back or is_dashing:
 	 	# slide on ground instead of stopping
 		velocity.x *= ground_slide_friction
+		if is_dashing:
+			dash_timer += delta
 		# exit knockback when slow enough
 		if abs(velocity.x) < knockback_threshold:
 			is_knocked_back = false
+			is_dashing = false
+			dash_timer = 0.0
+		if dash_timer > dash_slide_timer:
+			if (Input.get_axis(get_input_action("left"), get_input_action("right"))):
+				is_dashing = false
+				dash_timer = 0.0
 			
 	elif (not is_jumping and not lock_jump) or jump_upgraded:
 		# normal movement
@@ -124,7 +132,12 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed(get_input_action("jump")) and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		is_dashing = false
+		if is_jumping == true:
+			is_dashing = true
+			
 		is_jumping = true
+		
 		jump_timer = 0.0
 	
 	
@@ -141,20 +154,6 @@ func disable_player():
 	set_physics_process(false) # disables _physics_process
 	
 	
-func increase_dog_knockback(added_strength : int):
-	$Sprites/Dog.stats.knockback_strength += added_strength
-	$Sprites/Dog.apply_stats()
-	
-func decrease_dog_chargetime():
-	$Sprites/Dog.stats.charge_speed_multiplier *= 2
-	$Sprites/Dog.apply_stats()
-	
-func increase_dog_length(length : int, extend_speed : int,  retract_speed : int):
-	$Sprites/Dog.stats.max_length += length
-	$Sprites/Dog.stats.extend_speed +=extend_speed
-	$Sprites/Dog.stats.retract_speed += retract_speed
-	$Sprites/Dog.apply_stats()
-
 
 func respawn():
 	if(not spawn_point):

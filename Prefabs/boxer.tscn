@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cpyypyg05jsny"]
+
+[ext_resource type="Script" uid="uid://chly7ehqwckde" path="res://Scripts/dogs/Boxer.gd" id="1_4v0op"]
+[ext_resource type="Texture2D" uid="uid://dckegner3i5sq" path="res://Sprites/Boxer/boxerFront.png" id="1_rdldn"]
+[ext_resource type="Texture2D" uid="uid://dbovj7cfs7433" path="res://Sprites/Boxer/boxerMiddle.png" id="2_4v0op"]
+[ext_resource type="Script" uid="uid://ogyhsdq873el" path="res://Scripts/dogs/dog_stats.gd" id="2_js4y2"]
+[ext_resource type="Texture2D" uid="uid://bwjryahiex1bd" path="res://Sprites/Boxer/boxerBack.png" id="3_js4y2"]
+[ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="4_vyva2"]
+
+[sub_resource type="Resource" id="Resource_vyva2"]
+script = ExtResource("2_js4y2")
+metadata/_custom_type_script = "uid://ogyhsdq873el"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kgyii"]
+
+[node name="Boxer" type="Node2D" unique_id=1059360503]
+position = Vector2(-2, 0)
+script = ExtResource("1_4v0op")
+stats = SubResource("Resource_vyva2")
+
+[node name="Front" type="Sprite2D" parent="." unique_id=1424018028]
+texture_filter = 1
+position = Vector2(3, 17)
+texture = ExtResource("1_rdldn")
+offset = Vector2(-2.265, 0)
+
+[node name="Hitbox" type="Area2D" parent="Front" unique_id=936956966]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Front/Hitbox" unique_id=1384423473]
+position = Vector2(20, 1)
+shape = SubResource("CapsuleShape2D_kgyii")
+
+[node name="Middle" type="Sprite2D" parent="." unique_id=285816344]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-12, 19)
+scale = Vector2(1.037, 1.074)
+texture = ExtResource("2_4v0op")
+centered = false
+region_enabled = true
+region_rect = Rect2(51.02859, 66.058235, 12.941326, 15.920639)
+
+[node name="Back" type="Sprite2D" parent="." unique_id=453409502]
+texture_filter = 1
+position = Vector2(1, 17)
+texture = ExtResource("3_js4y2")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=249525829]
+visible = false
+offset_left = -72.0
+offset_top = -64.0
+offset_right = 72.0
+offset_bottom = 64.0
+texture = ExtResource("4_vyva2")
+stretch_mode = 1
