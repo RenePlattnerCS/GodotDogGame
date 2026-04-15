@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://drpmguk88ausi"]
 
-[ext_resource type="Script" uid="uid://4l00bpiehtcf" path="res://Scripts/dachshund.gd" id="1_3s77s"]
+[ext_resource type="Script" uid="uid://4l00bpiehtcf" path="res://Scripts/dogs/dachshund.gd" id="1_3s77s"]
 [ext_resource type="Texture2D" uid="uid://4d1gsv2w7pme" path="res://Sprites/FrontDog.png" id="3_knabg"]
 [ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="4_nx2tc"]
 [ext_resource type="Texture2D" uid="uid://b0ie0bguyrjsw" path="res://Sprites/BackDog.png" id="5_cj07x"]

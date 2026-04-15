@@ -23,9 +23,9 @@ extends Node2D
 
 const HITLAG_THREASHOLD = 0.50
 const FLASH_COUNT = 3
-const CAN_HIT_AGAIN_TIME = 0.05
+var CAN_HIT_AGAIN_TIME = 0.05
 
-var player_index: int = -1
+var player_index: int = -69
 var charge_time: float = 0.0
 var over_charge_time: float = 0.0
 var prev_charge_time: float = 0.0

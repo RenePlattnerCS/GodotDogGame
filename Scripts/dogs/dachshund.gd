@@ -72,7 +72,9 @@ func on_retracting(delta):
 		state = DogState.IDLE
 
 # ─── visuals ──────────────────────────────────────────────────────────────────
-
+func _ready():
+	super()
+	CAN_HIT_AGAIN_TIME = 0.5
 func _process(delta):
 	super(delta)  # runs base _process
 	update_dog_visuals()
