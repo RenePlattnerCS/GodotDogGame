@@ -7,7 +7,7 @@ const EASE_IN_LENGTH = 20.0
 const HIGH_CHARGE_KNOCKBACK_BONUS = 3000
 const CHARGE_PERCENT_BONUS_THRESHOLD = 0.8
 const BONUS_DISTANCE = 100
-const MAX_HIT_COUNT = 3
+const MAX_HIT_COUNT = 2
 
 var current_length: float = 0.0
 var hit_count: int = 0

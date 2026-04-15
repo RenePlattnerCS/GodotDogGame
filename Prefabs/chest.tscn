@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://dnir4ycjsevv2"]
+
+[ext_resource type="Texture2D" uid="uid://dakrrfej212jr" path="res://Sprites/Animated Chests/Chests.png" id="1_ts4sy"]
+[ext_resource type="Script" uid="uid://cxuppr2hxj7by" path="res://Scripts/chest.gd" id="2_yaanm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ts4sy"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(192, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yaanm"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(144, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ad3vq"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(96, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d670m"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(48, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oh3s0"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(0, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yr71j"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(0, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbimj"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(0, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b1fom"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(48, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83v38"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(96, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ei121"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(144, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kif2"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(192, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmj0a"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(0, 128, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g6cf"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(0, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2d6q0"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(48, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1lqg8"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(96, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnjbl"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(144, 160, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yp5p8"]
+atlas = ExtResource("1_ts4sy")
+region = Rect2(192, 160, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ad3vq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ts4sy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yaanm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ad3vq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d670m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oh3s0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yr71j")
+}],
+"loop": false,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbimj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b1fom")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83v38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ei121")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kif2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmj0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7g6cf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2d6q0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1lqg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnjbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yp5p8")
+}],
+"loop": false,
+"name": &"open",
+"speed": 12.0
+}]
+
+[node name="Chest" type="AnimatedSprite2D" unique_id=1861553032]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ad3vq")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("2_yaanm")

@@ -7,7 +7,7 @@ const EASE_IN_LENGTH = 20.0
 const HIGH_CHARGE_KNOCKBACK_BONUS = 3000
 const CHARGE_PERCENT_BONUS_THRESHOLD = 0.8
 const BONUS_DISTANCE = 100
-const MAX_HIT_COUNT = 2
+const MAX_HIT_COUNT = 1
 const DASH_BONUS = 3.0
 
 var current_length: float = 0.0
@@ -107,15 +107,10 @@ func apply_knockback(body: CharacterBody2D, knock_direction: float, velocity_per
 		return
 	hit_enemy = true
 	
-	var force = lerp(300.0, knockback_strength, velocity_percent)
-	var force_up = lerp(50.0, knockback_up, 0.5)
+	var force = lerp(300.0, knockback_strength *1.5, velocity_percent)
+	var force_up = lerp(50.0, knockback_up, velocity_percent)
 	body.velocity.x = knock_direction * force
 	body.velocity.y = -force_up
 	body.is_knocked_back = true
 	hitlag(body)
 	
-#func check_existing_overlaps():
-#	for body in $Front/Hitbox.get_overlapping_bodies():
-#		if body.is_in_group("player"):
-#			print("found overlapping")
-#			on_hit(body)

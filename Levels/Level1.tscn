@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://biierk3fove7a" path="res://Sprites/BG/3 Background/Day/2.png" id="15_p2sgf"]
 [ext_resource type="Texture2D" uid="uid://cxf5gsapmx83u" path="res://Sprites/BG/3 Background/Day/1.png" id="16_ufevr"]
 [ext_resource type="Script" uid="uid://8wt1q6ite14s" path="res://Levels/upgrade_manager.gd" id="18_ufevr"]
+[ext_resource type="PackedScene" uid="uid://dnir4ycjsevv2" path="res://Prefabs/chest.tscn" id="19_gmnjr"]
+[ext_resource type="Script" uid="uid://dlysj7rdkb2an" path="res://event_system.gd" id="20_qg0tc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iotdp"]
 texture = ExtResource("3_fhqol")
@@ -138,6 +140,7 @@ position = Vector2(-16, 0)
 
 [node name="Player1" parent="." unique_id=365629459 node_paths=PackedStringArray("spawn_point") instance=ExtResource("1_w77jt")]
 position = Vector2(-86, -74)
+collision_mask = 135
 spawn_point = NodePath("../P1_spawn")
 
 [node name="Player2" parent="." unique_id=769169184 node_paths=PackedStringArray("spawn_point") instance=ExtResource("1_w77jt")]
@@ -297,6 +300,13 @@ region_rect = Rect2(-0.666687, -0.33332825, 570.6667, 316.6667)
 
 [node name="upgrade_manager" type="Node2D" parent="." unique_id=48248330]
 script = ExtResource("18_ufevr")
+
+[node name="Chest" parent="." unique_id=1861553032 groups=["chest"] instance=ExtResource("19_gmnjr")]
+modulate = Color(0.78775924, 0.78775924, 0.78775924, 1)
+position = Vector2(29, -13)
+
+[node name="EventSystem" type="Node" parent="." unique_id=1380571561]
+script = ExtResource("20_qg0tc")
 
 [editable path="DeathZone"]
 [editable path="DeathZone/choose_screen2"]
