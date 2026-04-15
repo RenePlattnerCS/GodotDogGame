@@ -2,28 +2,27 @@ class_name DogManager
 extends Node2D
 
 @export var default_dog_scene: PackedScene
-var current_dog: DogBase
 
 enum DogType { BOXER, DACHSHUND }
 
-var timer : float = 0
-var end:float = 5
-var tested : bool = false
+
+var current_dog: DogBase
+var player_index: int = -1
 
 const DOG_SCENES = {
 	DogType.BOXER: preload("res://Prefabs/boxer.tscn"),
 	DogType.DACHSHUND: preload("res://Prefabs/Dachshund.tscn"),
 }
 
+
+
 func _ready():
 	current_dog = $Boxer
-	
+	EventSystem.dog_picked_up.connect(_on_dog_picked_up)
+	player_index = get_parent().get_parent().player_index
 	
 func _process(delta: float) -> void:
-	timer = timer + delta
-	if timer > end and not tested:
-		swap_dog(DogType.DACHSHUND)
-		tested = true
+	pass
 	
 	
 	
@@ -55,3 +54,9 @@ func increase_length(length: int, extend_speed: int, retract_speed: int):
 	current_dog.stats.extend_speed += extend_speed
 	current_dog.stats.retract_speed += retract_speed
 	current_dog.apply_stats()
+#------------------
+func _on_dog_picked_up(player, dog_type):
+	print(player_index)
+	if player.player_index == get_parent().get_parent().player_index:
+		swap_dog(dog_type)
+	

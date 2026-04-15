@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_esy1t")
 max_length = 200.0
+knockback_strength = 1700.0
 metadata/_custom_type_script = "uid://ogyhsdq873el"
