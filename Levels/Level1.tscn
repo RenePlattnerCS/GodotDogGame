@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cxf5gsapmx83u" path="res://Sprites/BG/3 Background/Day/1.png" id="16_ufevr"]
 [ext_resource type="Script" uid="uid://8wt1q6ite14s" path="res://Levels/upgrade_manager.gd" id="18_ufevr"]
 [ext_resource type="PackedScene" uid="uid://dnir4ycjsevv2" path="res://Prefabs/chest.tscn" id="19_gmnjr"]
-[ext_resource type="Script" uid="uid://dlysj7rdkb2an" path="res://event_system.gd" id="20_qg0tc"]
+[ext_resource type="Script" path="res://event_system.gd" id="20_qg0tc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iotdp"]
 texture = ExtResource("3_fhqol")
