@@ -45,8 +45,8 @@ func increase_knockback(added_strength: int):
 	current_dog.stats.knockback_strength += added_strength
 	current_dog.apply_stats()
 
-func decrease_charge_time():
-	current_dog.stats.charge_speed_multiplier *= 2
+func decrease_charge_time(mult : float):
+	current_dog.stats.charge_speed_multiplier *= mult
 	current_dog.apply_stats()
 
 func increase_length(length: int, extend_speed: int, retract_speed: int):

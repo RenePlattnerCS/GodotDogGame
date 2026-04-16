@@ -35,9 +35,6 @@ func _ready():
 # ─── charging ─────────────────────────────────────────────────────────────────
 
 func on_start_charging(delta):
-	print("START_SCALE", START_SCALE)
-	print("size_bonus", size_bonus)
-	print("scale x",  scale)
 	curr_scale = START_SCALE + Vector2(size_bonus, size_bonus)
 	scale = curr_scale
 	target_length = current_length - charging_retraction_length
@@ -50,11 +47,8 @@ func on_charging(delta):
 	var charge_percent = clamp(charge_time / max_charge_time, 0.0, 1.0)
 	curr_scale = lerp(START_SCALE + Vector2(size_bonus, size_bonus), MAX_SCALE + Vector2(size_bonus* 2, size_bonus* 2), charge_percent)
 	
-	print("START_SCALE2: ", START_SCALE)
-	print("size_bonus2: ", size_bonus)
-	print("scale x2 : ",  scale)
 	scale = curr_scale  # ✅ grow the dog while charging
-	print("scale x3 : ",  scale)
+
 
 func on_release_charge(delta):
 	front.scale = curr_scale
@@ -84,9 +78,6 @@ func on_extending(delta):
 	if state != DogState.EXTENDING:
 		return
 	# only move the Front node, no middle stretching
-	print("-----------START_SCALE on_extending--------------: ", START_SCALE)
-	print("size_bonus on_extending: ", size_bonus)
-	print("scale x on_extending : ",  scale)
 	current_length = move_toward(current_length, target_length, shoot_speed * delta)
 	shoot_speed += delta * shoot_speed
 	#check_existing_overlaps()
@@ -132,7 +123,7 @@ func update_dog_visuals():
 
 # ─── hit ──────────────────────────────────────────────────────────────────────
 
-func on_hit(body: CharacterBody2D):
+func on_hit(body: Node2D ):
 	if not body.is_in_group("player"):
 		return
 	if(body.player_index == player_index):

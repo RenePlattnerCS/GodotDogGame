@@ -134,8 +134,8 @@ func apply_knockback(body: CharacterBody2D, knock_direction: float, charge_perce
 	if hit_enemy:
 		return
 	hit_enemy = true
-	var force = lerp(100.0, knockback_strength, charge_percent)
-	var force_up = lerp(50.0, knockback_up, charge_percent)
+	var force = lerp(100.0 * 0.8, knockback_strength * 0.8, charge_percent)
+	var force_up = lerp(50.0, knockback_up * 0.8, charge_percent)
 
 	body.velocity.x = knock_direction * force
 	body.velocity.y = -force_up

@@ -12,7 +12,7 @@ extends CharacterBody2D
 
 @export_group("Jump")
 @export var fall_multiplier : float = 1.5
-@export var low_jump_multiplier: float = 5.0  # when button released early
+@export var low_jump_multiplier: float = 2.0  # when button released early
 @export var max_jump_time: float = 0.8  # max time you can hold jump
 @export var lock_jump_after_time: float = 0.2  # max time you can hold jump
 
@@ -21,16 +21,18 @@ var is_jumping: bool = false
 var lock_jump: bool = false
 var jump_upgraded: bool = false
 var dash_timer: float = 0.0
-
+var fast_fall_multiplier : float = 1
+const BASE_FAST_FALL_MULT = 2
+const APEX_THRESHOLD = 10.0  
 var player_has_horizontal_speed : bool = false
 
 var is_knocked_back: bool = false
 var is_dashing: bool = false
 
 var SPEED = 150.0
-var  JUMP_VELOCITY = -400.0
+var JUMP_VELOCITY = -400.0
 const EPSILON = 1.0
-
+const STRAIGHT_DOWN_THREASHOLD = 0.8
 
 func _ready():
 	$Sprites/HandAnimation.play("idle")
@@ -78,9 +80,19 @@ func _physics_process(delta: float) -> void:
 					lock_jump = true
 				$NormalHurtbox.disabled = true
 				$JumpingHurtbox.disabled = false
+		
+		if velocity.y < 0 and velocity.y > -APEX_THRESHOLD:  # ascending, near apex
+			var stick = Input.get_vector(get_input_action("left"), get_input_action("right"), get_input_action("up"), get_input_action("down"))
+			if stick.y > STRAIGHT_DOWN_THREASHOLD:
+				print("fast faliing!!")
+				fast_fall_multiplier = BASE_FAST_FALL_MULT
 				
 		if velocity.y > 0:  # descending
-			velocity += get_gravity() * delta * fall_multiplier
+			var stick = Input.get_vector(get_input_action("left"),get_input_action("right"),get_input_action("up"), get_input_action("down"))
+			if stick.y > STRAIGHT_DOWN_THREASHOLD:
+				print("fast faliing!!")
+				fast_fall_multiplier = BASE_FAST_FALL_MULT
+			velocity += get_gravity() * delta * fall_multiplier * fast_fall_multiplier
 		elif not is_jumping and velocity.y < 0:
 			# ascending but button released early — pull down faster
 			velocity += get_gravity() * delta * low_jump_multiplier
@@ -90,15 +102,11 @@ func _physics_process(delta: float) -> void:
 			# slow air resistance instead of instant stop
 			velocity.x *= air_resistance
 	else:	
-		if $DownRayCast2D.is_colliding():
-			var body = $DownRayCast2D.get_collider()
-			if body:  # always null check first!
-				if body.is_in_group("crumble_tile"):
-					body.crumble()
-		#print("unlock jump")
+
 		is_jumping = false
 		lock_jump = false
 		jump_timer = 0.0
+		fast_fall_multiplier = 1
 		$NormalHurtbox.disabled = false
 		$JumpingHurtbox.disabled = true
 		

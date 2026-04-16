@@ -28,8 +28,8 @@ func _on_player_died():
 	play("open")
 	# pick random dog for next round
 	var all_types = DogType.values()
-	#current_dog_type = all_types[randi() % all_types.size()]
-	current_dog_type = DogType.GREYHOUND
+	current_dog_type = all_types[randi() % all_types.size()]
+	#current_dog_type = DogType.GREYHOUND
 	show_dog_preview(current_dog_type)
 
 func _on_player_respawn():

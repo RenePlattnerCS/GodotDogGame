@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b0ie0bguyrjsw" path="res://Sprites/BackDog.png" id="5_cj07x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7j1c1"]
+height = 25.349228
 
 [node name="Dachshund" type="Node2D" unique_id=380888768]
 script = ExtResource("1_3s77s")
@@ -20,7 +21,7 @@ collision_layer = 8
 collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Front/Hitbox" unique_id=650149174]
-position = Vector2(4.999998, 23)
+position = Vector2(2.9999995, 18)
 scale = Vector2(4.8558455, 0.7889786)
 shape = SubResource("CapsuleShape2D_7j1c1")
 

@@ -408,7 +408,3 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_juxdh")
 
 [node name="Node" type="Node" parent="Sprites" unique_id=1863457981]
-
-[node name="DownRayCast2D" type="RayCast2D" parent="." unique_id=1482340320]
-position = Vector2(-1, 64)
-target_position = Vector2(0, 16)

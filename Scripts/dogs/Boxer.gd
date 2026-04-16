@@ -6,7 +6,7 @@ const RETRACT_LENGTH_OFFSET = 1.0
 const EASE_IN_LENGTH = 20.0
 const HIGH_CHARGE_KNOCKBACK_BONUS = 2000
 const CHARGE_PERCENT_BONUS_THRESHOLD = 0.5
-const BONUS_DISTANCE = 100
+const BONUS_DISTANCE = 150
 const MAX_HIT_COUNT = 2
 
 var current_length: float = 0.0
@@ -71,13 +71,12 @@ func on_hit(body: CharacterBody2D):
 		
 	hit_count += 1
 	var distance = abs(body.global_position.x - global_position.x)
-	var knock_direction = sign(body.global_position.x - $Front.global_position.x)
+	var knock_direction = sign(body.global_position.x - $Back.global_position.x)
 	var charge_percent = target_length / max_length
 
 	var bonus = 0
 	print("distance", distance)
-	if charge_percent > CHARGE_PERCENT_BONUS_THRESHOLD and distance > BONUS_DISTANCE \
-		or hit_count == MAX_HIT_COUNT:
+	if charge_percent > CHARGE_PERCENT_BONUS_THRESHOLD  or hit_count >= MAX_HIT_COUNT -1 or  distance > BONUS_DISTANCE:
 		bonus = HIGH_CHARGE_KNOCKBACK_BONUS
 		print("bonus",bonus)
 

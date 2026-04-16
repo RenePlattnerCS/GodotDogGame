@@ -42,11 +42,12 @@ animations = [{
 }],
 "loop": false,
 "name": &"shoot",
-"speed": 16.0
+"speed": 24.0
 }]
 
 [node name="Flame" type="AnimatedSprite2D" unique_id=1422971709]
 texture_filter = 1
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_lwyh2")
 animation = &"shoot"
 frame = 4
