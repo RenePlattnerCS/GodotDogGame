@@ -18,20 +18,28 @@ var shoot_speed : float = 1.0
 var launch_position
 var curr_scale : Vector2 = Vector2(0.7, 0.7)
 
+
 @onready var front : Sprite2D = $Front  
 @onready var player_sprites = get_parent().get_parent()
 
 var saved_start_position : Transform2D
 var front_rest_position: Vector2  # add this as a var
 var fire_direction: int = 1
+var bullet_scale: Vector2 = Vector2(0.7, 0.7)
+
+
 func _ready():
 	super()
-	START_SCALE = Vector2(0.7,0.7)
+	START_SCALE = Vector2(0.7,0.7) 
 	front_rest_position = front.position
 # ─── charging ─────────────────────────────────────────────────────────────────
 
 func on_start_charging(delta):
+	print("START_SCALE", START_SCALE)
+	print("size_bonus", size_bonus)
+	print("scale x",  scale)
 	curr_scale = START_SCALE + Vector2(size_bonus, size_bonus)
+	scale = curr_scale
 	target_length = current_length - charging_retraction_length
 	shoot_speed = 1.0
 	
@@ -41,40 +49,50 @@ func on_charging(delta):
 	current_length = lerp(current_length, target_length, 1.0 - exp(-retract_ease_speed * delta))
 	var charge_percent = clamp(charge_time / max_charge_time, 0.0, 1.0)
 	curr_scale = lerp(START_SCALE + Vector2(size_bonus, size_bonus), MAX_SCALE + Vector2(size_bonus* 2, size_bonus* 2), charge_percent)
-	#scale = curr_scale
+	
+	print("START_SCALE2: ", START_SCALE)
+	print("size_bonus2: ", size_bonus)
+	print("scale x2 : ",  scale)
+	scale = curr_scale  # ✅ grow the dog while charging
+	print("scale x3 : ",  scale)
 
 func on_release_charge(delta):
+	front.scale = curr_scale
 	var charge_percent = clamp(prev_charge_time / max_charge_time, 0.0, 1.0)
 	shoot_speed = lerp(40 , 500, charge_percent)
 	target_length = MAX_ROCKET_LENGTH
 	
+	bullet_scale = curr_scale  # ✅ capture size at fire time
+	
 
 	current_length = 0
 	fire_direction = sign(player_sprites.scale.x)
-	print("-----front.rotation BEFORE reparent on_release_charge:------ ", front.rotation)
-	print("front.rotation_degrees BEFORE reparent on_release_charge: ", front.rotation_degrees)
+
 	var saved_pos = $Back.global_position
 	launch_position = saved_pos
 	front.get_parent().remove_child(front)
 	get_tree().current_scene.add_child(front)
 	front.global_position = saved_pos
-	front.scale = Vector2(0.7, 0.7)
+	#front.scale = Vector2(0.7, 0.7)
 	front.scale.x = front.scale.x * fire_direction
 	front.rotation = 0.0  # ✅ reset rotation after detach
-	print("-----front.rotation Afterr reparent on_release_charge:------ ", front.rotation)
-	print("front.rotation_degrees After reparent on_release_charge: ", front.rotation_degrees)
+
 # ─── extending & retracting ───────────────────────────────────────────────────
 
 func on_extending(delta):
+	
 	if state != DogState.EXTENDING:
 		return
 	# only move the Front node, no middle stretching
-	
+	print("-----------START_SCALE on_extending--------------: ", START_SCALE)
+	print("size_bonus on_extending: ", size_bonus)
+	print("scale x on_extending : ",  scale)
 	current_length = move_toward(current_length, target_length, shoot_speed * delta)
 	shoot_speed += delta * shoot_speed
 	#check_existing_overlaps()
 	if current_length >= target_length - EXTEND_LENGTH_OFFSET:
 		state = DogState.RETRACTING
+		
 
 func on_retracting(delta):
 	
@@ -90,25 +108,14 @@ func on_retracting(delta):
 	state = DogState.IDLE
 	
 	if front.get_parent() != self:
-		print("front.rotation BEFORE reparent on_retracting: ", front.rotation)
-		print("front.rotation_degrees BEFORE reparent on_retracting: ", front.rotation_degrees)
-		print("----front.scale BEFORE reparent: -----", front.scale)
-		print("front.global_transform BEFORE: ", front.global_transform)
-		#front.scale = Vector2(player_sprites.scale.x, player_sprites.scale.x)
-		print("player_sprites.scale.xBEFORE: ", player_sprites.scale.x)
 		front.reparent(self)
 		front.position = front_rest_position
 		front.rotation = 0.0
 
 		front.scale = Vector2(1.0, 1.0)
-		print("------player_sprites.scale.x after: ----------", player_sprites.scale.x)
-		print("front.scale: ", front.scale)
-		print("self.scale: ", self.scale)
-		print("Dog node scale: ", get_parent().scale)
-		print("Sprites scale: ", get_parent().get_parent().scale)
-		print("front.global_transform: ", front.global_transform)
-		print("player_sprites.scale: ", player_sprites.scale)
-		print("-----player_sprites.get_parent().scale: ", player_sprites.get_parent().scale)
+		curr_scale = START_SCALE + Vector2(size_bonus, size_bonus)  # reset dog scale
+		scale = curr_scale  # ✅ apply reset to dog
+
 
 		
 

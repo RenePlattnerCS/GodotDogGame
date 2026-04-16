@@ -188,6 +188,7 @@ func apply_stats():
 	knockback_strength = stats.knockback_strength
 	charge_speed_multiplier = stats.charge_speed_multiplier
 	size_bonus = stats.size_bonus
+	print("........apply stats size bonus...........", size_bonus)
 	scale = START_SCALE +	Vector2(size_bonus,size_bonus)
 	
 	
