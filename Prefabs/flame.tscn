@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://db0jec82lrlih"]
+
+[ext_resource type="Texture2D" uid="uid://ctlg2rwu1j867" path="res://Sprites/Effects/flame/falconFlame.png" id="1_03qrh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdiwu"]
+atlas = ExtResource("1_03qrh")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcq0e"]
+atlas = ExtResource("1_03qrh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21nhy"]
+atlas = ExtResource("1_03qrh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n865p"]
+atlas = ExtResource("1_03qrh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jswy"]
+atlas = ExtResource("1_03qrh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lwyh2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdiwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcq0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21nhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n865p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jswy")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 16.0
+}]
+
+[node name="Flame" type="AnimatedSprite2D" unique_id=1422971709]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_lwyh2")
+animation = &"shoot"
+frame = 4
+frame_progress = 1.0

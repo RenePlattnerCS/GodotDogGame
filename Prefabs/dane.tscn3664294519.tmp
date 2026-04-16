@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://bgn517slkcu28"]
+
+[ext_resource type="Script" uid="uid://cct8eyaefngip" path="res://Scripts/dogs/Dane.gd" id="1_0c4xc"]
+[ext_resource type="Texture2D" uid="uid://ds2ymkjj0jidb" path="res://Sprites/Dane/daneFront.png" id="2_n87fj"]
+[ext_resource type="Texture2D" uid="uid://c85twhklq67qr" path="res://Sprites/Dane/daneMiddle.png" id="3_gdiwu"]
+[ext_resource type="Texture2D" uid="uid://ctlg2rwu1j867" path="res://Sprites/Effects/flame/falconFlame.png" id="3_n87fj"]
+[ext_resource type="Texture2D" uid="uid://duhbdg8p42b12" path="res://Sprites/Dane/daneBack.png" id="4_gcq0e"]
+[ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="6_6jswy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdiwu"]
+atlas = ExtResource("3_n87fj")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcq0e"]
+atlas = ExtResource("3_n87fj")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_21nhy"]
+atlas = ExtResource("3_n87fj")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n865p"]
+atlas = ExtResource("3_n87fj")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jswy"]
+atlas = ExtResource("3_n87fj")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lwyh2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdiwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcq0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_21nhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n865p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jswy")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 16.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kgyii"]
+height = 48.0
+
+[node name="Dane" type="Node2D" unique_id=1059360503]
+position = Vector2(-2, 0)
+script = ExtResource("1_0c4xc")
+
+[node name="Front" type="Sprite2D" parent="." unique_id=1424018028]
+texture_filter = 1
+position = Vector2(3, 17)
+texture = ExtResource("2_n87fj")
+offset = Vector2(-2.265, 0)
+
+[node name="Flame" type="AnimatedSprite2D" parent="Front" unique_id=1922781305]
+texture_filter = 1
+position = Vector2(17, 4)
+sprite_frames = SubResource("SpriteFrames_lwyh2")
+animation = &"shoot"
+frame = 4
+frame_progress = 1.0
+
+[node name="Hitbox" type="Area2D" parent="Front" unique_id=936956966]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Front/Hitbox" unique_id=1384423473]
+position = Vector2(19, 3)
+scale = Vector2(-2.3445344, 1.4240565)
+shape = SubResource("CapsuleShape2D_kgyii")
+
+[node name="Middle" type="Sprite2D" parent="." unique_id=285816344]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-17, 14)
+scale = Vector2(1.037, 1.074)
+texture = ExtResource("3_gdiwu")
+centered = false
+region_enabled = true
+region_rect = Rect2(45.99822, 61.058434, 14.020573, 15.985527)
+
+[node name="Back" type="Sprite2D" parent="." unique_id=453409502]
+texture_filter = 1
+position = Vector2(1, 17)
+texture = ExtResource("4_gcq0e")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=249525829]
+visible = false
+offset_left = -72.0
+offset_top = -64.0
+offset_right = 72.0
+offset_bottom = 64.0
+texture = ExtResource("6_6jswy")
+stretch_mode = 1

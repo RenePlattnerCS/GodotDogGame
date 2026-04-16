@@ -3,7 +3,7 @@ extends Node2D
 
 @export var default_dog_scene: PackedScene
 
-enum DogType { BOXER, DACHSHUND }
+enum DogType { BOXER, DACHSHUND, DANE }
 
 
 var current_dog: DogBase
@@ -12,6 +12,7 @@ var player_index: int = -1
 const DOG_SCENES = {
 	DogType.BOXER: preload("res://Prefabs/boxer.tscn"),
 	DogType.DACHSHUND: preload("res://Prefabs/Dachshund.tscn"),
+	DogType.DANE: preload("res://Prefabs/dane.tscn"),
 }
 
 
@@ -31,9 +32,7 @@ func swap_dog(dog_type: DogType):
 	if current_dog:
 		current_dog.queue_free()
 		current_dog = null 
-	print(old_stats)
 	current_dog = DOG_SCENES[dog_type].instantiate()
-	#"res://Dog_stats/dog_stats.tres"
 	
 	current_dog.stats = old_stats
 	add_child(current_dog)

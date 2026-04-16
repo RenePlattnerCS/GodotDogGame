@@ -23,7 +23,7 @@ extends Node2D
 
 const HITLAG_THREASHOLD = 0.50
 const FLASH_COUNT = 3
-var CAN_HIT_AGAIN_TIME = 0.05
+var CAN_HIT_AGAIN_TIME = 0.1
 
 var player_index: int = -69
 var charge_time: float = 0.0
@@ -83,8 +83,7 @@ func process_charge_state(delta):
 			over_charge_time += delta
 			on_charging(delta)
 
-			var should_release = over_charge_time > max_keep_charging_time \
-				or Input.is_action_just_released(get_input_action("shoot"))
+			var should_release = should_release_charge()
 
 			if should_release:
 				charge_time = min(charge_time, max_charge_time)
@@ -95,6 +94,10 @@ func process_charge_state(delta):
 				on_release_charge(delta)
 				state = DogState.EXTENDING
 
+
+func should_release_charge() -> bool:
+	return over_charge_time > max_keep_charging_time \
+		or Input.is_action_just_released(get_input_action("shoot"))
 # ─── virtual methods (override in each dog) ───────────────────────────────────
 
 func on_start_charging(delta):
@@ -129,9 +132,11 @@ func apply_knockback(body: CharacterBody2D, knock_direction: float, charge_perce
 	if hit_enemy:
 		return
 	hit_enemy = true
-	print("applying force")
+	
 	var force = lerp(300.0, knockback_strength, charge_percent)
 	var force_up = lerp(50.0, knockback_up, charge_percent)
+	print("applying force in base: ", force)
+	print("woth kb: ", knockback_strength)
 	body.velocity.x = knock_direction * force
 	body.velocity.y = -force_up
 	body.is_knocked_back = true
@@ -177,7 +182,8 @@ func update_charge_visuals(delta):
 
 
 func apply_stats():
-	print("applying stats")
+	print("old strength" ,knockback_strength)
+	print("applying stats: " , stats.knockback_strength)
 	# override in each dog to read from stats
 	max_length = stats.max_length
 	extend_speed = stats.extend_speed

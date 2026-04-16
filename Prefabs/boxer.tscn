@@ -3,20 +3,16 @@
 [ext_resource type="Script" uid="uid://chly7ehqwckde" path="res://Scripts/dogs/Boxer.gd" id="1_4v0op"]
 [ext_resource type="Texture2D" uid="uid://dckegner3i5sq" path="res://Sprites/Boxer/boxerFront.png" id="1_rdldn"]
 [ext_resource type="Texture2D" uid="uid://dbovj7cfs7433" path="res://Sprites/Boxer/boxerMiddle.png" id="2_4v0op"]
-[ext_resource type="Script" uid="uid://ogyhsdq873el" path="res://Scripts/dogs/dog_stats.gd" id="2_js4y2"]
+[ext_resource type="Resource" uid="uid://boht2f5uoule" path="res://Dog_stats/dog_stats.tres" id="2_js4y2"]
 [ext_resource type="Texture2D" uid="uid://bwjryahiex1bd" path="res://Sprites/Boxer/boxerBack.png" id="3_js4y2"]
 [ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="4_vyva2"]
-
-[sub_resource type="Resource" id="Resource_vyva2"]
-script = ExtResource("2_js4y2")
-metadata/_custom_type_script = "uid://ogyhsdq873el"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kgyii"]
 
 [node name="Boxer" type="Node2D" unique_id=1059360503]
 position = Vector2(-2, 0)
 script = ExtResource("1_4v0op")
-stats = SubResource("Resource_vyva2")
+stats = ExtResource("2_js4y2")
 
 [node name="Front" type="Sprite2D" parent="." unique_id=1424018028]
 texture_filter = 1

@@ -10,6 +10,7 @@ const BONUS_DISTANCE = 100
 const MAX_HIT_COUNT = 1
 const DASH_BONUS = 3.0
 
+
 var current_length: float = 0.0
 var hit_count: int = 0
 
@@ -102,8 +103,9 @@ func on_hit(body: CharacterBody2D):
 	var knock_direction = sign(body.global_position.x - player.global_position.x)  # away from YOU
 	var velocity_percent = clamp((abs(player.velocity.x) - min_dash_velocity) / (max_dash_velocity - min_dash_velocity), 0.0, 1.0)
 	
-	apply_knockback(body, knock_direction, velocity_percent)  # body = opponent gets knocked
+	apply_knockback(body, knock_direction, velocity_percent)  
 
+	
 func apply_knockback(body: CharacterBody2D, knock_direction: float, velocity_percent:float):
 	if hit_enemy:
 		return

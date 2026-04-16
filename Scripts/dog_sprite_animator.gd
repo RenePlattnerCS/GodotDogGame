@@ -1,17 +1,18 @@
 extends Sprite2D
 
 @export var float_speed: float = 2.0
-@export var float_height: float = 10.0
+@export var float_height: float = 20.0
 @export var spin_speed: float = 1.5
 
+var origin_y: float = -40.0
+
 var time: float = 0.0
-var origin_y: float = 0.0
 var players_in_range: Array = []
 
 var dog_type
 
 func _ready():
-	origin_y = position.y
+	#origin_y = position.y
 	call_deferred("_setup_area")
 
 func _setup_area():

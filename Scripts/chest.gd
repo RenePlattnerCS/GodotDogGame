@@ -2,12 +2,13 @@ extends AnimatedSprite2D
 
 var dog_preview_sprite: Sprite2D
 
-enum DogType { BOXER, DACHSHUND }
+enum DogType { BOXER, DACHSHUND , DANE}
 var current_dog_type: DogType
 
 const DOG_SPRITES = {
 	DogType.BOXER: preload("res://Sprites/DogSprites/boxer.png"),
 	DogType.DACHSHUND: preload("res://Sprites/DogSprites/Dachshund.png"),
+	DogType.DANE: preload("res://Sprites/DogSprites/dane.png"),
 }
 
 
@@ -54,8 +55,10 @@ func show_dog_preview(dog_type: DogType):
 	
 	var chest = get_tree().get_first_node_in_group("chest")
 	dog_preview_sprite.transform = chest.transform
-	add_child(dog_preview_sprite)
-	dog_preview_sprite.position = Vector2(-5, -80)
+	#add_child(dog_preview_sprite)
+	#dog_preview_sprite.position = Vector2(-5, -80)
+	get_parent().add_child(dog_preview_sprite)  # ← sibling, not child
+	dog_preview_sprite.global_position = global_position + Vector2(0, 80)
 
 func remove_dog_preview():
 	if dog_preview_sprite:

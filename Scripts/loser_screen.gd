@@ -100,17 +100,15 @@ func hide_death_screen():
 	visible = false
 
 func _on_button1_pressed():
-	print("button1 pressed")
+	print("button1 pressed for: ", controlled_player) 
 	offered_upgrades[0].apply(controlled_player)
 	hide_death_screen()
 	controlled_player.respawn()
 	EventSystem.player_respawned.emit()
-	#hide_death_screen()
 
 func _on_button2_pressed():
-	print("button2 pressed")
+	print("button2 pressed for " , controlled_player)
 	offered_upgrades[1].apply(controlled_player)
 	hide_death_screen()
 	controlled_player.respawn()
 	EventSystem.player_respawned.emit()
-	#hide_death_screen()

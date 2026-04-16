@@ -1,4 +1,3 @@
-# upgrade_jump.gd
 extends Upgrade
 class_name UpgradeLength
 

@@ -2,7 +2,7 @@
 extends Upgrade
 class_name UpgradeCharge
 
-@export var charge_reduction: float = 0.2
+@export var charge_reduction: float = 0.1
 
 func apply(player: Node2D):
 	player.get_node("Sprites/Dog").decrease_charge_time()
