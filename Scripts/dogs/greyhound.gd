@@ -15,7 +15,7 @@ var current_length: float = 0.0
 var hit_count: int = 0
 
 var shoot_speed : float = 1.0
-
+var launch_position
 var curr_scale : Vector2 = Vector2(0.7, 0.7)
 
 @onready var front : Sprite2D = $Front  
@@ -41,19 +41,28 @@ func on_charging(delta):
 	current_length = lerp(current_length, target_length, 1.0 - exp(-retract_ease_speed * delta))
 	var charge_percent = clamp(charge_time / max_charge_time, 0.0, 1.0)
 	curr_scale = lerp(START_SCALE + Vector2(size_bonus, size_bonus), MAX_SCALE + Vector2(size_bonus* 2, size_bonus* 2), charge_percent)
+	#scale = curr_scale
 
 func on_release_charge(delta):
 	var charge_percent = clamp(prev_charge_time / max_charge_time, 0.0, 1.0)
 	shoot_speed = lerp(40 , 500, charge_percent)
 	target_length = MAX_ROCKET_LENGTH
 	
-	saved_start_position = front.global_transform
-	saved_start_position.origin = $Back.global_position	#fire_direction = get_parent().get_parent().get_parent().scale.x
-	front.reparent(get_tree().current_scene)
-	front.set_deferred("global_transform", saved_start_position)
-	current_length = 0
-	fire_direction = player_sprites.scale.x
 
+	current_length = 0
+	fire_direction = sign(player_sprites.scale.x)
+	print("-----front.rotation BEFORE reparent on_release_charge:------ ", front.rotation)
+	print("front.rotation_degrees BEFORE reparent on_release_charge: ", front.rotation_degrees)
+	var saved_pos = $Back.global_position
+	launch_position = saved_pos
+	front.get_parent().remove_child(front)
+	get_tree().current_scene.add_child(front)
+	front.global_position = saved_pos
+	front.scale = Vector2(0.7, 0.7)
+	front.scale.x = front.scale.x * fire_direction
+	front.rotation = 0.0  # ✅ reset rotation after detach
+	print("-----front.rotation Afterr reparent on_release_charge:------ ", front.rotation)
+	print("front.rotation_degrees After reparent on_release_charge: ", front.rotation_degrees)
 # ─── extending & retracting ───────────────────────────────────────────────────
 
 func on_extending(delta):
@@ -74,29 +83,45 @@ func on_retracting(delta):
 		return
 		
 	curr_scale = START_SCALE + Vector2(size_bonus, size_bonus)
+	#scale = curr_scale
 	hit_count = 0
 	
 	current_length = 0.0
 	state = DogState.IDLE
 	
 	if front.get_parent() != self:
-		front.scale.x = player_sprites.scale.x
+		print("front.rotation BEFORE reparent on_retracting: ", front.rotation)
+		print("front.rotation_degrees BEFORE reparent on_retracting: ", front.rotation_degrees)
+		print("----front.scale BEFORE reparent: -----", front.scale)
+		print("front.global_transform BEFORE: ", front.global_transform)
+		#front.scale = Vector2(player_sprites.scale.x, player_sprites.scale.x)
+		print("player_sprites.scale.xBEFORE: ", player_sprites.scale.x)
 		front.reparent(self)
 		front.position = front_rest_position
-		
+		front.rotation = 0.0
+
+		front.scale = Vector2(1.0, 1.0)
+		print("------player_sprites.scale.x after: ----------", player_sprites.scale.x)
+		print("front.scale: ", front.scale)
+		print("self.scale: ", self.scale)
+		print("Dog node scale: ", get_parent().scale)
+		print("Sprites scale: ", get_parent().get_parent().scale)
+		print("front.global_transform: ", front.global_transform)
+		print("player_sprites.scale: ", player_sprites.scale)
+		print("-----player_sprites.get_parent().scale: ", player_sprites.get_parent().scale)
+
 		
 
 # ─── visuals ──────────────────────────────────────────────────────────────────
 
 func _process(delta):
 	super(delta)
-	scale = curr_scale
+	
 	update_dog_visuals()
 
 func update_dog_visuals():
-	# only move Front, Middle stays at scale 1 (invisible or hidden)
 	if front.get_parent() != self:
-		front.position.x = saved_start_position.origin.x + current_length *fire_direction
+		front.global_position.x = launch_position.x + current_length * fire_direction
 
 # ─── hit ──────────────────────────────────────────────────────────────────────
 
