@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://cwtl0au8uq4by"]
+
+[ext_resource type="Script" uid="uid://dhg1ovcivr531" path="res://Scripts/dogs/greyhound.gd" id="1_1sdap"]
+[ext_resource type="Texture2D" uid="uid://ddjnxowwmtf2p" path="res://Sprites/GreyHound/greyHoundFront.png" id="2_0h8ut"]
+[ext_resource type="Texture2D" uid="uid://5bmj8d4d0cil" path="res://Sprites/GreyHound/greyHoundMiddle.png" id="3_ext10"]
+[ext_resource type="Texture2D" uid="uid://b0fns23giutsg" path="res://Sprites/GreyHound/greyHoundBack.png" id="4_m6v7m"]
+[ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="6_vegqa"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kgyii"]
+height = 48.0
+
+[node name="GreyHound" type="Node2D" unique_id=1059360503]
+position = Vector2(-2, 0)
+script = ExtResource("1_1sdap")
+
+[node name="Front" type="Sprite2D" parent="." unique_id=1424018028]
+texture_filter = 1
+position = Vector2(3, 17)
+texture = ExtResource("2_0h8ut")
+offset = Vector2(-2.265, 0)
+
+[node name="Hitbox" type="Area2D" parent="Front" unique_id=936956966]
+collision_layer = 8
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Front/Hitbox" unique_id=1384423473]
+position = Vector2(39, 10.999999)
+scale = Vector2(1.5191073, 1.1445884)
+shape = SubResource("CapsuleShape2D_kgyii")
+
+[node name="Middle" type="Sprite2D" parent="." unique_id=285816344]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-15, 13)
+scale = Vector2(1.037, 1.074)
+texture = ExtResource("3_ext10")
+centered = false
+region_enabled = true
+region_rect = Rect2(48.088528, 59.98771, 11.79813, 15.976746)
+
+[node name="Back" type="Sprite2D" parent="." unique_id=453409502]
+texture_filter = 1
+position = Vector2(1, 17)
+texture = ExtResource("4_m6v7m")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=249525829]
+visible = false
+offset_left = -72.0
+offset_top = -64.0
+offset_right = 72.0
+offset_bottom = 64.0
+texture = ExtResource("6_vegqa")
+stretch_mode = 1
+
+[connection signal="body_entered" from="Front/Hitbox" to="." method="on_hit"]

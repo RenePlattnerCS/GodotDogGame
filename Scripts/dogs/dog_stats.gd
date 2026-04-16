@@ -6,3 +6,4 @@ extends Resource
 @export var retract_speed: float = 300.0
 @export var knockback_strength: float = 2000.0
 @export var charge_speed_multiplier: float = 1.0
+@export var size_bonus  : float = 0.0

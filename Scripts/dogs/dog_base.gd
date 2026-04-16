@@ -16,6 +16,8 @@ extends Node2D
 @export var knockback_up: float = 600.0
 @export var knockback_strength: float = 4000.0
 @export var charge_speed_multiplier: float = 1.0
+@export var size_bonus: float = 0.0
+@export var  START_SCALE : Vector2 = Vector2(1.0, 1.0)
 
 @export_group("Blinking")
 @export var max_blink_speed: float = 10.0
@@ -132,11 +134,9 @@ func apply_knockback(body: CharacterBody2D, knock_direction: float, charge_perce
 	if hit_enemy:
 		return
 	hit_enemy = true
-	
-	var force = lerp(300.0, knockback_strength, charge_percent)
+	var force = lerp(100.0, knockback_strength, charge_percent)
 	var force_up = lerp(50.0, knockback_up, charge_percent)
-	print("applying force in base: ", force)
-	print("woth kb: ", knockback_strength)
+
 	body.velocity.x = knock_direction * force
 	body.velocity.y = -force_up
 	body.is_knocked_back = true
@@ -149,7 +149,7 @@ func hitlag(body: CharacterBody2D):
 	if charge_percent > HITLAG_THREASHOLD:
 		var hitlag_duration = lerp(0.05, 0.15, charge_percent)
 		var flash_time = hitlag_duration / (FLASH_COUNT * 2)
-		Engine.time_scale = 0.05
+		Engine.time_scale = 0.08
 		for i in FLASH_COUNT:
 			body.modulate = Color.RED
 			await get_tree().create_timer(flash_time, true, false, true).timeout
@@ -182,12 +182,13 @@ func update_charge_visuals(delta):
 
 
 func apply_stats():
-	print("old strength" ,knockback_strength)
-	print("applying stats: " , stats.knockback_strength)
 	# override in each dog to read from stats
 	max_length = stats.max_length
 	extend_speed = stats.extend_speed
 	knockback_strength = stats.knockback_strength
 	charge_speed_multiplier = stats.charge_speed_multiplier
+	size_bonus = stats.size_bonus
+	scale = START_SCALE +	Vector2(size_bonus,size_bonus)
+	
 	
 	

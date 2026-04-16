@@ -66,6 +66,9 @@ func update_dog_visuals():
 func on_hit(body: CharacterBody2D):
 	if hit_enemy or hit_count > MAX_HIT_COUNT:
 		return
+	if(body.player_index == player_index):
+		return
+		
 	hit_count += 1
 	var distance = abs(body.global_position.x - global_position.x)
 	var knock_direction = sign(body.global_position.x - $Front.global_position.x)

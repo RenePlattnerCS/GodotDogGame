@@ -6,6 +6,7 @@ const ALL_UPGRADES = [
 	preload("res://Upgrades/speed.tres"),
 	preload("res://Upgrades/srength.tres"),
 	preload("res://Upgrades/length.tres"),
+	preload("res://Upgrades/size.tres"),
 ]
 
 func get_random_upgrades(count: int = 2) -> Array:

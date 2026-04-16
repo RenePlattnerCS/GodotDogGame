@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeSize" format=3 uid="uid://b66xmcswhwsv1"]
+
+[ext_resource type="Texture2D" uid="uid://c72gwtasqc618" path="res://Sprites/BG/3 Objects/1 Cargos/18.png" id="1_25437"]
+[ext_resource type="Script" uid="uid://cyu1e1uhjainh" path="res://Scripts/UpgradeRessources/upgrade_size.gd" id="1_v8eon"]
+
+[resource]
+script = ExtResource("1_v8eon")
+name = "Size↑"
+icon = ExtResource("1_25437")
+button_text_color = Color(0.83049405, 0.8471851, 0.22456643, 1)
+button_text_border_color = Color(0.36957052, 0.28093755, 0.030591857, 1)
+metadata/_custom_type_script = "uid://cyu1e1uhjainh"

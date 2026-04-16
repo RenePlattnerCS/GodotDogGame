@@ -95,8 +95,10 @@ func apply_self_knockback(sign):
 	hitlag(player)
 	
 func on_hit(body: CharacterBody2D):
-	print("on hit body p: " , body.player_index )
-	print("on hit  p: " , player_index )
+	
+	if not body.is_in_group("player"):
+		return
+
 	if(body.player_index == player_index):
 		return
 	if hit_enemy or hit_count > MAX_HIT_COUNT:

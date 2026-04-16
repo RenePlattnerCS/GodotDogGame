@@ -2,13 +2,14 @@ extends AnimatedSprite2D
 
 var dog_preview_sprite: Sprite2D
 
-enum DogType { BOXER, DACHSHUND , DANE}
+enum DogType { BOXER, DACHSHUND , DANE, GREYHOUND}
 var current_dog_type: DogType
 
 const DOG_SPRITES = {
 	DogType.BOXER: preload("res://Sprites/DogSprites/boxer.png"),
 	DogType.DACHSHUND: preload("res://Sprites/DogSprites/Dachshund.png"),
 	DogType.DANE: preload("res://Sprites/DogSprites/dane.png"),
+	DogType.GREYHOUND : preload("res://Sprites/DogSprites/greyHound.png")
 }
 
 
@@ -27,7 +28,8 @@ func _on_player_died():
 	play("open")
 	# pick random dog for next round
 	var all_types = DogType.values()
-	current_dog_type = all_types[randi() % all_types.size()]
+	#current_dog_type = all_types[randi() % all_types.size()]
+	current_dog_type = DogType.GREYHOUND
 	show_dog_preview(current_dog_type)
 
 func _on_player_respawn():
@@ -52,6 +54,7 @@ func show_dog_preview(dog_type: DogType):
 	
 	dog_preview_sprite.set_script(preload("res://Scripts/dog_sprite_animator.gd"))
 	dog_preview_sprite.dog_type = dog_type 
+	dog_preview_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	
 	var chest = get_tree().get_first_node_in_group("chest")
 	dog_preview_sprite.transform = chest.transform

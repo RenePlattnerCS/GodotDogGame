@@ -3,7 +3,7 @@ extends Node2D
 
 @export var default_dog_scene: PackedScene
 
-enum DogType { BOXER, DACHSHUND, DANE }
+enum DogType { BOXER, DACHSHUND, DANE , GREYHOUND}
 
 
 var current_dog: DogBase
@@ -13,6 +13,7 @@ const DOG_SCENES = {
 	DogType.BOXER: preload("res://Prefabs/boxer.tscn"),
 	DogType.DACHSHUND: preload("res://Prefabs/Dachshund.tscn"),
 	DogType.DANE: preload("res://Prefabs/dane.tscn"),
+	DogType.GREYHOUND: preload("res://Prefabs/greyhound.tscn")
 }
 
 
@@ -58,4 +59,9 @@ func _on_dog_picked_up(player, dog_type):
 	print(player_index)
 	if player.player_index == get_parent().get_parent().player_index:
 		swap_dog(dog_type)
+		
+func increase_size(size_bonus):
+	current_dog.stats.size_bonus += size_bonus
+	current_dog.apply_stats()
+	
 	
