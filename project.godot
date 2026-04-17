@@ -157,6 +157,7 @@ p2_up={
 2d_physics/layer_2="player"
 2d_physics/layer_3="box"
 2d_physics/layer_4="dog"
+2d_physics/layer_6="bullet"
 
 [physics]
 

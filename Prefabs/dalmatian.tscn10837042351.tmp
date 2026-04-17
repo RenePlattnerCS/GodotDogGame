@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://dloy4mb8aluhv"]
+
+[ext_resource type="Script" uid="uid://bvekr2t3h0enb" path="res://Scripts/dogs/dalmatian.gd" id="1_2eofb"]
+[ext_resource type="Texture2D" uid="uid://c3autcxm1h70f" path="res://Sprites/Dalmatian/dalmatianARM.png" id="2_alvcr"]
+[ext_resource type="Texture2D" uid="uid://cxafuyod8khjq" path="res://Sprites/Dalmatian/dalmatianFrontClosed.png" id="2_sgc5j"]
+[ext_resource type="Texture2D" uid="uid://b12s0tvwnu2rl" path="res://Sprites/Dalmatian/dalmatianMiddle.png" id="3_alvcr"]
+[ext_resource type="Texture2D" uid="uid://o10hferv4n8o" path="res://Sprites/Dalmatian/dalmatianBack.png" id="4_sjp6o"]
+[ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="6_mhhxr"]
+[ext_resource type="Script" uid="uid://ctuu84gq6gd1w" path="res://Scripts/bullet_counter_stop_flipping.gd" id="7_alvcr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sgc5j"]
+
+[node name="Dalmatian" type="Node2D" unique_id=1059360503]
+script = ExtResource("1_2eofb")
+
+[node name="Arm" type="Sprite2D" parent="." unique_id=431725059]
+z_index = -1
+texture_filter = 1
+position = Vector2(-29.000002, 26)
+scale = Vector2(0.85, 0.595)
+texture = ExtResource("2_alvcr")
+offset = Vector2(29.775, 0)
+region_enabled = true
+region_rect = Rect2(0, -0.2086811, 128, 128.61107)
+
+[node name="Front" type="Sprite2D" parent="." unique_id=1424018028]
+texture_filter = 1
+position = Vector2(3, 17)
+texture = ExtResource("2_sgc5j")
+offset = Vector2(-2.265, 0)
+
+[node name="Middle" type="Sprite2D" parent="." unique_id=285816344]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-18, 10)
+scale = Vector2(1.037, 1.074)
+texture = ExtResource("3_alvcr")
+centered = false
+region_enabled = true
+region_rect = Rect2(45.054363, 57.09932, 11.9473915, 15.701355)
+
+[node name="Back" type="Sprite2D" parent="." unique_id=453409502]
+texture_filter = 1
+position = Vector2(1, 17)
+texture = ExtResource("4_sjp6o")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=249525829]
+visible = false
+offset_left = -72.0
+offset_top = -64.0
+offset_right = 72.0
+offset_bottom = 64.0
+texture = ExtResource("6_mhhxr")
+stretch_mode = 1
+
+[node name="BulletCounter" type="Label" parent="." unique_id=1665865776]
+offset_left = 19.0
+offset_top = -50.0
+offset_right = 59.0
+offset_bottom = -5.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_sgc5j")
+text = "16"
+script = ExtResource("7_alvcr")

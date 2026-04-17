@@ -100,7 +100,7 @@ func update_dog_visuals():
 		
 	
 	
-func on_hit(body: CharacterBody2D):
+func on_hit(body: Node2D):
 	if not body.is_in_group("player"):
 		return
 
@@ -117,7 +117,7 @@ func on_hit(body: CharacterBody2D):
 
 	hit_count += 1
 	
-	var charge_percent = target_length / max_length
+	var charge_percent = clamp(target_length / max_length, 0, 1)
 	var bonus = 1
 	if charge_percent > 0.5:
 		bonus = DASH_BONUS

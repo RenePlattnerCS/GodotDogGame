@@ -143,3 +143,8 @@ func check_existing_overlaps():
 	for body in front.Hitbox.get_overlapping_bodies():
 		if body.is_in_group("player"):
 			on_hit(body)
+
+func cleanup():
+	if front.get_parent() != self:
+		front.queue_free()
+	Engine.time_scale = 1.0

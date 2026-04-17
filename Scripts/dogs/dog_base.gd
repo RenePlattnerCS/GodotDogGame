@@ -188,8 +188,10 @@ func apply_stats():
 	knockback_strength = stats.knockback_strength
 	charge_speed_multiplier = stats.charge_speed_multiplier
 	size_bonus = stats.size_bonus
-	print("........apply stats size bonus...........", size_bonus)
+	retract_speed = stats.retract_speed
+	print("........apply stats retract_speed...........", retract_speed)
 	scale = START_SCALE +	Vector2(size_bonus,size_bonus)
 	
-	
+func cleanup():
+	Engine.time_scale = 1.0
 	

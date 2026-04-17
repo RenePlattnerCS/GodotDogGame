@@ -192,7 +192,7 @@ position = Vector2(-226.675, -229)
 
 [node name="Cargo" type="Node2D" parent="Stage" unique_id=766573068]
 modulate = Color(0.5985247, 0.59852463, 0.59852463, 1)
-z_index = -1
+z_index = -2
 position = Vector2(0, 1)
 
 [node name="Sprite2D2" type="Sprite2D" parent="Stage/Cargo" unique_id=273082362]

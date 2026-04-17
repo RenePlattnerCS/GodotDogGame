@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://hjfr1s5pv0sq"]
+
+[ext_resource type="Script" uid="uid://84edn3mbvchh" path="res://Scripts/bullet.gd" id="1_m4f65"]
+[ext_resource type="Texture2D" uid="uid://c2ur5pexwnnva" path="res://Sprites/Dalmatian/dalmatianPuppy.png" id="2_m4f65"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1nxya"]
+size = Vector2(25.375, 10.5)
+
+[node name="Bullet" type="Area2D" unique_id=1688868885]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_m4f65")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=458770339]
+position = Vector2(4, 8)
+shape = SubResource("RectangleShape2D_1nxya")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=594915032]
+texture_filter = 1
+position = Vector2(0, -1.9999999)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_m4f65")
+region_rect = Rect2(40.830593, 60.13519, 42.373615, 5.872944)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
