@@ -32,6 +32,8 @@ player="the player character"
 crumble_tile=""
 chest=""
 dog=""
+shield=""
+bullet=""
 
 [input]
 

@@ -292,16 +292,16 @@ texture_filter = 1
 position = Vector2(-1, -1)
 texture = ExtResource("7_g2x0k")
 
-[node name="Shield" type="Sprite2D" parent="Front" unique_id=67677023]
+[node name="Shield" type="Sprite2D" parent="Front" unique_id=67677023 groups=["shield"]]
 texture_filter = 1
 position = Vector2(39, 2)
 texture = ExtResource("6_b6dvx")
 
-[node name="Hitbox" type="Area2D" parent="Front/Shield" unique_id=936956966]
+[node name="Hitbox" type="Area2D" parent="Front/Shield" unique_id=936956966 groups=["shield"]]
 position = Vector2(-25, -1)
 scale = Vector2(0.8566681, 4.1064444)
 collision_layer = 8
-collision_mask = 10
+collision_mask = 42
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Front/Shield/Hitbox" unique_id=1384423473]
 position = Vector2(16.014233, -5.9604645e-08)

@@ -13,8 +13,8 @@ func _physics_process(delta):
 	var velocity = Vector2(cos(angle) * direction, sin(angle)) * speed
 	global_position += velocity * delta
 
+
 func _on_body_entered(body: Node2D):
-	
 	if not body.is_in_group("player"):
 		return
 	if body.player_index == player_index:

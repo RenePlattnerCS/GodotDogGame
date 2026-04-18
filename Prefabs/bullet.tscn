@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://hjfr1s5pv0sq"]
 
-[ext_resource type="Script" uid="uid://tbxrci4dvlq4" path="res://Prefabs/hitbox_is_active.gd" id="1_m4f65"]
+[ext_resource type="Script" uid="uid://84edn3mbvchh" path="res://Scripts/bullet.gd" id="1_m4f65"]
 [ext_resource type="Texture2D" uid="uid://c2ur5pexwnnva" path="res://Sprites/Dalmatian/dalmatianPuppy.png" id="2_m4f65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1nxya"]
 size = Vector2(25.375, 10.5)
 
-[node name="Bullet" type="Area2D" unique_id=1688868885 groups=["dog"]]
+[node name="Bullet" type="Area2D" unique_id=1688868885 groups=["bullet"]]
 collision_layer = 32
 collision_mask = 2
 script = ExtResource("1_m4f65")
@@ -22,4 +22,5 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_m4f65")
 region_rect = Rect2(40.830593, 60.13519, 42.373615, 5.872944)
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

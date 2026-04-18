@@ -10,7 +10,7 @@ const BONUS_DISTANCE = 150
 const MAX_HIT_COUNT = 1
 
 const NORMAL_HIT_PENALTY : float = 8.0
-const COUNTER_HIT_BONUS : float = 1.9
+const COUNTER_HIT_BONUS : float = 4
 const COUNTER_HIT_SPEED_BONUS : float = 1.5
 const LENGTH_BONUS : float = 100
 
@@ -56,9 +56,15 @@ func on_release_charge(delta):
 func _on_shield_hit(area: Area2D):
 	if state != DogState.CHARGING:
 		return
-	if not area.is_in_group("dog"):
+	if area == $Front/HitboxRaw:
 		return
-	print("area ", area)
+
+	if not area.is_in_group("dog"):
+		if area.is_in_group("bullet"):
+			area.queue_free()
+		return
+		
+		
 	if not area.is_active: #check if actually attacking
 		return
 	# shield got hit while charging → trigger extend
