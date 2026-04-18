@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://drpmguk88ausi"]
 
 [ext_resource type="Script" uid="uid://4l00bpiehtcf" path="res://Scripts/dogs/dachshund.gd" id="1_3s77s"]
+[ext_resource type="Script" uid="uid://tbxrci4dvlq4" path="res://Prefabs/hitbox_is_active.gd" id="3_cdrbk"]
 [ext_resource type="Texture2D" uid="uid://4d1gsv2w7pme" path="res://Sprites/FrontDog.png" id="3_knabg"]
 [ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="4_nx2tc"]
 [ext_resource type="Texture2D" uid="uid://b0ie0bguyrjsw" path="res://Sprites/BackDog.png" id="5_cj07x"]
@@ -16,9 +17,10 @@ texture_filter = 1
 texture = ExtResource("3_knabg")
 offset = Vector2(-2.265, 0)
 
-[node name="Hitbox" type="Area2D" parent="Front" unique_id=502847565]
+[node name="Hitbox" type="Area2D" parent="Front" unique_id=502847565 groups=["dog"]]
 collision_layer = 8
 collision_mask = 6
+script = ExtResource("3_cdrbk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Front/Hitbox" unique_id=650149174]
 position = Vector2(2.9999995, 18)

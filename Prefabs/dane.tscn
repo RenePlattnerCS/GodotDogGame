@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cct8eyaefngip" path="res://Scripts/dogs/Dane.gd" id="1_0c4xc"]
 [ext_resource type="Texture2D" uid="uid://ds2ymkjj0jidb" path="res://Sprites/Dane/daneFront.png" id="2_n87fj"]
 [ext_resource type="Texture2D" uid="uid://c85twhklq67qr" path="res://Sprites/Dane/daneMiddle.png" id="3_gdiwu"]
+[ext_resource type="Script" uid="uid://tbxrci4dvlq4" path="res://Prefabs/hitbox_is_active.gd" id="3_n87fj"]
 [ext_resource type="Texture2D" uid="uid://duhbdg8p42b12" path="res://Sprites/Dane/daneBack.png" id="4_gcq0e"]
 [ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="6_6jswy"]
 
@@ -19,9 +20,10 @@ position = Vector2(3, 17)
 texture = ExtResource("2_n87fj")
 offset = Vector2(-2.265, 0)
 
-[node name="Hitbox" type="Area2D" parent="Front" unique_id=936956966]
+[node name="Hitbox" type="Area2D" parent="Front" unique_id=936956966 groups=["dog"]]
 collision_layer = 8
 collision_mask = 6
+script = ExtResource("3_n87fj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Front/Hitbox" unique_id=1384423473]
 position = Vector2(15.000002, 2)

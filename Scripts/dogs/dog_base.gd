@@ -25,7 +25,7 @@ extends Node2D
 
 const HITLAG_THREASHOLD = 0.50
 const FLASH_COUNT = 3
-var CAN_HIT_AGAIN_TIME = 0.1
+var CAN_HIT_AGAIN_TIME = 0.01
 
 var player_index: int = -69
 var charge_time: float = 0.0
@@ -42,6 +42,7 @@ enum DogState { IDLE, CHARGING, EXTENDING, RETRACTING, COUNTER }
 var state: DogState = DogState.IDLE
 
 var dont_extend : bool = false
+@onready var player = get_parent().get_parent().get_parent()
 
 func _ready():
 	player_index = get_parent().get_parent().get_parent().player_index
@@ -163,15 +164,31 @@ func hitlag(body: CharacterBody2D):
 		hitlag_duration = 0
 	if state == DogState.COUNTER:
 		hitlag_duration = 0.3
-		print("hitlag_duration")
+
+	if hitlag_duration <= 0:
+		return
+
+	# freeze both bodies
+	var body_vel = body.velocity
+	var self_vel = player.velocity  # player
+	body.velocity = Vector2.ZERO
+	player.velocity = Vector2.ZERO
+	body.set_physics_process(false)
+	player.set_physics_process(false)
+	set_process(false)
+
+	# flash effect
 	var flash_time = hitlag_duration / (FLASH_COUNT * 2)
-	Engine.time_scale = 0.08
 	for i in FLASH_COUNT:
 		body.modulate = Color.RED
 		await get_tree().create_timer(flash_time, true, false, true).timeout
 		body.modulate = Color.WHITE
 		await get_tree().create_timer(flash_time, true, false, true).timeout
-	Engine.time_scale = 1.0
+
+	# unfreeze
+	body.set_physics_process(true)
+	player.set_physics_process(true)
+	set_process(true)
 	body.modulate = Color.WHITE
 
 # ─── hit cooldown ─────────────────────────────────────────────────────────────

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cjv1xwtpu8c12" path="res://Sprites/Super Pixel Effects Gigapack (Free Version)/spritesheet/Fantasy Spells/DEATH/spell_death_001_small_red/spritesheet.png" id="2_g2x0k"]
 [ext_resource type="Texture2D" uid="uid://cubeitgu4xmql" path="res://Sprites/dobermann/dobermannMiddle.png" id="3_b6dvx"]
 [ext_resource type="Texture2D" uid="uid://cj8oqkw7kc0wp" path="res://Sprites/dobermann/dobermannBack.png" id="4_g2x0k"]
+[ext_resource type="Script" uid="uid://tbxrci4dvlq4" path="res://Prefabs/hitbox_is_active.gd" id="6_1s6ip"]
 [ext_resource type="Texture2D" uid="uid://77shgp8jlyk5" path="res://Sprites/dobermann/romanShield.png" id="6_b6dvx"]
 [ext_resource type="Texture2D" uid="uid://djbqjxmv5xtwe" path="res://Sprites/Effects/flame/purpleFire.png" id="6_sid06"]
 [ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="6_w58x6"]
@@ -307,9 +308,10 @@ position = Vector2(16.014233, -5.9604645e-08)
 scale = Vector2(4.6996465, 1.0907042)
 shape = SubResource("CapsuleShape2D_kgyii")
 
-[node name="HitboxRaw" type="Area2D" parent="Front" unique_id=713365557]
+[node name="HitboxRaw" type="Area2D" parent="Front" unique_id=713365557 groups=["dog"]]
 collision_layer = 8
 collision_mask = 2
+script = ExtResource("6_1s6ip")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Front/HitboxRaw" unique_id=211659756]
 position = Vector2(32, -6.999999)

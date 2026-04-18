@@ -10,8 +10,9 @@ const BONUS_DISTANCE = 150
 const MAX_HIT_COUNT = 1
 
 const NORMAL_HIT_PENALTY : float = 8.0
-const COUNTER_HIT_BONUS : float = 1.1
+const COUNTER_HIT_BONUS : float = 1.9
 const COUNTER_HIT_SPEED_BONUS : float = 1.5
+const LENGTH_BONUS : float = 100
 
 var current_length: float = 0.0
 var hit_count: int = 0
@@ -21,11 +22,10 @@ var hit_count: int = 0
 @onready var fire = $Front/fire
 @onready var back_point = $BackPoint
 
-var player : Node2D
 
 func _ready():
 	super()
-	START_SCALE = Vector2(0.9, 0.9)
+	START_SCALE = Vector2(0.8, 0.8)
 	dont_extend = true
 	shield.visible = false
 	charging_retraction_length = 4
@@ -49,7 +49,7 @@ func on_charging(delta):
 	
 	
 func on_release_charge(delta):
-	pass
+	$Front/HitboxRaw.is_active = true
 	
 	
 # ─── shield hit while charging ────────────────────────────────────────────────
@@ -58,6 +58,7 @@ func _on_shield_hit(area: Area2D):
 		return
 	if not area.is_in_group("dog"):
 		return
+	print("area ", area)
 	if not area.is_active: #check if actually attacking
 		return
 	# shield got hit while charging → trigger extend
@@ -106,11 +107,12 @@ func _on_hitbox_body_entered(body : Node2D):
 func on_extending(delta):
 	if state != DogState.EXTENDING:
 		return
-	current_length = move_toward(current_length, target_length, extend_speed * delta)
+	current_length = move_toward(current_length , target_length + LENGTH_BONUS, extend_speed * delta)
 	check_existing_overlaps()
-	if current_length >= target_length - EXTEND_LENGTH_OFFSET:
+	if current_length >= target_length + LENGTH_BONUS - EXTEND_LENGTH_OFFSET:
 		player.lock_turning_around = false
 		shield.visible = false
+		$Front/HitboxRaw.is_active = false
 		state = DogState.RETRACTING
 
 func on_retracting(delta):
@@ -127,7 +129,12 @@ func on_retracting(delta):
 			state = DogState.CHARGING
 	if current_length <= RETRACT_LENGTH_OFFSET:
 		current_length = 0.0
+		$Front/HitboxRaw.is_active = false
 		state = DogState.IDLE
+		
+	
+
+
 
 func on_counter(delta):
 	if state != DogState.COUNTER:
