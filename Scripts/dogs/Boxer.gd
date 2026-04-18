@@ -7,7 +7,7 @@ const EASE_IN_LENGTH = 20.0
 const HIGH_CHARGE_KNOCKBACK_BONUS = 2000
 const CHARGE_PERCENT_BONUS_THRESHOLD = 0.5
 const BONUS_DISTANCE = 150
-const MAX_HIT_COUNT = 2
+const MAX_HIT_COUNT = 3
 
 var current_length: float = 0.0
 var hit_count: int = 0
@@ -15,7 +15,6 @@ var hit_count: int = 0
 
 func _ready():
 	super()
-	hitbox.monitorable = false
 	
 # ─── charging ─────────────────────────────────────────────────────────────────
 
@@ -28,8 +27,7 @@ func on_charging(delta):
 	
 	
 func on_release_charge(delta):
-	hitbox.monitorable = true 
-
+	hitbox.is_active = true
 # ─── extending & retracting ───────────────────────────────────────────────────
 
 func on_extending(delta):
@@ -38,7 +36,7 @@ func on_extending(delta):
 	current_length = move_toward(current_length, target_length, extend_speed * delta)
 	check_existing_overlaps()
 	if current_length >= target_length - EXTEND_LENGTH_OFFSET:
-		hitbox.monitorable = false
+		hitbox.is_active = false
 		state = DogState.RETRACTING
 
 func on_retracting(delta):
@@ -55,6 +53,7 @@ func on_retracting(delta):
 			state = DogState.CHARGING
 	if current_length <= RETRACT_LENGTH_OFFSET:
 		current_length = 0.0
+		hitbox.is_active = false
 		state = DogState.IDLE
 
 # ─── visuals ──────────────────────────────────────────────────────────────────
@@ -81,16 +80,14 @@ func on_hit(body: CharacterBody2D):
 	var charge_percent = target_length / max_length
 
 	var bonus = 0
-	print("distance", distance)
 	if charge_percent > CHARGE_PERCENT_BONUS_THRESHOLD  or hit_count >= MAX_HIT_COUNT -1 or  distance > BONUS_DISTANCE:
 		bonus = HIGH_CHARGE_KNOCKBACK_BONUS
-		print("bonus",bonus)
+
 
 	# temporarily boost knockback_strength for the bonus, then restore
 	var original = knockback_strength
 	knockback_strength += bonus
-	print("knockback_strength", knockback_strength)
-	print("bonus", bonus)
+
 	apply_knockback(body, knock_direction, charge_percent)
 	knockback_strength = original
 

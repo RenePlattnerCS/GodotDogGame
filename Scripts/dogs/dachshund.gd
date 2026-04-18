@@ -127,7 +127,7 @@ func on_hit(body: Node2D):
 	apply_knockback(body, knock_direction, velocity_percent)  
 
 	
-func apply_knockback(body: CharacterBody2D, knock_direction: float, velocity_percent:float):
+func apply_knockback(body: CharacterBody2D, knock_direction: float, velocity_percent:float, mult : float = 1.0):
 	if hit_enemy:
 		return
 	hit_enemy = true

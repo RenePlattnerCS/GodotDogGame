@@ -179,7 +179,7 @@ func respawn():
 		print("no sawn point assigned")
 		return
 	global_position = spawn_point.position
-	
+	lock_turning_around = false
 	visible = true
 	set_process(true)
 	set_physics_process(true)

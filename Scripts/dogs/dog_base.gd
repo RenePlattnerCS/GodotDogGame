@@ -75,6 +75,7 @@ func get_input_action(action: String) -> String:
 
 func process_charge_state(delta):
 	match state:
+		
 		DogState.IDLE:
 			if input_buffer:
 				input_buffer = false
@@ -137,33 +138,41 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 # ─── knockback helper (dogs can call this, or override entirely) ──────────────
 
-func apply_knockback(body: CharacterBody2D, knock_direction: float, charge_percent: float):
+func apply_knockback(body: CharacterBody2D, knock_direction: float, charge_percent: float, knockback_mult : float = 0.8):
 	if hit_enemy:
 		return
 	hit_enemy = true
-	var force = lerp(100.0 * 0.8, knockback_strength * 0.8, charge_percent)
+	
+	var force = lerp(100.0 * 0.8, knockback_strength * knockback_mult, charge_percent)
 	var force_up = lerp(50.0, knockback_up * 0.8, charge_percent)
-
+	
+	await hitlag(body)
+	
 	body.velocity.x = knock_direction * force
 	body.velocity.y = -force_up
 	body.is_knocked_back = true
-	hitlag(body)
+	
 
 # ─── hitlag ───────────────────────────────────────────────────────────────────
 
 func hitlag(body: CharacterBody2D):
 	var charge_percent = clamp(prev_charge_time / max_charge_time, 0.0, 1.0)
-	if charge_percent > HITLAG_THREASHOLD:
-		var hitlag_duration = lerp(0.05, 0.15, charge_percent)
-		var flash_time = hitlag_duration / (FLASH_COUNT * 2)
-		Engine.time_scale = 0.08
-		for i in FLASH_COUNT:
-			body.modulate = Color.RED
-			await get_tree().create_timer(flash_time, true, false, true).timeout
-			body.modulate = Color.WHITE
-			await get_tree().create_timer(flash_time, true, false, true).timeout
-		Engine.time_scale = 1.0
+	
+	var hitlag_duration = lerp(0.05, 0.15, charge_percent)
+	if charge_percent < HITLAG_THREASHOLD:
+		hitlag_duration = 0
+	if state == DogState.COUNTER:
+		hitlag_duration = 0.3
+		print("hitlag_duration")
+	var flash_time = hitlag_duration / (FLASH_COUNT * 2)
+	Engine.time_scale = 0.08
+	for i in FLASH_COUNT:
+		body.modulate = Color.RED
+		await get_tree().create_timer(flash_time, true, false, true).timeout
 		body.modulate = Color.WHITE
+		await get_tree().create_timer(flash_time, true, false, true).timeout
+	Engine.time_scale = 1.0
+	body.modulate = Color.WHITE
 
 # ─── hit cooldown ─────────────────────────────────────────────────────────────
 
@@ -196,7 +205,6 @@ func apply_stats():
 	charge_speed_multiplier = stats.charge_speed_multiplier
 	size_bonus = stats.size_bonus
 	retract_speed = stats.retract_speed
-	print("........apply stats retract_speed...........", retract_speed)
 	scale = START_SCALE +	Vector2(size_bonus,size_bonus)
 	
 func cleanup():

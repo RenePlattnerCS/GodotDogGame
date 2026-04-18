@@ -31,6 +31,7 @@ window/stretch/mode="viewport"
 player="the player character"
 crumble_tile=""
 chest=""
+dog=""
 
 [input]
 
