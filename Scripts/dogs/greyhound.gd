@@ -7,7 +7,7 @@ const HIGH_CHARGE_KNOCKBACK_BONUS = 2000
 const CHARGE_PERCENT_BONUS_THRESHOLD = 0.8
 const BONUS_DISTANCE = 100
 const MAX_HIT_COUNT = 3
-const MAX_ROCKET_LENGTH = 1000
+const MAX_ROCKET_LENGTH = 1200
 
 var MAX_SCALE : Vector2 = Vector2(1, 1)
 
@@ -27,6 +27,7 @@ var front_rest_position: Vector2  # add this as a var
 var fire_direction: int = 1
 var bullet_scale: Vector2 = Vector2(0.7, 0.7)
 
+var retract_length : float = 0.0
 
 func _ready():
 	super()
@@ -45,8 +46,9 @@ func on_charging(delta):
 	# just lerp the front back slightly during charge windup
 	current_length = lerp(current_length, target_length, 1.0 - exp(-retract_ease_speed * delta))
 	var charge_percent = clamp(charge_time / max_charge_time, 0.0, 1.0)
-	curr_scale = lerp(START_SCALE + Vector2(size_bonus, size_bonus), MAX_SCALE + Vector2(size_bonus* 2, size_bonus* 2), charge_percent)
-	
+	var squared_size_bonus = (1+size_bonus) * (1+size_bonus)
+	squared_size_bonus -= 1
+	curr_scale = lerp(START_SCALE + Vector2(squared_size_bonus, squared_size_bonus), MAX_SCALE + Vector2(squared_size_bonus * 2, squared_size_bonus * 2), charge_percent)
 	scale = curr_scale  # ✅ grow the dog while charging
 
 
@@ -55,8 +57,10 @@ func on_release_charge(delta):
 	var charge_percent = clamp(prev_charge_time / max_charge_time, 0.0, 1.0)
 	shoot_speed = lerp(40 , 500, charge_percent)
 	target_length = MAX_ROCKET_LENGTH
+	if(retract_speed > 300):
+		target_length -= 200
 	
-	bullet_scale = curr_scale  # ✅ capture size at fire time
+	bullet_scale = curr_scale  
 	
 
 	current_length = 0
@@ -69,7 +73,7 @@ func on_release_charge(delta):
 	front.global_position = saved_pos
 	#front.scale = Vector2(0.7, 0.7)
 	front.scale.x = front.scale.x * fire_direction
-	front.rotation = 0.0  # ✅ reset rotation after detach
+	front.rotation = 0.0  # reset rotation after detach
 
 # ─── extending & retracting ───────────────────────────────────────────────────
 
@@ -82,21 +86,32 @@ func on_extending(delta):
 	shoot_speed += delta * shoot_speed
 	#check_existing_overlaps()
 	if current_length >= target_length - EXTEND_LENGTH_OFFSET:
+		retract_length = current_length
 		state = DogState.RETRACTING
 		
 
 func on_retracting(delta):
-	
-	
 	if state != DogState.RETRACTING:
 		return
 		
+	retract_length -= (retract_speed * delta) * 4
+	print("retract_length", retract_length)
+	
+
+	if retract_length <= RETRACT_LENGTH_OFFSET:
+		print("restoring")
+		restore_front_missile()
+		state = DogState.IDLE
+
+		
+
+# ─── visuals ──────────────────────────────────────────────────────────────────
+func restore_front_missile():
 	curr_scale = START_SCALE + Vector2(size_bonus, size_bonus)
 	#scale = curr_scale
 	hit_count = 0
 	
 	current_length = 0.0
-	state = DogState.IDLE
 	
 	if front.get_parent() != self:
 		front.reparent(self)
@@ -105,13 +120,8 @@ func on_retracting(delta):
 
 		front.scale = Vector2(1.0, 1.0)
 		curr_scale = START_SCALE + Vector2(size_bonus, size_bonus)  # reset dog scale
-		scale = curr_scale  # ✅ apply reset to dog
-
-
+		scale = curr_scale
 		
-
-# ─── visuals ──────────────────────────────────────────────────────────────────
-
 func _process(delta):
 	super(delta)
 	

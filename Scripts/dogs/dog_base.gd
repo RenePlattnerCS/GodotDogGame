@@ -38,9 +38,10 @@ var target_length: float = 0.0
 var input_buffer: bool = false
 var buffer_timer: float = 0.0
 
-enum DogState { IDLE, CHARGING, EXTENDING, RETRACTING }
+enum DogState { IDLE, CHARGING, EXTENDING, RETRACTING, COUNTER }
 var state: DogState = DogState.IDLE
 
+var dont_extend : bool = false
 
 func _ready():
 	player_index = get_parent().get_parent().get_parent().player_index
@@ -87,7 +88,7 @@ func process_charge_state(delta):
 
 			var should_release = should_release_charge()
 
-			if should_release:
+			if should_release :
 				charge_time = min(charge_time, max_charge_time)
 				target_length = max((charge_time / max_charge_time) * max_length, min_extend_length)
 				prev_charge_time = charge_time
@@ -95,6 +96,11 @@ func process_charge_state(delta):
 				over_charge_time = 0.0
 				on_release_charge(delta)
 				state = DogState.EXTENDING
+
+					
+		DogState.COUNTER:
+			on_counter(delta)
+			
 
 
 func should_release_charge() -> bool:
@@ -119,7 +125,8 @@ func on_retracting(delta):
 
 func on_hit(body: CharacterBody2D):
 	pass  # override to define what hitting an enemy does
-
+func on_counter(delta):
+	pass
 # ─── hitbox ───────────────────────────────────────────────────────────────────
 
 func _on_hitbox_body_entered(body: Node2D) -> void:

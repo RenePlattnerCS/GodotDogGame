@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://ceewxru04humv"]
+
+[ext_resource type="Script" uid="uid://c5fn6kn4nm767" path="res://Scripts/dogs/dobermann.gd" id="1_2ir2h"]
+[ext_resource type="Texture2D" uid="uid://b6f5vrrnwsis2" path="res://Sprites/dobermann/dobermannFront.png" id="2_2hr16"]
+[ext_resource type="Texture2D" uid="uid://cubeitgu4xmql" path="res://Sprites/dobermann/dobermannMiddle.png" id="3_b6dvx"]
+[ext_resource type="Texture2D" uid="uid://cj8oqkw7kc0wp" path="res://Sprites/dobermann/dobermannBack.png" id="4_g2x0k"]
+[ext_resource type="Texture2D" uid="uid://77shgp8jlyk5" path="res://Sprites/dobermann/romanShield.png" id="6_b6dvx"]
+[ext_resource type="Texture2D" uid="uid://dw07miafkftgs" path="res://Sprites/MiddleDog.png" id="6_w58x6"]
+[ext_resource type="Texture2D" uid="uid://p8ux64bmax4q" path="res://Sprites/dobermann/dobermannRomanHat.png" id="7_g2x0k"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sid06"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"spark",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kgyii"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b6dvx"]
+
+[node name="Dobermann" type="Node2D" unique_id=1059360503]
+position = Vector2(-2, 6)
+script = ExtResource("1_2ir2h")
+
+[node name="Front" type="Sprite2D" parent="." unique_id=1424018028]
+texture_filter = 1
+position = Vector2(3, 17)
+texture = ExtResource("2_2hr16")
+offset = Vector2(-2.265, 0)
+
+[node name="CounterHitAnimation" type="AnimatedSprite2D" parent="Front" unique_id=1338568386]
+position = Vector2(31, -3)
+scale = Vector2(3.4767423, 3.498755)
+sprite_frames = SubResource("SpriteFrames_sid06")
+animation = &"spark"
+
+[node name="hat" type="Sprite2D" parent="Front" unique_id=505818926]
+z_index = -1
+texture_filter = 1
+position = Vector2(-1, -1)
+texture = ExtResource("7_g2x0k")
+
+[node name="Shield" type="Sprite2D" parent="Front" unique_id=67677023]
+visible = false
+texture_filter = 1
+position = Vector2(39, 2)
+texture = ExtResource("6_b6dvx")
+
+[node name="Hitbox" type="Area2D" parent="Front/Shield" unique_id=936956966]
+position = Vector2(-20, -2)
+scale = Vector2(0.93666667, 4.1064444)
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Front/Shield/Hitbox" unique_id=1384423473]
+position = Vector2(16.014233, -5.9604645e-08)
+scale = Vector2(4.6996465, 1.0907042)
+shape = SubResource("CapsuleShape2D_kgyii")
+
+[node name="HitboxRaw" type="Area2D" parent="Front" unique_id=713365557]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Front/HitboxRaw" unique_id=211659756]
+position = Vector2(32, -6.999999)
+scale = Vector2(0.7713445, 1.7244503)
+shape = SubResource("CapsuleShape2D_b6dvx")
+
+[node name="Middle" type="Sprite2D" parent="." unique_id=285816344]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-14, 10)
+scale = Vector2(1, 1.0416667)
+texture = ExtResource("3_b6dvx")
+centered = false
+region_enabled = true
+region_rect = Rect2(49.04445, 57.97665, 3.8733597, 24.04459)
+
+[node name="Back" type="Sprite2D" parent="." unique_id=453409502]
+texture_filter = 1
+position = Vector2(1, 17)
+texture = ExtResource("4_g2x0k")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=249525829]
+visible = false
+offset_left = -72.0
+offset_top = -64.0
+offset_right = 72.0
+offset_bottom = 64.0
+texture = ExtResource("6_w58x6")
+stretch_mode = 1
+
+[connection signal="area_entered" from="Front/Shield/Hitbox" to="." method="_on_shield_hit"]
+[connection signal="body_entered" from="Front/HitboxRaw" to="." method="_on_hitbox_body_entered"]

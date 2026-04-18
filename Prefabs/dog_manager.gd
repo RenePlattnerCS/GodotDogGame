@@ -3,7 +3,7 @@ extends Node2D
 
 @export var default_dog_scene: PackedScene
 
-enum DogType { BOXER, DACHSHUND, DANE , GREYHOUND, DALMATIAN}
+enum DogType { BOXER, DACHSHUND, DANE , GREYHOUND, DALMATIAN, DOBERMANN}
 
 
 var current_dog: DogBase
@@ -14,7 +14,8 @@ const DOG_SCENES = {
 	DogType.DACHSHUND: preload("res://Prefabs/Dachshund.tscn"),
 	DogType.DANE: preload("res://Prefabs/dane.tscn"),
 	DogType.GREYHOUND: preload("res://Prefabs/greyhound.tscn"),
-	DogType.DALMATIAN: preload("res://Prefabs/dalmatian.tscn")
+	DogType.DALMATIAN: preload("res://Prefabs/dalmatian.tscn"),
+	DogType.DOBERMANN: preload("res://Prefabs/dobermann.tscn")
 ,}
 
 

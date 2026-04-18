@@ -28,6 +28,7 @@ var player_has_horizontal_speed : bool = false
 
 var is_knocked_back: bool = false
 var is_dashing: bool = false
+var lock_turning_around: bool = false
 
 var SPEED = 150.0
 var JUMP_VELOCITY = -400.0
@@ -84,13 +85,11 @@ func _physics_process(delta: float) -> void:
 		if velocity.y < 0 and velocity.y > -APEX_THRESHOLD:  # ascending, near apex
 			var stick = Input.get_vector(get_input_action("left"), get_input_action("right"), get_input_action("up"), get_input_action("down"))
 			if stick.y > STRAIGHT_DOWN_THREASHOLD:
-				print("fast faliing!!")
 				fast_fall_multiplier = BASE_FAST_FALL_MULT
 				
 		if velocity.y > 0:  # descending
 			var stick = Input.get_vector(get_input_action("left"),get_input_action("right"),get_input_action("up"), get_input_action("down"))
 			if stick.y > STRAIGHT_DOWN_THREASHOLD:
-				print("fast faliing!!")
 				fast_fall_multiplier = BASE_FAST_FALL_MULT
 			velocity += get_gravity() * delta * fall_multiplier * fast_fall_multiplier
 		elif not is_jumping and velocity.y < 0:
@@ -128,7 +127,19 @@ func _physics_process(delta: float) -> void:
 			
 	elif (not is_jumping and not lock_jump) or jump_upgraded:
 		# normal movement
-		var direction = Input.get_axis(get_input_action(("left")), get_input_action(("right")))
+		var direction = 0
+		if(not lock_turning_around):
+			direction = Input.get_axis(get_input_action(("left")), get_input_action(("right")))
+		if(lock_turning_around):
+			var locked_dir = direction
+			if(locked_dir == 0.0):
+				locked_dir = $Sprites.scale.x
+			direction = Input.get_axis(get_input_action(("left")), get_input_action(("right")))
+			if(locked_dir >=0):
+				direction = clamp(direction,0,1)
+			else:
+				direction = clamp(direction,-1,0)	
+			
 		if direction:
 			velocity.x = direction * SPEED
 		else:

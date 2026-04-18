@@ -2,7 +2,7 @@ extends AnimatedSprite2D
 
 var dog_preview_sprite: Sprite2D
 
-enum DogType { BOXER, DACHSHUND , DANE, GREYHOUND, DALMATIAN}
+enum DogType { BOXER, DACHSHUND , DANE, GREYHOUND, DALMATIAN, DOBERMANN}
 var current_dog_type: DogType
 
 const DOG_SPRITES = {
@@ -10,7 +10,8 @@ const DOG_SPRITES = {
 	DogType.DACHSHUND: preload("res://Sprites/DogSprites/Dachshund.png"),
 	DogType.DANE: preload("res://Sprites/DogSprites/dane.png"),
 	DogType.GREYHOUND : preload("res://Sprites/DogSprites/greyHound.png"),
-	DogType.DALMATIAN: preload("res://Sprites/DogSprites/dalmatian.png")
+	DogType.DALMATIAN: preload("res://Sprites/DogSprites/dalmatian.png"),
+	DogType.DOBERMANN: preload("res://Sprites/DogSprites/dobermann.png"),
 }
 
 
@@ -30,7 +31,7 @@ func _on_player_died():
 	# pick random dog for next round
 	var all_types = DogType.values()
 	current_dog_type = all_types[randi() % all_types.size()]
-	#current_dog_type = DogType.DALMATIAN
+	current_dog_type = DogType.DOBERMANN
 	show_dog_preview(current_dog_type)
 
 func _on_player_respawn():

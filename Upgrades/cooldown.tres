@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="UpgradeCooldown" format=3 uid="uid://d08ako7y5agwj"]
 
 [ext_resource type="Texture2D" uid="uid://bv4uav5y8ggbw" path="res://Sprites/BG/3 Objects/1 Cargos/29.png" id="1_8h5pb"]
-[ext_resource type="Script" uid="uid://c3a55mxgqluxs" path="res://Scripts/UpgradeRessources/upgrade_cooldown .gd" id="1_lmyj3"]
+[ext_resource type="Script" path="res://Scripts/UpgradeRessources/upgrade_cooldown .gd" id="1_lmyj3"]
 
 [resource]
 script = ExtResource("1_lmyj3")
