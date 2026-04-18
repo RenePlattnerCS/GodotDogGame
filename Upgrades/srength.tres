@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_clmay")
+knockback_bonus = 500.0
 name = "Strength↑"
 icon = ExtResource("1_8cfwa")
 button_text_color = Color(1, 0.59257066, 0.4643036, 1)

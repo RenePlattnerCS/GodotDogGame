@@ -42,6 +42,7 @@ func on_release_charge(delta):
 	var charge_percent = prev_charge_time / max_charge_time
 	var player_sprites : Node2D = get_parent().get_parent()  # DogManager -> Sprites -> Player
 	var player : Node2D = player_sprites.get_parent()  # DogManager -> Sprites -> Player
+	$Front/Hitbox.is_active = true
 
 	var dash_direction = sign(player_sprites.scale.x)  # whichever way player is facing
 	var bonus = 1
@@ -63,12 +64,14 @@ func on_extending(delta):
 	#check_existing_overlaps()
 	current_length = move_toward(current_length, target_length, extend_speed * delta)
 	if current_length >= target_length - EXTEND_LENGTH_OFFSET:
+		$Front/Hitbox.is_active = false
 		state = DogState.RETRACTING
 
 func on_retracting(delta):
 	if state != DogState.RETRACTING:
 		return
 		#check_existing_overlaps()
+	$Front/Hitbox.is_active = false
 	hit_count = 0
 	if current_length > EASE_IN_LENGTH:
 		current_length = move_toward(current_length, 0.0, retract_speed * delta)

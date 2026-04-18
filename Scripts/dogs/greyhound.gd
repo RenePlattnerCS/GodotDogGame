@@ -17,7 +17,7 @@ var hit_count: int = 0
 var shoot_speed : float = 1.0
 var launch_position
 var curr_scale : Vector2 = Vector2(0.7, 0.7)
-
+const KNOCKBACK_MULT = 1.4
 
 @onready var front : Sprite2D = $Front  
 @onready var player_sprites = get_parent().get_parent()
@@ -59,7 +59,7 @@ func on_release_charge(delta):
 	target_length = MAX_ROCKET_LENGTH
 	if(retract_speed > 300):
 		target_length -= 200
-	
+	front.get_node("Hitbox").is_active = true
 	bullet_scale = curr_scale  
 	
 
@@ -88,18 +88,18 @@ func on_extending(delta):
 	if current_length >= target_length - EXTEND_LENGTH_OFFSET:
 		retract_length = current_length
 		state = DogState.RETRACTING
+		front.get_node("Hitbox").is_active = false
 		
 
 func on_retracting(delta):
 	if state != DogState.RETRACTING:
 		return
-		
+	
+	front.get_node("Hitbox").is_active = false
 	retract_length -= (retract_speed * delta) * 4
-	print("retract_length", retract_length)
 	
 
 	if retract_length <= RETRACT_LENGTH_OFFSET:
-		print("restoring")
 		restore_front_missile()
 		state = DogState.IDLE
 
@@ -146,8 +146,12 @@ func on_hit(body: Node2D ):
 		return
 	hit_count += 1
 	var knock_direction = sign(body.global_position.x - front.global_position.x)
-	var charge_percent = clamp(prev_charge_time / max_charge_time, 0.0, 1.0)
-	apply_knockback(body, knock_direction, charge_percent)
+	var charge_percent = clamp(prev_charge_time / max_charge_time, 0.3, 1.0)
+	var mult = KNOCKBACK_MULT
+	if(knockback_strength > 2000):
+		mult = lerp(KNOCKBACK_MULT, 1.0 , charge_percent)
+	print("-------------mult--------", mult)
+	apply_knockback(body, knock_direction, charge_percent,mult)
 
 func check_existing_overlaps():
 	for body in front.Hitbox.get_overlapping_bodies():

@@ -43,6 +43,7 @@ func on_release_charge(delta):
 	flame.position = $Front.position + Vector2(20,-20)
 	shoot_and_fade(flame)
 	check_existing_overlaps()
+	$Front/Hitbox.is_active = true
 
 func should_release_charge() -> bool:
 	# ignore button release — only fire when fully charged
@@ -56,10 +57,12 @@ func on_extending(delta):
 	#check_existing_overlaps()
 	if current_length >= target_length / LENGTH_PENALTY - EXTEND_LENGTH_OFFSET:
 		state = DogState.RETRACTING
+		$Front/Hitbox.is_active = false
 
 func on_retracting(delta):
 	if state != DogState.RETRACTING:
 		return
+	$Front/Hitbox.is_active = false
 	hit_count = 0
 	if current_length > EASE_IN_LENGTH:
 		current_length = move_toward(current_length, 0.0, retract_speed * delta)
