@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 [autoload]
 
 EventSystem="*res://event_system.gd"
+rarities="*uid://cfwym66ouw54a"
 
 [display]
 

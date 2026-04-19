@@ -35,6 +35,9 @@ var JUMP_VELOCITY = -400.0
 const EPSILON = 1.0
 const STRAIGHT_DOWN_THREASHOLD = 0.8
 
+var number_of_jumps : int = 1
+var jumps_remaining: int = 1
+
 func _ready():
 	$Sprites/HandAnimation.play("idle")
 	$Sprites/BodyAnimation.play("idle")
@@ -100,8 +103,8 @@ func _physics_process(delta: float) -> void:
 		if is_knocked_back:
 			# slow air resistance instead of instant stop
 			velocity.x *= air_resistance
-	else:	
-
+	else:	 # ----------------is_on_floor()-------------------
+		jumps_remaining = number_of_jumps
 		is_jumping = false
 		lock_jump = false
 		jump_timer = 0.0
@@ -149,15 +152,19 @@ func _physics_process(delta: float) -> void:
 		if(player_has_horizontal_speed and not is_knocked_back):
 			$Sprites.scale.x = sign(velocity.x)
 
-	if Input.is_action_just_pressed(get_input_action("jump")) and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		is_dashing = false
-		if is_jumping == true:
-			is_dashing = true
-			
-		is_jumping = true
-		
-		jump_timer = 0.0
+	if Input.is_action_just_pressed(get_input_action("jump")):
+		if is_on_floor():
+			jumps_remaining = number_of_jumps -1
+			velocity.y = JUMP_VELOCITY
+			is_dashing = false
+			is_jumping = true
+			jump_timer = 0.0
+		elif jumps_remaining > 0:
+			jumps_remaining -= 1
+			velocity.y = JUMP_VELOCITY
+			is_jumping = true
+			jump_timer = 0.0
+			lock_jump = false  # reset so the new jump can be held
 	
 	
 	move_and_slide()

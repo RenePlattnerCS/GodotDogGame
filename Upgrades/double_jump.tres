@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeDoubleJump" format=3 uid="uid://drwqh8cril0v"]
+
+[ext_resource type="Script" uid="uid://dd4e8hn1ea851" path="res://Scripts/UpgradeRessources/upgrade_double_jump.gd" id="1_c2oj3"]
+[ext_resource type="Texture2D" uid="uid://c7j51tr6dy28j" path="res://Sprites/BG/3 Objects/1 Cargos/Buttons/Button_neutral.png" id="1_x0gje"]
+
+[resource]
+script = ExtResource("1_c2oj3")
+name = "Double Jump"
+icon = ExtResource("1_x0gje")
+button_text_color = Color(2.3102762e-06, 0.97129256, 0.97461706, 1)
+rarity = 2
+metadata/_custom_type_script = "uid://dd4e8hn1ea851"
