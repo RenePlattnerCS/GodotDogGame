@@ -63,27 +63,28 @@ func _on_shield_hit(area: Area2D):
 		if area.is_in_group("bullet"):
 			area.queue_free()
 		return
-		
-		
-	if not area.is_active: #check if actually attacking
+	if 	area.is_in_group("dane"):
 		return
-	# shield got hit while charging → trigger extend
-	player.velocity.x = 0
-	counter_animation.visible = true
-	fire.visible = true
+	print(area.get_groups())
+	if area.is_in_group("dachshund") or area.is_active : #check if actually attacking
 	
-	fire.play("fire")
-	counter_animation.play("counter")
-	counter_animation.animation_finished.connect(func():
-		counter_animation.visible = false, CONNECT_ONE_SHOT)
+		# shield got hit while charging → trigger extend
+		player.velocity.x = 0
+		counter_animation.visible = true
+		fire.visible = true
 		
-	fire.animation_finished.connect(func():
-		fire.visible = false , CONNECT_ONE_SHOT)
-	
-	state = DogState.COUNTER
-	target_length = max_length
-	
-	player.remove_from_group("player")
+		fire.play("fire")
+		counter_animation.play("counter")
+		counter_animation.animation_finished.connect(func():
+			counter_animation.visible = false, CONNECT_ONE_SHOT)
+			
+		fire.animation_finished.connect(func():
+			fire.visible = false , CONNECT_ONE_SHOT)
+		
+		state = DogState.COUNTER
+		target_length = max_length
+		
+		player.remove_from_group("player")
 	
 func _on_hitbox_body_entered(body : Node2D):
 	if hit_enemy or hit_count > MAX_HIT_COUNT:

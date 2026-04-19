@@ -73,12 +73,17 @@ func on_hit(body: CharacterBody2D):
 		return
 	if(body.player_index == player_index):
 		return
-		
+
 	hit_count += 1
 	var distance = abs(body.global_position.x - global_position.x)
 	var knock_direction = sign(body.global_position.x - $Back.global_position.x)
 	var charge_percent = target_length / max_length
 
+	var dach_hit_bonus : float = 1.0
+	if(body.get_cur_dog().is_in_group("dachshund")):
+		print("DACHS:" )
+		dach_hit_bonus = lerp(8.0 , 1.0, charge_percent)
+		
 	var bonus = 0
 	if charge_percent > CHARGE_PERCENT_BONUS_THRESHOLD  or hit_count >= MAX_HIT_COUNT -1 or  distance > BONUS_DISTANCE:
 		bonus = HIGH_CHARGE_KNOCKBACK_BONUS
@@ -86,8 +91,10 @@ func on_hit(body: CharacterBody2D):
 
 	# temporarily boost knockback_strength for the bonus, then restore
 	var original = knockback_strength
-	knockback_strength += bonus
-
+	knockback_strength += bonus 
+	print("knockback_strength", knockback_strength)
+	knockback_strength *= dach_hit_bonus
+	print("knockback_strengt2h", knockback_strength)
 	apply_knockback(body, knock_direction, charge_percent)
 	knockback_strength = original
 

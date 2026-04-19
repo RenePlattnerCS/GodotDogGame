@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://cuo0tfm5xpd1o" path="res://Prefabs/dog_manager.gd" id="4_4qbli"]
 [ext_resource type="PackedScene" uid="uid://cpyypyg05jsny" path="res://Prefabs/boxer.tscn" id="4_juxdh"]
 [ext_resource type="Texture2D" uid="uid://dsxodcrisgf64" path="res://Sprites/WalkArms.png" id="6_juxdh"]
-[ext_resource type="Texture2D" uid="uid://cqot6vwh1hhek" path="res://Sprites/soloArm.png" id="9_08u7w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mc20k"]
 height = 50.0
@@ -452,13 +451,6 @@ libraries/ = SubResource("AnimationLibrary_juxdh")
 [node name="Dog" type="Node2D" parent="Sprites" unique_id=1637275449]
 position = Vector2(19, 2)
 script = ExtResource("4_4qbli")
-
-[node name="soloArm" type="Sprite2D" parent="Sprites/Dog" unique_id=1218033693]
-visible = false
-texture_filter = 1
-position = Vector2(-15, 21.000004)
-rotation = -1.3654181
-texture = ExtResource("9_08u7w")
 
 [node name="Boxer" parent="Sprites/Dog" unique_id=1622081403 instance=ExtResource("4_juxdh")]
 

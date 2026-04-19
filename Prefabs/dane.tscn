@@ -11,6 +11,7 @@
 height = 48.0
 
 [node name="Dane" type="Node2D" unique_id=1059360503]
+modulate = Color(0.831761, 0.83176106, 0.831761, 1)
 position = Vector2(-2, 0)
 script = ExtResource("1_0c4xc")
 
@@ -20,7 +21,7 @@ position = Vector2(3, 17)
 texture = ExtResource("2_n87fj")
 offset = Vector2(-2.265, 0)
 
-[node name="Hitbox" type="Area2D" parent="Front" unique_id=936956966 groups=["dog"]]
+[node name="Hitbox" type="Area2D" parent="Front" unique_id=936956966 groups=["dane", "dog"]]
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("3_n87fj")

@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://bn732y6pxljw5"]
+
+[ext_resource type="Texture2D" uid="uid://cqot6vwh1hhek" path="res://Sprites/soloArm.png" id="1_andgb"]
+[ext_resource type="Texture2D" uid="uid://cbr11fl283ry8" path="res://Sprites/pomerainian.png" id="1_g01w0"]
+[ext_resource type="Script" uid="uid://c0iwm5kjdex21" path="res://Scripts/dogs/pomeranian.gd" id="1_gf8fm"]
+[ext_resource type="Script" uid="uid://tbxrci4dvlq4" path="res://Prefabs/hitbox_is_active.gd" id="4_gh058"]
+[ext_resource type="Texture2D" uid="uid://biy2fj8ijg24e" path="res://Sprites/Super Pixel Effects Gigapack (Free Version)/spritesheet/Impacts/directional_impact_003/directional_impact_003_large_violet/spritesheet.png" id="5_kvnb0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gf8fm"]
+atlas = ExtResource("1_g01w0")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvnb0"]
+atlas = ExtResource("1_g01w0")
+region = Rect2(96, 0, 96, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wx2le"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gf8fm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvnb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvnb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvnb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gf8fm")
+}],
+"loop": false,
+"name": &"bark",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kgyii"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wx2le"]
+atlas = ExtResource("5_kvnb0")
+region = Rect2(2, 0, 79, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3ame"]
+atlas = ExtResource("5_kvnb0")
+region = Rect2(81, 0, 79, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqv1q"]
+atlas = ExtResource("5_kvnb0")
+region = Rect2(160, 0, 79, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjjif"]
+atlas = ExtResource("5_kvnb0")
+region = Rect2(239, 0, 79, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gh058"]
+atlas = ExtResource("5_kvnb0")
+region = Rect2(318, 0, 79, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3c84"]
+atlas = ExtResource("5_kvnb0")
+region = Rect2(397, 0, 79, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k0gqx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wx2le")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3ame")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqv1q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjjif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gh058")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3c84")
+}],
+"loop": false,
+"name": &"bark",
+"speed": 14.0
+}]
+
+[node name="PomPom" type="Node2D" unique_id=1059360503]
+position = Vector2(-17, 0)
+script = ExtResource("1_gf8fm")
+
+[node name="Front" type="Node2D" parent="." unique_id=1266490811]
+texture_filter = 1
+position = Vector2(3, 17)
+
+[node name="soloArm" type="Sprite2D" parent="Front" unique_id=491085977]
+visible = false
+texture_filter = 1
+position = Vector2(1, 4.000002)
+rotation = -1.3654181
+texture = ExtResource("1_andgb")
+
+[node name="PomSprites" type="AnimatedSprite2D" parent="Front" unique_id=879963587]
+position = Vector2(38, 3)
+sprite_frames = SubResource("SpriteFrames_wx2le")
+animation = &"bark"
+frame = 1
+frame_progress = 0.8964934
+
+[node name="Hitbox" type="Area2D" parent="Front/PomSprites" unique_id=936956966 groups=["dog"]]
+position = Vector2(-129, -4)
+scale = Vector2(4.506511, 2.7524748)
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("4_gh058")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Front/PomSprites/Hitbox" unique_id=1384423473]
+position = Vector2(29.000004, 2)
+scale = Vector2(0.96905833, 0.734214)
+shape = SubResource("CapsuleShape2D_kgyii")
+
+[node name="BarkAnimation" type="AnimatedSprite2D" parent="Front" unique_id=165816544]
+position = Vector2(118.99999, -15)
+rotation = 1.569345
+sprite_frames = SubResource("SpriteFrames_k0gqx")
+animation = &"bark"
+frame = 5
+frame_progress = 1.0

@@ -185,3 +185,11 @@ func respawn():
 	set_physics_process(true)
 	velocity = Vector2.ZERO
 	is_knocked_back = false
+
+func get_cur_dog():
+	return $Sprites/Dog.get_child(0)
+
+func switch_arms():
+	var show_hand = not $Sprites/Dog/soloArm.visible
+	$Sprites/Dog/soloArm.visible = show_hand
+	$Sprites/HandAnimation.visible = not show_hand
