@@ -130,7 +130,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x *= ground_slide_friction
 			
 		if is_dashing:
-			print("velocity" , velocity.x)
 			dash_timer += delta
 		# exit knockback when slow enough
 		if abs(velocity.x) < knockback_threshold:

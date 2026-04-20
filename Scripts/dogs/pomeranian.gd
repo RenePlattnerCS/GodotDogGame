@@ -37,7 +37,7 @@ func _ready():
 # ─── charging ─────────────────────────────────────────────────────────────────
 
 func on_start_charging(delta):
-	pass
+	hitbox.is_active = true
 	#target_length = current_length - charging_retraction_length
 
 func on_charging(delta):

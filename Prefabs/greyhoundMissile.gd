@@ -21,6 +21,7 @@ const FLASH_COUNT = 3
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	hitbox.area_entered.connect(on_reflector_entered)
+	hitbox.is_active = true
 	
 	
 func setup(p_position: Vector2, p_direction: float, p_speed: float, p_scale: Vector2, p_target_length: float, p_player_index: int, p_knockback_strength: float, p_knockback_up: float, p_player : Node2D, p_charge_percent : float):

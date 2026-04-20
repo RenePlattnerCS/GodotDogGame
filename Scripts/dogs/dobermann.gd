@@ -66,6 +66,7 @@ func _on_shield_hit(area: Area2D):
 	if 	area.is_in_group("dane"):
 		return
 	print(area.get_groups())
+	print("area.is_active" , area.is_active)
 	if area.is_in_group("dachshund") or area.is_active : #check if actually attacking
 	
 		# shield got hit while charging → trigger extend
