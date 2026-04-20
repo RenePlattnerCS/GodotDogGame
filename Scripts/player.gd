@@ -191,7 +191,6 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed(get_input_action("jump")):
 		if is_on_floor():
-			print("number_of_jumps", number_of_jumps)
 			jumps_remaining = number_of_jumps - 1
 			velocity.y = JUMP_VELOCITY
 			is_dashing = false
@@ -243,7 +242,6 @@ func switch_arms():
 	$Sprites/HandAnimation.visible = not show_hand
 
 func trigger_dash(direction):
-	print("unlocked_dash ", unlocked_dash)
 	if not unlocked_dash:
 		return
 	is_dashing = true

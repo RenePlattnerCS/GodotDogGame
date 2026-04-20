@@ -15,7 +15,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	timer += delta
 	if timer > 50 + trng and not one_shot:
-		release_grapple()
+		#release_grapple()
 		one_shot = true
 	pass
 	

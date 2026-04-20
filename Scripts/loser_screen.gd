@@ -45,7 +45,6 @@ func _process(delta: float) -> void:
 	var ui_dir = Input.get_axis(left, right)
 	var just_moved = abs(ui_dir) > 0.5 and abs(prev_ui_direction) <= 0.5
 	var just_moved_digital = Input.is_action_just_pressed(left) or Input.is_action_just_pressed(right)
-	print("just_moved_digital" ,just_moved_digital)
 	if just_moved or just_moved_digital:
 		if ui_dir < 0 or Input.is_action_just_pressed(left):
 			focused_button_index = max(0, focused_button_index - 1)
@@ -76,7 +75,6 @@ func show_death_screen(player):
 func _on_button1_pressed():
 	if focused_button_index != 0:
 		return  # ignore if not focused
-	print("1 pressed")
 	offered_upgrades[0].apply(controlled_player)
 	hide_death_screen()
 	controlled_player.respawn()
@@ -85,7 +83,6 @@ func _on_button1_pressed():
 func _on_button2_pressed():
 	if focused_button_index != 1:
 		return  # ignore if not focused
-	print("2 pressed")
 	offered_upgrades[1].apply(controlled_player)
 	hide_death_screen()
 	controlled_player.respawn()

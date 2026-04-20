@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bi364gsiiww7b"]
 
 [ext_resource type="Texture2D" uid="uid://h210kty6oqrm" path="res://Sprites/BG/3 Objects/4 Overhead crane/2 Cart/Move.png" id="1_o8d5y"]
-[ext_resource type="Script" uid="uid://dtk3qnjegvy0j" path="res://Prefabs/cart_grapple.gd" id="2_6ohuo"]
+[ext_resource type="Script" path="res://Prefabs/cart_grapple.gd" id="2_6ohuo"]
 [ext_resource type="Texture2D" uid="uid://j04db4sygssj" path="res://Sprites/BG/3 Objects/4 Overhead crane/3 Grab/Rope2.png" id="4_24e42"]
 [ext_resource type="Texture2D" uid="uid://bh1dnqpa57sj2" path="res://Sprites/BG/3 Objects/4 Overhead crane/3 Grab/GrapFrontt.png" id="4_ikec7"]
 [ext_resource type="Script" uid="uid://cacglvo173ega" path="res://Prefabs/grappler.gd" id="4_u2am6"]
