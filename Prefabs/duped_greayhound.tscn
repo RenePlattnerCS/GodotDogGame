@@ -7,7 +7,7 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kgyii"]
 height = 48.0
 
-[node name="DupedGreayhound" type="Sprite2D" unique_id=855520973]
+[node name="DupedGreayhound" type="Sprite2D" unique_id=855520973 groups=["dog"]]
 texture_filter = 1
 texture = ExtResource("1_32wa5")
 offset = Vector2(-2.265, 0)
@@ -22,3 +22,5 @@ script = ExtResource("3_gib2t")
 position = Vector2(39, 10.999999)
 scale = Vector2(1.5191073, 1.1445884)
 shape = SubResource("CapsuleShape2D_kgyii")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

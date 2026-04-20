@@ -28,7 +28,11 @@ var fire_direction: int = 1
 var bullet_scale: Vector2 = Vector2(0.7, 0.7)
 
 var retract_length : float = 0.0
+#----------
+@export var missile_scene: PackedScene
 
+
+#--------
 func _ready():
 	super()
 	START_SCALE = Vector2(0.7,0.7) 
@@ -53,114 +57,67 @@ func on_charging(delta):
 
 
 func on_release_charge(delta):
-	front.scale = curr_scale
 	var charge_percent = clamp(prev_charge_time / max_charge_time, 0.0, 1.0)
-	shoot_speed = lerp(40 , 500, charge_percent)
-	target_length = MAX_ROCKET_LENGTH
-	if(retract_speed > 300):
-		target_length -= 200
-	front.get_node("Hitbox").is_active = true
-	bullet_scale = curr_scale  
-	
+	var initial_speed = lerp(40.0, 300.0, charge_percent)
+	var missile_target_length = MAX_ROCKET_LENGTH
+	if retract_speed > 300:
+		missile_target_length -= 200
 
-	current_length = 0
-	fire_direction = sign(player_sprites.scale.x)
+	# hide front
+	front.visible = false
 
-	var saved_pos = $Back.global_position
-	launch_position = saved_pos
-	front.get_parent().remove_child(front)
-	get_tree().current_scene.add_child(front)
-	front.global_position = saved_pos
-	#front.scale = Vector2(0.7, 0.7)
-	front.scale.x = front.scale.x * fire_direction
-	front.rotation = 0.0  # reset rotation after detach
+	# spawn missile at front's current world position
+	var missile = missile_scene.instantiate()
+	get_tree().current_scene.add_child(missile)
+	missile.setup(
+		$Back.global_position,
+		sign(player_sprites.scale.x),
+		initial_speed,
+		curr_scale,
+		missile_target_length,
+		player_index,
+		knockback_strength,
+		knockback_up,
+		player,
+		charge_percent
+	)
+	missile.tree_exited.connect(_on_missile_done)  # called when missile queue_free's
 
+	# reset state immediately
+	current_length = 0.0
+	state = DogState.RETRACTING
+
+func _on_missile_done():
+	front.visible = true
+	curr_scale = START_SCALE + Vector2(size_bonus, size_bonus)
+	scale = curr_scale
+	state = DogState.IDLE
 # ─── extending & retracting ───────────────────────────────────────────────────
 
 func on_extending(delta):
-	
-	if state != DogState.EXTENDING:
-		return
-	# only move the Front node, no middle stretching
-	current_length = move_toward(current_length, target_length, shoot_speed * delta)
-	shoot_speed += delta * shoot_speed
-	#check_existing_overlaps()
-	if current_length >= target_length - EXTEND_LENGTH_OFFSET:
-		retract_length = current_length
-		state = DogState.RETRACTING
-		front.get_node("Hitbox").is_active = false
+	pass
 		
 
 func on_retracting(delta):
-	if state != DogState.RETRACTING:
-		return
-	
-	front.get_node("Hitbox").is_active = false
-	retract_length -= (retract_speed * delta) * 4
-	
-
-	if retract_length <= RETRACT_LENGTH_OFFSET:
-		restore_front_missile()
-		state = DogState.IDLE
+	pass
 
 		
 
 # ─── visuals ──────────────────────────────────────────────────────────────────
-func restore_front_missile():
-	curr_scale = START_SCALE + Vector2(size_bonus, size_bonus)
-	#scale = curr_scale
-	hit_count = 0
-	
-	current_length = 0.0
-	
-	if front.get_parent() != self:
-		front.reparent(self)
-		front.position = front_rest_position
-		front.rotation = 0.0
 
-		front.scale = Vector2(1.0, 1.0)
-		curr_scale = START_SCALE + Vector2(size_bonus, size_bonus)  # reset dog scale
-		scale = curr_scale
 		
-func _process(delta):
-	super(delta)
-	
-	update_dog_visuals()
 
 func update_dog_visuals():
-	if front.get_parent() != self:
-		front.global_position.x = launch_position.x + current_length * fire_direction
+	pass
 
-# ─── hit ──────────────────────────────────────────────────────────────────────
-
-func on_hit(body: Node2D ):
-	if not body.is_in_group("player"):
-		return
-	if(body.player_index == player_index):
-		return
-		
-	if state != DogState.EXTENDING:
-		return
-		
-	if hit_enemy or hit_count > MAX_HIT_COUNT:
-		return
-	hit_count += 1
-	var knock_direction = sign(body.global_position.x - front.global_position.x)
-	var charge_percent = clamp(prev_charge_time / max_charge_time, 0.3, 1.0)
-	var mult = KNOCKBACK_MULT
-	if(knockback_strength > 2000):
-		mult = lerp(KNOCKBACK_MULT, 1.0 , charge_percent)
-	print("-------------mult--------", mult)
-	apply_knockback(body, knock_direction, charge_percent,mult)
-
-func check_existing_overlaps():
-	for body in front.Hitbox.get_overlapping_bodies():
-		if body.is_in_group("player"):
-			on_hit(body)
 
 func cleanup():
-	if front.get_parent() != self:
-		front.queue_free()
+	# find and free any live missiles
+	for node in get_tree().current_scene.get_children():
+		if node is Missile:
+			if node.player_index == player_index:
+				node.queue_free()
+	front.visible = true
 	Engine.time_scale = 1.0
 
 	
