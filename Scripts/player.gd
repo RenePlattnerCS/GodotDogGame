@@ -52,7 +52,6 @@ const DASH_DURATION = 0.15
 @onready var reflector = $dashing
 
 func _ready():
-	unlocked_dash = true
 	$Sprites/HandAnimation.play("idle")
 	$Sprites/BodyAnimation.play("idle")
 	$Sprites/DogBounceAnimationPlayer.play("idle")
@@ -116,7 +115,8 @@ func _physics_process(delta: float) -> void:
 			# slow air resistance instead of instant stop
 			velocity.x *= air_resistance
 	else:	 # ----------------is_on_floor()-------------------
-		jumps_remaining = number_of_jumps
+		#jumps_remaining = number_of_jumps
+		jumps_remaining = number_of_jumps - 1
 		is_jumping = false
 		lock_jump = false
 		jump_timer = 0.0
@@ -191,11 +191,11 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed(get_input_action("jump")):
 		if is_on_floor():
-			
+			print("number_of_jumps", number_of_jumps)
 			jumps_remaining = number_of_jumps - 1
 			velocity.y = JUMP_VELOCITY
 			is_dashing = false
-			
+			reflector.end_dash_reflect()
 			is_jumping = true
 			jump_timer = 0.0
 		elif jumps_remaining > 0:
@@ -243,6 +243,7 @@ func switch_arms():
 	$Sprites/HandAnimation.visible = not show_hand
 
 func trigger_dash(direction):
+	print("unlocked_dash ", unlocked_dash)
 	if not unlocked_dash:
 		return
 	is_dashing = true

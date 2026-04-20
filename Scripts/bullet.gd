@@ -5,7 +5,7 @@ var speed: float = 800.0
 var angle: float = 0.0  # spread angle in radians
 var knockback_strength: float = 100.0
 var player_index: int = -1
-
+var bullet_count = 1
 
 func _ready() -> void:
 	area_entered.connect(_on_reflector_entered)
@@ -30,14 +30,17 @@ func _on_body_entered(body: Node2D):
 		return
 	
 	var knock_direction = sign(body.global_position.x - global_position.x)
-	body.velocity.x = direction * knockback_strength
+	var mult = lerp(1.5,2.5, bullet_count / 8)
+	print("mult" ,mult)
+	body.velocity.x = direction * knockback_strength * mult
 	body.velocity.y = -400.0
 	body.is_knocked_back = true
 	queue_free()
 	
 	
-func setup(p_direction: float, p_angle: float, p_knockback: float, p_player_index: int, p_length : float, bullet_count: int):
+func setup(p_direction: float, p_angle: float, p_knockback: float, p_player_index: int, p_length : float, p_bullet_count: int):
 	direction = p_direction
+	bullet_count = p_bullet_count
 	angle = p_angle
 	knockback_strength = p_knockback
 	player_index = p_player_index

@@ -22,42 +22,10 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tkfg3"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yni04"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[node name="Loser screen" type="CanvasLayer" unique_id=264522770]
+[node name="Loser screen" type="CanvasLayer" unique_id=264522770 node_paths=PackedStringArray("button1", "button2")]
 script = ExtResource("1_413dk")
+button1 = NodePath("MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button")
+button2 = NodePath("MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button2")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1491022539]
 offset_right = 40.0
@@ -88,7 +56,6 @@ alignment = 1
 [node name="Button" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer" unique_id=1255863207]
 texture_filter = 1
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_tkfg3")
 icon = ExtResource("1_ebsy2")
 
 [node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button" unique_id=1804197191]
@@ -108,7 +75,6 @@ text = "test"
 texture_filter = 1
 layout_mode = 2
 focus_neighbor_left = NodePath("../Button")
-theme_override_styles/normal = SubResource("StyleBoxFlat_yni04")
 icon = ExtResource("2_413dk")
 
 [node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button2" unique_id=534598156]

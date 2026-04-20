@@ -165,15 +165,11 @@ camera_speed = 7.0
 
 [node name="DeathZone" parent="." unique_id=1575452244 instance=ExtResource("3_p2sgf")]
 
-[node name="choose_screen2" parent="DeathZone" index="1" unique_id=264522770 node_paths=PackedStringArray("button1", "button2", "controlled_player", "UpgradeManager")]
-button1 = NodePath("MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button")
-button2 = NodePath("MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button2")
+[node name="choose_screen2" parent="DeathZone" index="1" unique_id=264522770 node_paths=PackedStringArray("controlled_player", "UpgradeManager")]
 controlled_player = NodePath("../../Player2")
 UpgradeManager = NodePath("../../upgrade_manager")
 
-[node name="choose_screen" parent="DeathZone" index="2" unique_id=1194221161 node_paths=PackedStringArray("button1", "button2", "controlled_player", "UpgradeManager")]
-button1 = NodePath("MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button")
-button2 = NodePath("MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/Button2")
+[node name="choose_screen" parent="DeathZone" index="2" unique_id=1194221161 node_paths=PackedStringArray("controlled_player", "UpgradeManager")]
 controlled_player = NodePath("../../Player1")
 UpgradeManager = NodePath("../../upgrade_manager")
 

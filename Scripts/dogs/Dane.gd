@@ -8,7 +8,7 @@ const HIGH_CHARGE_KNOCKBACK_BONUS = 2000
 const CHARGE_PERCENT_BONUS_THRESHOLD = 0.5
 const BONUS_DISTANCE = 100
 const MAX_HIT_COUNT = 2
-const SELF_KNOCKBACK = 1000
+const SELF_KNOCKBACK = 2000
 
 const STRENGTH_BONUS = 3000
 const SPEED_BONUS = 2
@@ -90,6 +90,7 @@ func update_dog_visuals():
 	
 
 func apply_self_knockback(sign):
+	print("applying self nockback")
 	var player = get_parent().get_parent().get_parent()
 	var self_knock_direction = sign  # opposite to dash direction
 	player.velocity.x = self_knock_direction * (SELF_KNOCKBACK + knockback_strength) / 4  # adjust strength to taste
