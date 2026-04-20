@@ -16,6 +16,8 @@ extends CharacterBody2D
 @export var max_jump_time: float = 0.8  # max time you can hold jump
 @export var lock_jump_after_time: float = 0.2  # max time you can hold jump
 
+var unlocked_dash : bool = false
+
 var jump_timer: float = 0.0
 var is_jumping: bool = false
 var lock_jump: bool = false
@@ -38,11 +40,23 @@ const STRAIGHT_DOWN_THREASHOLD = 0.8
 var number_of_jumps : int = 1
 var jumps_remaining: int = 1
 
+var last_tap_direction: float = 0.0
+var tap_timer: float = 0.0
+const DOUBLE_TAP_WINDOW = 0.4
+var prev_direction: float = 0.0 
+var direction_was_released: bool = true  
+var dash_direction : float = 0.0
+const DASH_SPEED = 1000.0    
+const DASH_DURATION = 0.15
+
+@onready var reflector = $dashing
+
 func _ready():
+	unlocked_dash = true
 	$Sprites/HandAnimation.play("idle")
 	$Sprites/BodyAnimation.play("idle")
 	$Sprites/DogBounceAnimationPlayer.play("idle")
-	
+	jump_upgraded = true
 	$NormalHurtbox.disabled = false
 	$JumpingHurtbox.disabled = true
 
@@ -66,8 +80,6 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		
-	
 		if Input.is_action_just_released(get_input_action("jump")) and not lock_jump:
 			is_jumping = false
 		
@@ -116,23 +128,47 @@ func _physics_process(delta: float) -> void:
 	if is_knocked_back or is_dashing:
 	 	# slide on ground instead of stopping
 		velocity.x *= ground_slide_friction
+			
 		if is_dashing:
+			print("velocity" , velocity.x)
 			dash_timer += delta
 		# exit knockback when slow enough
 		if abs(velocity.x) < knockback_threshold:
 			is_knocked_back = false
+			reflector.end_dash_reflect()
 			is_dashing = false
 			dash_timer = 0.0
 		if dash_timer > dash_slide_timer:
-			if (Input.get_axis(get_input_action("left"), get_input_action("right"))):
-				is_dashing = false
-				dash_timer = 0.0
+			#if (Input.get_axis(get_input_action("left"), get_input_action("right"))):
+			is_dashing = false
+			dash_timer = 0.0
+			reflector.end_dash_reflect()
 			
 	elif (not is_jumping and not lock_jump) or jump_upgraded:
 		# normal movement
 		var direction = 0
 		if(not lock_turning_around):
 			direction = Input.get_axis(get_input_action(("left")), get_input_action(("right")))
+			const TAP_THRESHOLD = 0.5
+			if direction != 0:
+					# detect tap as axis crossing a threshold from near-zero
+				
+				var is_pressed = abs(direction) > TAP_THRESHOLD
+				var just_tapped = is_pressed and direction_was_released
+
+				if just_tapped:
+					if sign(direction) == sign(last_tap_direction) and tap_timer > 0:
+						trigger_dash(direction)
+						tap_timer = 0.0
+						last_tap_direction = 0.0
+					else:
+						last_tap_direction = direction
+						tap_timer = DOUBLE_TAP_WINDOW
+
+				# track release for both stick and dpad
+			direction_was_released = abs(direction) <= TAP_THRESHOLD
+		
+				
 		if(lock_turning_around):
 			var locked_dir = direction
 			if(locked_dir == 0.0):
@@ -145,6 +181,8 @@ func _physics_process(delta: float) -> void:
 			
 		if direction:
 			velocity.x = direction * SPEED
+			if is_dashing: #-------------------------------------------------
+				velocity.x = sign(dash_direction) * DASH_SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			
@@ -154,19 +192,23 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed(get_input_action("jump")):
 		if is_on_floor():
-			jumps_remaining = number_of_jumps -1
+			
+			jumps_remaining = number_of_jumps - 1
 			velocity.y = JUMP_VELOCITY
 			is_dashing = false
+			
 			is_jumping = true
 			jump_timer = 0.0
 		elif jumps_remaining > 0:
 			jumps_remaining -= 1
-			velocity.y = JUMP_VELOCITY
+			var jump_number = number_of_jumps - jumps_remaining + 1  # 1st extra jump, 2nd extra jump etc.
+			velocity.y = JUMP_VELOCITY * pow(0.8, jump_number)
 			is_jumping = true
 			jump_timer = 0.0
 			lock_jump = false  # reset so the new jump can be held
 	
-	
+	if tap_timer > 0:
+		tap_timer -= delta
 	move_and_slide()
 	
 func get_input_action(action: String) -> String:
@@ -200,3 +242,13 @@ func switch_arms():
 	var show_hand = not $Sprites/Dog/soloArm.visible
 	$Sprites/Dog/soloArm.visible = show_hand
 	$Sprites/HandAnimation.visible = not show_hand
+
+func trigger_dash(direction):
+	if not unlocked_dash:
+		return
+	is_dashing = true
+	dash_timer = 0.0
+	dash_direction = direction
+	velocity.x = sign(dash_direction) * DASH_SPEED
+	reflector.start_dash_reflect()
+	

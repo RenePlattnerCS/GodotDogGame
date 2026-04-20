@@ -7,12 +7,21 @@ var knockback_strength: float = 100.0
 var player_index: int = -1
 
 
-
+func _ready() -> void:
+	area_entered.connect(_on_reflector_entered)
 
 func _physics_process(delta):
 	var velocity = Vector2(cos(angle) * direction, sin(angle)) * speed
 	global_position += velocity * delta
 
+func _on_reflector_entered(area : Area2D):
+	if not area.is_in_group("reflector"):
+		return
+	if (player_index ==1):
+		player_index = 2
+	else:
+		player_index = 1
+	direction = -1 * direction
 
 func _on_body_entered(body: Node2D):
 	if not body.is_in_group("player"):

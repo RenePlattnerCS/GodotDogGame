@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeDash" format=3 uid="uid://4kjyemjt05n3"]
+
+[ext_resource type="Texture2D" uid="uid://dqcn38qovvf0" path="res://Sprites/BG/3 Objects/1 Cargos/21.png" id="1_4he0x"]
+[ext_resource type="Script" uid="uid://j8rt1n4sfnr0" path="res://Scripts/UpgradeRessources/upgrade_dash.gd" id="1_w4gas"]
+
+[resource]
+script = ExtResource("1_w4gas")
+name = "Dash and Reflect"
+icon = ExtResource("1_4he0x")
+button_text_color = Color(0.578894, 0.6460073, 0.9087662, 1)
+rarity = 2
+metadata/_custom_type_script = "uid://j8rt1n4sfnr0"

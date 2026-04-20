@@ -22,7 +22,7 @@ offset = Vector2(-2.265, 0)
 
 [node name="Hitbox" type="Area2D" parent="Front" unique_id=936956966 groups=["dog"]]
 collision_layer = 8
-collision_mask = 6
+collision_mask = 14
 script = ExtResource("3_0h8ut")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Front/Hitbox" unique_id=1384423473]

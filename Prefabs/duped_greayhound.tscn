@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bfth2x0ofw4yd"]
+
+[ext_resource type="Texture2D" uid="uid://ddjnxowwmtf2p" path="res://Sprites/GreyHound/greyHoundFront.png" id="1_32wa5"]
+[ext_resource type="Script" uid="uid://dxvaeonx8fcbw" path="res://Prefabs/greyhoundMissile.gd" id="2_k700i"]
+[ext_resource type="Script" uid="uid://tbxrci4dvlq4" path="res://Prefabs/hitbox_is_active.gd" id="3_gib2t"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kgyii"]
+height = 48.0
+
+[node name="DupedGreayhound" type="Sprite2D" unique_id=855520973]
+texture_filter = 1
+texture = ExtResource("1_32wa5")
+offset = Vector2(-2.265, 0)
+script = ExtResource("2_k700i")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1828069781 groups=["dog"]]
+collision_layer = 8
+collision_mask = 14
+script = ExtResource("3_gib2t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1814054262]
+position = Vector2(39, 10.999999)
+scale = Vector2(1.5191073, 1.1445884)
+shape = SubResource("CapsuleShape2D_kgyii")

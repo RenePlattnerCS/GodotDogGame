@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cpyypyg05jsny" path="res://Prefabs/boxer.tscn" id="4_juxdh"]
 [ext_resource type="Texture2D" uid="uid://dsxodcrisgf64" path="res://Sprites/WalkArms.png" id="6_juxdh"]
 [ext_resource type="Texture2D" uid="uid://cqot6vwh1hhek" path="res://Sprites/soloArm.png" id="9_08u7w"]
+[ext_resource type="Texture2D" uid="uid://bjcjd3mk3dl7n" path="res://Sprites/Effects/SmokeFX Lite SpriteSheet 1A-8.png" id="10_2xbkd"]
+[ext_resource type="Script" uid="uid://craonh2riruf0" path="res://Scripts/reflector.gd" id="10_3vpsw"]
+[ext_resource type="Texture2D" uid="uid://b5c0fv6lajng1" path="res://Sprites/Effects/flame/Blue Effect Bullet Impact Explosion 32x32.png" id="11_3vpsw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mc20k"]
 height = 50.0
@@ -421,6 +424,101 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_v447a"]
+atlas = ExtResource("10_2xbkd")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3c3ic"]
+atlas = ExtResource("10_2xbkd")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abtri"]
+atlas = ExtResource("10_2xbkd")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvkvw"]
+atlas = ExtResource("10_2xbkd")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy7bf"]
+atlas = ExtResource("10_2xbkd")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_of3e5"]
+atlas = ExtResource("10_2xbkd")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bskuj"]
+atlas = ExtResource("10_2xbkd")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_is11r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v447a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3c3ic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abtri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvkvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy7bf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_of3e5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bskuj")
+}],
+"loop": false,
+"name": &"dust",
+"speed": 12.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6oobh"]
+atlas = ExtResource("11_3vpsw")
+region = Rect2(512, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iw52j"]
+atlas = ExtResource("11_3vpsw")
+region = Rect2(544, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70pgm"]
+atlas = ExtResource("11_3vpsw")
+region = Rect2(576, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vde2o"]
+atlas = ExtResource("11_3vpsw")
+region = Rect2(608, 192, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ntesv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6oobh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iw52j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70pgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vde2o")
+}],
+"loop": true,
+"name": &"reflect",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u81v3"]
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=769169184 groups=["player"]]
 collision_layer = 2
 collision_mask = 39
@@ -471,3 +569,30 @@ frame = 7
 offset = Vector2(-0.875, 0)
 
 [node name="Node" type="Node" parent="Sprites" unique_id=1863457981]
+
+[node name="dashing" type="Node2D" parent="." unique_id=168554141]
+script = ExtResource("10_3vpsw")
+
+[node name="Dashdust" type="AnimatedSprite2D" parent="dashing" unique_id=239504977]
+texture_filter = 1
+position = Vector2(-10, 48)
+sprite_frames = SubResource("SpriteFrames_is11r")
+animation = &"dust"
+
+[node name="reflect" type="AnimatedSprite2D" parent="dashing" unique_id=1240381400]
+texture_filter = 1
+position = Vector2(0, 34)
+scale = Vector2(2.84375, 2.6875)
+sprite_frames = SubResource("SpriteFrames_ntesv")
+animation = &"reflect"
+autoplay = "reflect"
+frame_progress = 0.85139287
+
+[node name="ReflectArea" type="Area2D" parent="dashing/reflect" unique_id=1657686164 groups=["reflector"]]
+collision_layer = 2
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dashing/reflect/ReflectArea" unique_id=1490214280]
+position = Vector2(0.35164836, 0)
+scale = Vector2(1.2569002, 1.3209282)
+shape = SubResource("CircleShape2D_u81v3")

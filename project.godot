@@ -37,6 +37,7 @@ shield=""
 bullet=""
 dachshund="to apply extra knockback"
 dane="against shield"
+reflector="to reflect bullets"
 
 [input]
 

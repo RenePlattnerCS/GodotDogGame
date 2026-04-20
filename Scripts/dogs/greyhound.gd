@@ -162,3 +162,5 @@ func cleanup():
 	if front.get_parent() != self:
 		front.queue_free()
 	Engine.time_scale = 1.0
+
+	
